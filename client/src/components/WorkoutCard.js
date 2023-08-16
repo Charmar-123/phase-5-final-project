@@ -26,6 +26,7 @@ const WorkoutCard = () => {
                     style={{ width: 345, height: 194 }}
                     autoPlay
                     loop
+                    muted
                 >
                     <source src={benchPress} />
                 </video>

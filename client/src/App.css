@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'TitleFont';
+  src: url('./fonts/Caprasimo-Regular.ttf') format('truetype');
+  /* You can also include other font formats here (woff, woff2, etc.) */
+  font-weight: normal;
+  font-style: normal;
+}
+
 .App {
   text-align: center;
 }
@@ -12,6 +20,8 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+
 
 .App-header {
   background-color: #282c34;
