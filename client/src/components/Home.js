@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import gymHomeVideo from '../assets/videos/gym-home-video.mp4'
-import Logo from './Logo'
+import TestLogo from './TestLogo'
+
 
 
 
 const Home = () => {
+
+  const [showSplash, setShowSplash] = useState(true)
+
+  
+
   return (
     <div>
 
 
+      
+
       <video
-        style={{ width: '100%' }}
         autoPlay
+        muted 
+        style={{ width: '100%' }}
         loop
       >
         <source src={gymHomeVideo} />
       </video>
+      {showSplash ? <TestLogo setShowSplash={setShowSplash}/> : null }
     </div>
   )
 }

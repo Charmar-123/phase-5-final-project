@@ -37,7 +37,7 @@ const NavigationBar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{backgroundColor:"#db3a2c"}}>
+    <AppBar position="sticky" sx={{backgroundColor:"#db3a2c"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <FitnessCenterIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -56,7 +56,7 @@ const NavigationBar = () => {
               textDecoration: 'none',
             }}
           >
-            GymBuddy
+            GymBud
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -129,7 +129,7 @@ const NavigationBar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp"  />
               </IconButton>
             </Tooltip>
             <Menu
