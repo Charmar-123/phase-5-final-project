@@ -6,15 +6,18 @@ import AboutUs from './components/AboutUs';
 import WorkoutCard from './components/WorkoutCard';
 import WorkoutPage from './components/WorkoutPage';
 import Logo from './components/Logo';
+import TestLogo from './components/TestLogo';
+
 
 
 function App() {
   return (
     <>
       <NavigationBar />
-      <Logo/>
+      <TestLogo />
+      {/* <Logo /> */}
       {/* <WorkoutPage/> */}
-      <Home />
+      {/* <Home /> */}
       {/* <AboutUs/> */}
     </>
 
