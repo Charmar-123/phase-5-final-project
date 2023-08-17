@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Divider } from '@mui/material';
+import { Divider, Box } from '@mui/material';
 
 import benchPress from '../assets/videos/bench-press.mp4'
 
@@ -19,8 +19,17 @@ import benchPress from '../assets/videos/bench-press.mp4'
 // t.string "description"
 
 const WorkoutCard = () => {
+
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{
+            maxWidth: 345, marginLeft: 20,
+
+            boxShadow:
+                "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+
+
+
+        }}>
             <CardMedia>
                 <video
                     style={{ width: 345, height: 194 }}
@@ -32,28 +41,46 @@ const WorkoutCard = () => {
                 </video>
             </CardMedia>
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    Exercise: Dumbell Press
+                <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h5" component="div">
+                    Exercise:
+                </Typography>
+                <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} gutterBottom variant="h4" component="div">
+                    Dumbell Press
                 </Typography>
                 <Divider />
-                <Typography variant="body1">
-                    Sets: 4
-                </Typography>
+                <Box sx={{display:'flex' , flexDirection:'row', alignItems:'center'}}>
+                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h6">
+                        Sets:  
+                    </Typography>
+                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h5">
+                        4
+                    </Typography>
+                </Box>
+
                 <Divider />
-                <Typography variant="body1">
-                    Reps: 20
-                </Typography>
+                <Box sx={{display:'flex' , flexDirection:'row', alignItems:'center'}}>
+                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h6">
+                        Reps:  
+                    </Typography>
+                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h5">
+                        20
+                    </Typography>
+                </Box>
                 <Divider />
-                <Typography variant="body1">
-                    Description: Push from an incline bench.
-                </Typography>
+                <Box>
+                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h6">
+                        Description:  
+                    </Typography>
+                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h5">
+                        Push from an incline bench
+                    </Typography>
+                </Box>
             </CardContent>
-            <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-            </CardActions>
+
         </Card>
     )
 }
+
+
 
 export default WorkoutCard

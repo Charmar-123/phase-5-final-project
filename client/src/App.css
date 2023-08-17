@@ -5,6 +5,13 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'CardFont';
+  src: url('./fonts/Fredoka-VariableFont_wdth,wght.ttf') format('truetype');
+  /* You can also include other font formats here (woff, woff2, etc.) */
+  font-weight: normal;
+  font-style: normal;
+}
 
 .App {
   text-align: center;
