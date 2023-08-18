@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import gymHomeVideo from '../assets/videos/gym-home-video.mp4'
 import TestLogo from './TestLogo'
 import { Typography } from '@mui/material'
+import IntroAnimation from './IntroAnimation'
 
 
 
@@ -16,9 +17,12 @@ const Home = () => {
     <div>
 
 
-      {showSplash ? <TestLogo setShowSplash={setShowSplash} /> : null}
+      {/* {showSplash ? <TestLogo setShowSplash={setShowSplash} /> : null} */}
 
+     
 
+    
+      <IntroAnimation />
         <video
           autoPlay
           muted
@@ -28,7 +32,7 @@ const Home = () => {
           <source src={gymHomeVideo} />
         </video>
 
-
+      
 
       <Typography variant='h3'>
         Find The Workout That Fits Your Time And Level!

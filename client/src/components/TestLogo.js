@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './logo/test.scss'
+// import './logo/test.scss'
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
 const TestLogo = ({setShowSplash}) => {

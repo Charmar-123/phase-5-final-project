@@ -79,7 +79,7 @@ const CreateWorkout = () => {
 
     const onRatingClick = (text, rating) => {
         setSelectedRating({ text: text, rating: rating })
-        // handleClick()
+        handleClick()
     }
 
     return (
@@ -121,7 +121,9 @@ const CreateWorkout = () => {
                         <Typography sx={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4 }} variant='h4'>Pick A Date And Time</Typography>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
 
-                            <DateTimePicker label="Pick A Date And Time" />
+                            <DateTimePicker 
+                            disablePast
+                            label="Pick A Date And Time" />
 
                         </LocalizationProvider>
                     </motion.div>

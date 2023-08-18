@@ -6,6 +6,7 @@ import AboutUs from './components/AboutUs';
 import WorkoutCard from './components/WorkoutCard';
 import WorkoutPage from './components/WorkoutPage';
 import CreateWorkout from './components/CreateWorkout';
+import IntroAnimation from './components/IntroAnimation';
 
 
 
@@ -14,10 +15,11 @@ function App() {
   return (
     <>
       <NavigationBar />
+      {/* <IntroAnimation/> */}
       {/* <WorkoutPage/> */}
-      <CreateWorkout/>
+      {/* <CreateWorkout/> */}
       {/* <RatingsDropDown/> */}
-      {/* <Home /> */}
+      <Home />
       {/* <AboutUs/> */}
     </>
 
