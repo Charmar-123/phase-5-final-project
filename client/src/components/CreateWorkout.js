@@ -1,7 +1,7 @@
 import { Box, TextField, Typography, Button } from '@mui/material'
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from "framer-motion";
-
+import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -10,6 +10,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const CreateWorkout = () => {
+    const [date, selectedDate] = useState(dayjs().add(5, "minute"))
     const [isToggled, setIsToggled] = useState(false);
     const [selectedRating, setSelectedRating] = useState({ text: 'Pick a level out of 5!', rating: '😅' })
 
@@ -123,7 +124,10 @@ const CreateWorkout = () => {
 
                             <DateTimePicker 
                             disablePast
-                            label="Pick A Date And Time" />
+                            label="Pick A Date And Time" 
+                            value={date}
+                            onChange={(value) => console.log(value)}
+                            />
 
                         </LocalizationProvider>
                     </motion.div>

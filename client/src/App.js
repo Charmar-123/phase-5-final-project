@@ -17,9 +17,9 @@ function App() {
       <NavigationBar />
       {/* <IntroAnimation/> */}
       {/* <WorkoutPage/> */}
-      {/* <CreateWorkout/> */}
+      <CreateWorkout/>
       {/* <RatingsDropDown/> */}
-      <Home />
+      {/* <Home /> */}
       {/* <AboutUs/> */}
     </>
 
