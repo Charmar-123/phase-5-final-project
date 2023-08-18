@@ -5,15 +5,18 @@ import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import RatingsDropdown from './RatingsDropdown';
+import Textarea from '@mui/joy/Textarea';
 const CreateWorkout = () => {
     const [date, selectedDate] = useState(dayjs().add(5, "minute"))
 
 
+    const styles = {
+       ' input:focus': { 
+            outline: 'none',
+            borderColor: '#719ECE',
+        }
+    }
 
 
 
@@ -94,10 +97,18 @@ const CreateWorkout = () => {
                         variants={titleItem}>
                         <Typography sx={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4 }} variant='h3'>Tell Us About It!</Typography>
                         <Typography sx={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 1 }} variant='h5'>What equipment do we need and what type of workout is it.</Typography>
+
+                        <textarea
+                        style={{width: 300,borderRadius: 16, height: 200, fontSize: 15, resize: 'none', padding: '8px', outline: 'none'}}
+                        maxLength={300}
+                        placeholder='Write here...(max 300 characters)'
+                        >
+                        </textarea>
+
                     </motion.div>
 
-                    <RatingsDropdown titleItem={titleItem}/>
-                    
+                    <RatingsDropdown titleItem={titleItem} />
+
                 </Box>
 
 
