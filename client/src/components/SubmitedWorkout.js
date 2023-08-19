@@ -212,7 +212,7 @@ const SubmitedWorkout = () => {
                     /> : <AutoTypeInput
                         paddingLeft={4}
                         delay={8}
-                        text={'Push up weights from the bench. Keep the elbows at a 45 degree angle'}
+                        text={'Push from an          incline bench'}
                     />}
                 </motion.div>
 
@@ -246,19 +246,3 @@ const SubmitedWorkout = () => {
 }
 
 export default SubmitedWorkout
-
-{/* <AutoTypeInput
-                        delay={4}
-                        text={'Dumbbell Press'}
-                    />
-
-                    <textarea
-                        style={{
-                            overflow: 'hidden',
-                            fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
-                            border: "solid",
-                            borderRadius: 9, width: 300, padding: 0,
-                            height: 50, resize: "none"
-                        }}
-                        maxLength={15}
-                    /> */}

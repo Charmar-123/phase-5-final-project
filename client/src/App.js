@@ -29,6 +29,7 @@ function App() {
       {/* <AboutUs/> */}
       {/* <ProgressBar/> */}
       <SubmitedWorkout/>
+ 
 
     </>
 

@@ -52,16 +52,17 @@ const AutoTypeInput = ({
       transition={{
      
       }}
-    style={{overflow:"hidden", display: 'flex', border: border ? "solid" : "none", 
+    style={{overflow:"hidden", display: 'inline-block', border: border ? "solid" : "none", 
     borderRadius:  border && 9, width:  border && 300 ,
-    height: border && 50, paddingLeft: paddingLeft,
+    minHeight: border && 50, paddingLeft: paddingLeft,
   }}
     >
       {Array.from(text).map((letter, index) => 
          (<motion.span
           key={index}
           variants={child}
-          style={{fontSize: fontSize, fontFamily: 'CardFont', fontWeight: '800',}}
+          style={{fontSize: fontSize, fontFamily: 'CardFont', fontWeight: '800', display: 'inline-block', // Force the text to wrap
+          }}
 
         >
           {letter ===" " ? "\u00a0" : letter}
