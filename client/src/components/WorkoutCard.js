@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import { Divider, Box } from '@mui/material';
 
 import benchPress from '../assets/videos/bench-press.mp4'
+import AutoTypeInput from './AutoTypeInput';
 
 
 
@@ -18,7 +19,7 @@ import benchPress from '../assets/videos/bench-press.mp4'
 // t.string "target_area"
 // t.string "description"
 
-const WorkoutCard = () => {
+const WorkoutCard = ({ displayCard = false, name, reps, sets, rest, description }) => {
 
     return (
         <Card sx={{
@@ -41,39 +42,89 @@ const WorkoutCard = () => {
                 </video>
             </CardMedia>
             <CardContent>
-                <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h5" component="div">
+                <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5" component="div">
                     Exercise:
                 </Typography>
-                <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} gutterBottom variant="h4" component="div">
-                    Dumbell Press
-                </Typography>
+                {displayCard ?
+                    <AutoTypeInput
+                        text='Dumbbell Press'
+                        delay={4}
+                        border={false}
+                    /> : <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
+                        Dumbbell Press
+                    </Typography>
+                }
+
                 <Divider />
-                <Box sx={{display:'flex' , flexDirection:'row', alignItems:'center'}}>
-                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h6">
-                        Sets:  
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
+                        Sets:
                     </Typography>
-                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h5">
-                        4
+                    {displayCard ?
+                        <AutoTypeInput
+                            fontSize={25}
+                            text="4"
+                            delay={6}
+                            border={false}
+                        />
+                        :
+                        <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                            4
+                        </Typography>
+                    }
+
+
+                </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
+                        Rest:
                     </Typography>
+                    {displayCard ?
+                        <AutoTypeInput
+                            fontSize={25}
+                            text="30 Seconds"
+                            delay={6}
+                            border={false}
+                        />
+                        :
+                        <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                            4
+                        </Typography>
+                    }
+
+
                 </Box>
 
                 <Divider />
-                <Box sx={{display:'flex' , flexDirection:'row', alignItems:'center'}}>
-                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h6">
-                        Reps:  
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
+                        Reps:
                     </Typography>
-                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h5">
+                    {displayCard ? <AutoTypeInput
+                    fontSize={25}
+                        text="20"
+                        delay={6}
+                        border={false}
+                    /> : <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                         20
-                    </Typography>
+                    </Typography>}
                 </Box>
                 <Divider />
                 <Box>
-                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h6">
-                        Description:  
+                    <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
+                        Description:
                     </Typography>
-                    <Typography sx={{marginRight: 1, fontFamily: "CardFont", fontWeight: 800}} variant="h5">
-                        Push from an incline bench
-                    </Typography>
+                    {displayCard ? <AutoTypeInput
+                    fontSize={25}
+                        text="Push from an incline bench"
+                        delay={6}
+                        border={false}
+                    /> :
+                        <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                            Push from an incline bench
+                        </Typography>
+                    }
+
                 </Box>
             </CardContent>
 

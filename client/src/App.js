@@ -7,20 +7,29 @@ import WorkoutCard from './components/WorkoutCard';
 import WorkoutPage from './components/WorkoutPage';
 import CreateWorkout from './components/CreateWorkout';
 import IntroAnimation from './components/IntroAnimation';
+import SubmitedWorkout from './components/SubmitedWorkout';
+import AutoTypeInput from './components/AutoTypeInput';
+import ProgressBar from './components/ProgressBar';
+import { useState } from 'react';
 
 
 
 
 function App() {
+
+ 
   return (
     <>
       <NavigationBar />
       {/* <IntroAnimation/> */}
       {/* <WorkoutPage/> */}
-      <CreateWorkout/>
+      {/* <CreateWorkout/> */}
       {/* <RatingsDropDown/> */}
       {/* <Home /> */}
       {/* <AboutUs/> */}
+      {/* <ProgressBar/> */}
+      <SubmitedWorkout/>
+
     </>
 
   );
