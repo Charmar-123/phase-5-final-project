@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Divider, Box } from '@mui/material';
+import { Divider, Box, TextareaAutosize } from '@mui/material';
 
 import benchPress from '../assets/videos/bench-press.mp4'
 import AutoTypeInput from './AutoTypeInput';
@@ -20,6 +20,7 @@ import AutoTypeInput from './AutoTypeInput';
 // t.string "description"
 
 const AnimationWorkoutCard = ({ userInteracted, name, reps, sets, rest, description }) => {
+    
 
     return (
         <Card sx={{
@@ -114,19 +115,20 @@ const AnimationWorkoutCard = ({ userInteracted, name, reps, sets, rest, descript
                      /> }
                 </Box>
                 <Divider />
-                <Box>
+                <Box sx={{display: 'inline-block'}}>
                     <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
                         Description:
                     </Typography>
                     {userInteracted ? 
                         <Typography 
                      
-                        sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                        sx={{display: 'inline-block', wordBreak:'break-word', marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                             {description}
-                        </Typography> :
+                        </Typography> 
+                        :
                         <AutoTypeInput
                         fontSize={25}
-                            text="Push from an incline bench"
+                            text="Push up at  45 deg from a   flat bench"
                             delay={8}
                             border={false}
                         /> 

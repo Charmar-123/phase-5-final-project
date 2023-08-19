@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AnimationWorkoutCard from './AnimationWorkoutCard'
 import { motion } from 'framer-motion'
-import { TextField, Typography } from '@mui/material'
+import { TextField, TextareaAutosize, Typography } from '@mui/material'
 import AutoTypeInput from './AutoTypeInput'
 
 
@@ -55,6 +55,7 @@ const SubmitedWorkout = () => {
     const onChange = (e) => {
 
     }
+
     return (
         <motion.div
             variants={titleVaritants}
@@ -195,25 +196,27 @@ const SubmitedWorkout = () => {
                     <h3 variants={titleItem} style={{ ...styles.font, fontSize: 25 }}>Describe the exercise.</h3>
 
 
-                    {userInteracted ? <textarea
-                        style={{
+                    {userInteracted ?
+                        <TextareaAutosize
+                            style={{
+                                fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
+                                border: "solid",
+                                borderRadius: 9, width: 300,
+                                minHeight: 50, resize: "none",
+                            }}
 
-                            fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
-                            border: "solid",
-                            borderRadius: 9, width: 300,
-                            height: 50, resize: "none",
-
-                        }}
-                        onChange={(e) => {
-                            console.log(e.target.value);
-                            setDescription(e.target.value)
-                        }}
-                        maxLength={30}
-                    /> : <AutoTypeInput
-                        paddingLeft={4}
-                        delay={8}
-                        text={'Push from an          incline bench'}
-                    />}
+                            onChange={(e) => {
+                                console.log(e.target.value);
+                                setDescription(e.target.value)
+                            }}
+                            maxLength={100}       >
+                        </TextareaAutosize>
+                        :
+                        <AutoTypeInput
+                            paddingLeft={4}
+                            delay={8}
+                            text={'Push up at  45 deg from a flat  bench'}
+                        />}
                 </motion.div>
 
 
