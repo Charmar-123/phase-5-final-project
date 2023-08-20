@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :testings
   resources :participants
   resources :exercises
   resources :workouts

@@ -11,13 +11,14 @@ import SubmitedWorkout from './components/SubmitedWorkout';
 import AutoTypeInput from './components/AutoTypeInput';
 import ProgressBar from './components/ProgressBar';
 import { useState } from 'react';
+import VideoUpload from './components/VideoUpload';
 
 
 
 
 function App() {
 
- 
+
   return (
     <>
       <NavigationBar />
@@ -28,13 +29,17 @@ function App() {
       {/* <Home /> */}
       {/* <AboutUs/> */}
       {/* <ProgressBar/> */}
-      <SubmitedWorkout/>
- 
- 
+      {/* <SubmitedWorkout/> */}
 
-    </>
+      <VideoUpload/>
 
-  );
+
+
+
+
+        </>
+
+        );
 }
 
-export default App;
+        export default App;
