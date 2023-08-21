@@ -11,7 +11,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
-const RatingsDropdown = ({ titleItem }) => {
+const RatingsDropdown = ({ titleItem, setWorkoutIntensity }) => {
     const [isToggled, setIsToggled] = useState(false);
 
     const [selectedRating, setSelectedRating] = useState({ text: 'Pick a level out of 5!', rating: '😅' })
@@ -57,8 +57,9 @@ const RatingsDropdown = ({ titleItem }) => {
         setIsToggled(!isToggled); // Toggle the value using the NOT operator
     };
 
-    const onRatingClick = (text, rating) => {
+    const onRatingClick = (text, rating, val) => {
         setSelectedRating({ text: text, rating: rating })
+        setWorkoutIntensity(val)
         handleClick()
     }
     return (
@@ -103,7 +104,7 @@ const RatingsDropdown = ({ titleItem }) => {
 
                                         onClick={() => {
 
-                                            onRatingClick(`Piece of cake!`, `😅`)
+                                            onRatingClick(`Piece of cake!`, `😅`,1)
                                         }}
                                     >
                                         <Typography
@@ -119,7 +120,7 @@ const RatingsDropdown = ({ titleItem }) => {
 
                                         onClick={() => {
 
-                                            onRatingClick(`Feeling the burn!`, `😅😅`)
+                                            onRatingClick(`Feeling the burn!`, `😅😅`,2)
                                         }}
                                         variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
                                         style={styles.ratingsDiv}>
@@ -130,7 +131,7 @@ const RatingsDropdown = ({ titleItem }) => {
 
                                         onClick={() => {
 
-                                            onRatingClick(`Sweating buckets!`, `😅😅😅`)
+                                            onRatingClick(`Sweating buckets!`, `😅😅😅`,3)
                                         }}
                                         variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
                                         style={styles.ratingsDiv}>
@@ -141,7 +142,7 @@ const RatingsDropdown = ({ titleItem }) => {
 
                                         onClick={() => {
 
-                                            onRatingClick(`Gasping for air!`, `😅😅😅😅`)
+                                            onRatingClick(`Gasping for air!`, `😅😅😅😅`,4)
                                         }}
                                         variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
                                         style={styles.ratingsDiv}>
@@ -152,7 +153,7 @@ const RatingsDropdown = ({ titleItem }) => {
 
                                         onClick={() => {
 
-                                            onRatingClick(`Total workout apocalypse!`, `😅😅😅😅😅`)
+                                            onRatingClick(`Total workout apocalypse!`, `😅😅😅😅😅`,5)
                                         }}
                                         variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
                                         style={styles.ratingsDiv}>
