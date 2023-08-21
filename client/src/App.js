@@ -11,6 +11,7 @@ import SubmitedWorkout from './components/SubmitedWorkout';
 import AutoTypeInput from './components/AutoTypeInput';
 import ProgressBar from './components/ProgressBar';
 import { useState } from 'react';
+import TestGrid from './components/TestGrid';
 
 
 
@@ -22,13 +23,11 @@ function App() {
   return (
     <>
       <NavigationBar />
-      {/* <IntroAnimation/> */}
-      {/* <WorkoutPage/> */}
-      <CreateWorkout/>
-      {/* <RatingsDropDown/> */}
+      {/* <TestGrid/> */}
+      <WorkoutPage/>
+      {/* <CreateWorkout/> */}
       {/* <Home /> */}
       {/* <AboutUs/> */}
-      {/* <ProgressBar/> */}
       {/* <SubmitedWorkout/> */}
 
 

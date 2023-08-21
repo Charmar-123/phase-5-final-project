@@ -19,11 +19,11 @@ import AutoTypeInput from './AutoTypeInput';
 // t.string "target_area"
 // t.string "description"
 
-const WorkoutCard = ({ displayCard = false, name, reps, sets, rest, description }) => {
+const WorkoutCard = ({ name, reps, sets, rest, description }) => {
 
     return (
         <Card sx={{
-            maxWidth: 345, marginLeft: 20,
+            maxWidth: 345, 
 
             boxShadow:
                 "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
@@ -45,33 +45,21 @@ const WorkoutCard = ({ displayCard = false, name, reps, sets, rest, description 
                 <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5" component="div">
                     Exercise:
                 </Typography>
-                {displayCard ?
-                    <AutoTypeInput
-                        text='Dumbbell Press'
-                        delay={4}
-                        border={false}
-                    /> : <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
+             <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
                         Dumbbell Press
                     </Typography>
-                }
+                
 
                 <Divider />
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                     <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
                         Sets:
                     </Typography>
-                    {displayCard ?
-                        <AutoTypeInput
-                            fontSize={25}
-                            text="4"
-                            delay={6}
-                            border={false}
-                        />
-                        :
+                
                         <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                             4
                         </Typography>
-                    }
+                    
 
 
                 </Box>
@@ -79,18 +67,11 @@ const WorkoutCard = ({ displayCard = false, name, reps, sets, rest, description 
                     <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
                         Rest:
                     </Typography>
-                    {displayCard ?
-                        <AutoTypeInput
-                            fontSize={25}
-                            text="30 Seconds"
-                            delay={6}
-                            border={false}
-                        />
-                        :
+              
                         <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                             4
                         </Typography>
-                    }
+                    
 
 
                 </Box>
@@ -100,30 +81,20 @@ const WorkoutCard = ({ displayCard = false, name, reps, sets, rest, description 
                     <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
                         Reps:
                     </Typography>
-                    {displayCard ? <AutoTypeInput
-                    fontSize={25}
-                        text="20"
-                        delay={6}
-                        border={false}
-                    /> : <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                         20
-                    </Typography>}
+                    </Typography>
                 </Box>
                 <Divider />
                 <Box>
                     <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
                         Description:
                     </Typography>
-                    {displayCard ? <AutoTypeInput
-                    fontSize={25}
-                        text="Push from an incline bench"
-                        delay={6}
-                        border={false}
-                    /> :
+                
                         <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                             Push from an incline bench
                         </Typography>
-                    }
+                    
 
                 </Box>
             </CardContent>

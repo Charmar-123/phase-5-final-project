@@ -23,7 +23,7 @@ const RatingsDropdown = ({ titleItem, setWorkoutIntensity }) => {
         },
 
         ratingsDiv: {
-            boxShadow: "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset", width: 210, height: 60, borderRadius: 6, marginBottom: 19
+            boxShadow: "rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset", width: 210, height: 60, borderRadius: 6, marginBottom: 19, backgroundColor: 'white'
         }
 
     }
@@ -62,7 +62,7 @@ const RatingsDropdown = ({ titleItem, setWorkoutIntensity }) => {
         <motion.div
             variants={titleItem}>
 
-            <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 50 }} variant='h3'>How Intense Is It!</h1>
+            <h1 style={{marginTop: 10, fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 50 }} variant='h3'>How Intense Is It!</h1>
 
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

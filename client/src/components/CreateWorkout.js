@@ -135,7 +135,7 @@ const CreateWorkout = () => {
 
                     </LocalizationProvider>
                 </motion.div>
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex'}}>
                     <motion.div
                         style={{ marginRight: 40, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
                         variants={titleItem}>
