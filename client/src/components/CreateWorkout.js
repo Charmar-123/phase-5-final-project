@@ -53,6 +53,7 @@ const CreateWorkout = () => {
 
         <div
             style={{
+                height: '110vh',
                 marginTop: 0, paddingTop: 0, paddingLeft: 20,
                 background: "linear-gradient(90deg, rgba(208,208,244,1) 5%, rgba(208,208,244,1) 17%, rgba(0,212,255,1) 50%)",
 
@@ -81,7 +82,7 @@ const CreateWorkout = () => {
                     >
                         <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 35, marginTop: 0 }}>Give It A Name!</h1>
 
-                      
+
                         <input
                             placeholder='Workout Name'
                             onChange={(e) => setWorkoutName(e.target.value)}
@@ -94,14 +95,20 @@ const CreateWorkout = () => {
                 </motion.div>
                 <motion.div
                     variants={titleItem}>
-                    <Typography sx={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4 }} variant='h4'>Pick A Date And Time</Typography>
+                    <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 35, marginTop: 10 }}>Pick A Date And Time.</h1>
+
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
 
                         <DateTimePicker
                             disablePast
-                            label="Pick A Date And Time"
+                     
                             value={dateTime}
-                            onChange={(value) => setDateTime(value)}
+                            onChange={(value) => {
+                                console.log(value);
+                                setDateTime(value)
+                            }}
+                           
+                            sx={{ border: 3, borderRadius: 2, backgroundColor: "white"}}
                         />
 
                     </LocalizationProvider>
@@ -110,19 +117,22 @@ const CreateWorkout = () => {
                     <motion.div
                         style={{ marginRight: 40, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
                         variants={titleItem}>
-                        <Typography sx={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4 }} variant='h3'>Tell Us About It!</Typography>
-                        <Typography sx={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 1 }} variant='h5'>What equipment do we need and what type of workout is it.</Typography>
+                        <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 45, marginTop: 10,marginBottom: 0}}>Tell Us About It!</h1>
+                        <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 25, }}>What equipment do we need and what type of workout is it.</h1>
 
                         <textarea
-                            style={{ width: 300, borderRadius: 10, height: 200, fontSize: 15, resize: 'none', padding: '8px', outline: 'none' }}
+                            style={{fontFamily: 'CardFont', fontWeight: '950', width: 300, borderRadius: 10, height: 200, fontSize: 15, resize: 'none', padding: '8px', outline: 'none', borderWidth: 2 }}
                             maxLength={300}
                             placeholder='Write here...(max 300 characters)'
+                            onChange={(e) => setWorkoutExerciseType(e.target.value)}
                         >
                         </textarea>
 
-                        <Button
-                            variant='contained'
-                            sx={{ marginTop: 10, background: 'linear-gradient(90deg, rgba(50,78,152,1) 6%, rgba(107,155,244,1) 47%, rgba(0,9,255,1) 60%)' }}>Submit</Button>
+                        <button
+                            
+                            style={{fontSize: 20,fontFamily: 'CardFont', fontWeight: '950', marginTop: 10, width: 200, height: 50, borderRadius: 10,
+                            
+                            background: 'linear-gradient(90deg, rgba(107,227,244,1) 12%, rgba(249,255,0,1) 79%)' }}>Create Workout!</button>
 
                     </motion.div>
 

@@ -67,13 +67,13 @@ const RatingsDropdown = ({ titleItem }) => {
 
             <Typography sx={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4 }} variant='h3'>How Intense Is It!</Typography>
 
-            <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+            <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
 
                     <motion.div
                         onClick={handleClick}
-                        style={{ ...styles.ratingsDiv, display: 'flex', alignContent: 'flex-start', alignItems: 'center', width: 240 }}
+                        style={{ ...styles.ratingsDiv, display: 'flex', alignContent: 'flex-start', alignItems: 'center', width: 240, backgroundColor: 'white',  }}
                         whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
 
 
