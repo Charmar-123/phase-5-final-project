@@ -4,8 +4,7 @@ class CreateExercises < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :sets
       t.string :reps
-      t.string :weight
-      t.string :target_area
+      t.string :rest
       t.string :description
       t.belongs_to :workout, null: false, foreign_key: true
 

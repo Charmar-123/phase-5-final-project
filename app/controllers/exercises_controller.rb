@@ -13,6 +13,6 @@ class ExercisesController < ApplicationController
     private 
 
     def exercise_params
-        params.permit(:video, :name)
+        params.permit(:video, :name, :sets, :reps, :rest, :description, :workout_id)
     end
 end

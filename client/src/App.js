@@ -11,7 +11,7 @@ import SubmitedWorkout from './components/SubmitedWorkout';
 import AutoTypeInput from './components/AutoTypeInput';
 import ProgressBar from './components/ProgressBar';
 import { useState } from 'react';
-import VideoUpload from './components/VideoUpload';
+
 
 
 
@@ -24,14 +24,12 @@ function App() {
       <NavigationBar />
       {/* <IntroAnimation/> */}
       {/* <WorkoutPage/> */}
-      {/* <CreateWorkout/> */}
+      <CreateWorkout/>
       {/* <RatingsDropDown/> */}
       {/* <Home /> */}
       {/* <AboutUs/> */}
       {/* <ProgressBar/> */}
       {/* <SubmitedWorkout/> */}
-
-      <VideoUpload/>
 
 
 
