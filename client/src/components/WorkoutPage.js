@@ -1,28 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import WorkoutCard from './WorkoutCard'
 import MinimizedWorkoutCard from './MinimizedWorkoutCard'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, Reorder, motion } from 'framer-motion'
 
 
 
 const WorkoutPage = () => {
 
     const container = {
-        hidden:{
+        hidden: {
 
         },
         show: {
         }
     }
 
-    const item= {
+    const item = {
         hidden: {
 
         },
-        show:{
-            
+        show: {
+
         }
     }
+
+
+
+
+
+    const [items, setItems] = useState(["test 1","test 2","test 3","test 4","test 5",])
+
     return (
 
         <div style={{ padding: 20 }}>
@@ -42,22 +49,19 @@ const WorkoutPage = () => {
             </div> */}
 
             {/* minimized card div */}
-            <div style={{display: 'flex', flexDirection: "row", marginLeft: 250}}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center' }}>
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                    <MinimizedWorkoutCard />
-                </div>
-                <div style={{  position: 'fixed', marginLeft: 500}}>
+            <div style={{ display: 'flex', flexDirection: "row", marginLeft: 250 }}>
+
+                    <Reorder.Group 
+                    style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center' }}
+                    axis="y" values={items} onReorder={setItems}>
+                        {items.map((item) => (
+                            <Reorder.Item key={item} value={item}>
+                                <MinimizedWorkoutCard name={item}/>
+                            </Reorder.Item>
+                        ))}
+
+                    </Reorder.Group> 
+                <div style={{ position: 'fixed', marginLeft: 500 }}>
                     <WorkoutCard />
                 </div>
 
