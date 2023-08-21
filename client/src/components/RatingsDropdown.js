@@ -1,14 +1,10 @@
-import { Box, TextField, Typography, Button } from '@mui/material'
+
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from "framer-motion";
-import dayjs from 'dayjs';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 
 
 const RatingsDropdown = ({ titleItem, setWorkoutIntensity }) => {
@@ -66,122 +62,132 @@ const RatingsDropdown = ({ titleItem, setWorkoutIntensity }) => {
         <motion.div
             variants={titleItem}>
 
-            <Typography sx={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4 }} variant='h3'>How Intense Is It!</Typography>
-
-            <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 50 }} variant='h3'>How Intense Is It!</h1>
 
 
-                    <motion.div
-                        onClick={handleClick}
-                        style={{ ...styles.ratingsDiv, display: 'flex', alignContent: 'flex-start', alignItems: 'center', width: 240, backgroundColor: 'white',  }}
-                        whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
 
-                        <Typography sx={{ ...styles.ratingsText, flex: '1', textAlign: 'center' }}>{selectedRating.text} <br /> {selectedRating.rating}
-                        </Typography>
-                        {isToggled ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </motion.div>
+                <motion.div
+                    onClick={handleClick}
+                    style={{ ...styles.ratingsDiv, display: 'flex', alignContent: 'flex-start', alignItems: 'center', width: 240, backgroundColor: 'white', }}
+                    whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
 
 
 
+                    <h5 style={{ ...styles.ratingsText, flex: '1', textAlign: 'center', fontSize: 18 }}>{selectedRating.text} <br /> {selectedRating.rating}
+                    </h5>
+                    {isToggled ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </motion.div>
 
-                    <AnimatePresence initial={false}>
 
-                        {isToggled &&
 
-                            <>
+
+                <AnimatePresence initial={false}>
+
+                    {isToggled &&
+
+                        <>
+                            <motion.div
+                                variants={ratingVariants}
+                                initial="hidden"
+                                animate="show"
+                                exit="exit"
+                            >
+
                                 <motion.div
-                                    variants={ratingVariants}
-                                    initial="hidden"
-                                    animate="show"
-                                    exit="exit"
+                                    variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
+                                    style={styles.ratingsDiv}
+
+                                    onClick={() => {
+
+                                        onRatingClick(`Piece of cake!`, `😅`, 1)
+                                    }}
                                 >
 
-                                    <motion.div
-                                        variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
-                                        style={styles.ratingsDiv}
-
-                                        onClick={() => {
-
-                                            onRatingClick(`Piece of cake!`, `😅`,1)
-                                        }}
-                                    >
-                                        <Typography
-
-                                            sx={styles.ratingsText}>Piece of cake!<br /> 😅</Typography>
-
-
-                                    </motion.div>
 
 
 
-                                    <motion.div
+                                    <h5
 
-                                        onClick={() => {
-
-                                            onRatingClick(`Feeling the burn!`, `😅😅`,2)
-                                        }}
-                                        variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
-                                        style={styles.ratingsDiv}>
-                                        <Typography sx={styles.ratingsText}>Feeling the burn!<br />  😅😅</Typography>
-
-                                    </motion.div>
-                                    <motion.div
-
-                                        onClick={() => {
-
-                                            onRatingClick(`Sweating buckets!`, `😅😅😅`,3)
-                                        }}
-                                        variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
-                                        style={styles.ratingsDiv}>
-                                        <Typography sx={styles.ratingsText}>Sweating buckets!<br />  😅😅😅</Typography>
-
-                                    </motion.div>
-                                    <motion.div
-
-                                        onClick={() => {
-
-                                            onRatingClick(`Gasping for air!`, `😅😅😅😅`,4)
-                                        }}
-                                        variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
-                                        style={styles.ratingsDiv}>
-                                        <Typography sx={styles.ratingsText}>Gasping for air!<br />  😅😅😅😅</Typography>
-
-                                    </motion.div>
-                                    <motion.div
-
-                                        onClick={() => {
-
-                                            onRatingClick(`Total workout apocalypse!`, `😅😅😅😅😅`,5)
-                                        }}
-                                        variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
-                                        style={styles.ratingsDiv}>
-                                        <Typography sx={styles.ratingsText}>Total workout apocalypse!<br />  😅😅😅😅😅</Typography>
-
-                                    </motion.div>
-
-
+                                        style={{ ...styles.ratingsText, fontSize: 18, marginTop: 0 }}>Piece of cake!<br /> 😅</h5>
 
 
                                 </motion.div>
 
 
-                            </>
+
+                                <motion.div
+
+                                    onClick={() => {
+
+                                        onRatingClick(`Feeling the burn!`, `😅😅`, 2)
+                                    }}
+                                    variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
+                                    style={styles.ratingsDiv}>
+                                    <h5 style={{ ...styles.ratingsText, fontSize: 18, marginTop: 0 }}>Feeling the burn!<br />  😅😅</h5>
 
 
-                        }
+                                </motion.div>
+                                <motion.div
+
+                                    onClick={() => {
+
+                                        onRatingClick(`Sweating buckets!`, `😅😅😅`, 3)
+                                    }}
+                                    variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
+                                    style={styles.ratingsDiv}>
+                                    <h5 style={{ ...styles.ratingsText, fontSize: 18, marginTop: 0 }}>Sweating buckets!<br />  😅😅😅</h5>
 
 
-                    </AnimatePresence>
+                                </motion.div>
+                                <motion.div
+
+                                    onClick={() => {
+
+                                        onRatingClick(`Gasping for air!`, `😅😅😅😅`, 4)
+                                    }}
+                                    variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
+                                    style={styles.ratingsDiv}>
+                                    <h5 style={{ ...styles.ratingsText, fontSize: 18, marginTop: 0 }}>Gasping for air!<br />  😅😅😅😅</h5>
+                                   
+
+                                </motion.div>
+                                <motion.div
+
+                                    onClick={() => {
+
+                                        onRatingClick(`Total workout apocalypse!`, `😅😅😅😅😅`, 5)
+                                    }}
+                                    variants={ratingItem} whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
+                                    style={styles.ratingsDiv}>
+
+                                    <h5 style={{ ...styles.ratingsText, fontSize: 17, marginTop: 0 }}>Total workout apocalypse!<br />  😅😅😅😅😅</h5>
+                                 
+
+                                </motion.div>
+
+
+
+
+                            </motion.div>
+
+
+                        </>
+
+
+                    }
+
+
+                </AnimatePresence>
 
 
 
 
 
 
-                </Box>
-            </Box>
+            </div>
+
 
         </motion.div>
     )

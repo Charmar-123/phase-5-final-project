@@ -76,7 +76,7 @@ const CreateWorkout = () => {
 
         <form onSubmit={handleSubmit}
             style={{
-                height: '110vh',
+                height: '130vh',
                 marginTop: 0, paddingTop: 0, paddingLeft: 20,
                 background: "linear-gradient(90deg, rgba(208,208,244,1) 5%, rgba(208,208,244,1) 17%, rgba(0,212,255,1) 50%)",
 
