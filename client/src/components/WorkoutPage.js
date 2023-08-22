@@ -39,7 +39,7 @@ const WorkoutPage = () => {
 
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Check out your {"NAME"} workout!</h1>
 
-            <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Exercises:</h1>
+            <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: -50 }}>Exercises:</h1>
 
 
 
@@ -70,7 +70,7 @@ const WorkoutPage = () => {
                                 ))}
 
                             </Reorder.Group>
-                            <div style={{ position: 'fixed', marginLeft: 500 }}>
+                            <div style={{ position: 'fixed', marginLeft: 500}}>
                                 <WorkoutCard />
                             </div>
 

@@ -24,9 +24,7 @@ function App() {
   return (
     <>
       <NavigationBar />
-      <Grid/>
-
-      {/* <WorkoutPage/> */}
+      <WorkoutPage/>
       {/* <CreateWorkout/> */}
       {/* <Home /> */}
       {/* <AboutUs/> */}
