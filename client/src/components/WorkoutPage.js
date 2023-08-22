@@ -29,10 +29,12 @@ const WorkoutPage = () => {
 
 
     const [items, setItems] = useState(["test 1","test 2","test 3","test 4","test 5",])
-
+    const [listView, setListView] = useState(false)
     return (
 
         <div style={{ padding: 20 }}>
+            <button onClick={() => setListView(true)}>list</button>
+            <button onClick={() => setListView(false)}>grid</button>
 
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Check out your {"NAME"} workout!</h1>
 
@@ -49,21 +51,23 @@ const WorkoutPage = () => {
             </div> */}
 
             {/* minimized card div */}
-            <div style={{ display: 'flex', flexDirection: "row", marginLeft: 250 }}>
+            <div>
 
                     <Reorder.Group 
-                    style={{ display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center' }}
+                    style={listView ? {listStyle: "none", display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center' }
+                : {listStyle: "none", display: 'flex', flexWrap: 'wrap', gap: '60px', justifyContent: 'center', alignItems: 'center' }
+                }
                     axis="y" values={items} onReorder={setItems}>
                         {items.map((item) => (
                             <Reorder.Item key={item} value={item}>
-                                <MinimizedWorkoutCard name={item}/>
+                                {listView ? <MinimizedWorkoutCard name={item}/> : <WorkoutCard name={item}/>}
                             </Reorder.Item>
                         ))}
 
                     </Reorder.Group> 
-                <div style={{ position: 'fixed', marginLeft: 500 }}>
+               {listView ? <div style={{ position: 'fixed', marginLeft: 500 }}>
                     <WorkoutCard />
-                </div>
+                </div> : null}
 
             </div>
 
