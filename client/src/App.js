@@ -9,9 +9,10 @@ import CreateWorkout from './components/CreateWorkout';
 import IntroAnimation from './components/IntroAnimation';
 import SubmitedWorkout from './components/SubmitedWorkout';
 import AutoTypeInput from './components/AutoTypeInput';
-import ProgressBar from './components/ProgressBar';
+
 import { useState } from 'react';
-import TestGrid from './components/TestGrid';
+import Grid from './components/Grid.js';
+
 
 
 
@@ -23,8 +24,9 @@ function App() {
   return (
     <>
       <NavigationBar />
-      {/* <TestGrid/> */}
-      <WorkoutPage/>
+      <Grid/>
+
+      {/* <WorkoutPage/> */}
       {/* <CreateWorkout/> */}
       {/* <Home /> */}
       {/* <AboutUs/> */}

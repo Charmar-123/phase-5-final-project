@@ -2,34 +2,35 @@ import React, { useState } from 'react'
 import WorkoutCard from './WorkoutCard'
 import MinimizedWorkoutCard from './MinimizedWorkoutCard'
 import { AnimatePresence, Reorder, motion } from 'framer-motion'
+import Grid from './Grid'
 
 
 
 const WorkoutPage = () => {
 
-    const container = {
-        hidden: {
+    // const container = {
+    //     hidden: {
 
-        },
-        show: {
-        }
-    }
+    //     },
+    //     show: {
+    //     }
+    // }
 
-    const item = {
-        hidden: {
+    // const item = {
+    //     hidden: {
 
-        },
-        show: {
+    //     },
+    //     show: {
 
-        }
-    }
-
-
+    //     }
+    // }
 
 
 
-    const [items, setItems] = useState(["test 1","test 2","test 3","test 4","test 5",])
-    const [listView, setListView] = useState(false)
+
+
+    const [items, setItems] = useState(["test 1", "test 2", "test 3", "test 4", "test 5",])
+    const [listView, setListView] = useState(true)
     return (
 
         <div style={{ padding: 20 }}>
@@ -40,36 +41,72 @@ const WorkoutPage = () => {
 
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Exercises:</h1>
 
-            {/* Full card div */}
-            {/* <div style={{ display: 'flex', flexWrap: 'wrap', gap: '60px', justifyContent: 'center', alignItems: 'center' }}>
 
-                <WorkoutCard />
-                <WorkoutCard />
-                <WorkoutCard />
-                <WorkoutCard />
 
-            </div> */}
 
-            {/* minimized card div */}
-            <div>
 
-                    <Reorder.Group 
-                    style={listView ? {listStyle: "none", display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center' }
-                : {listStyle: "none", display: 'flex', flexWrap: 'wrap', gap: '60px', justifyContent: 'center', alignItems: 'center' }
-                }
-                    axis="y" values={items} onReorder={setItems}>
-                        {items.map((item) => (
-                            <Reorder.Item key={item} value={item}>
-                                {listView ? <MinimizedWorkoutCard name={item}/> : <WorkoutCard name={item}/>}
-                            </Reorder.Item>
-                        ))}
 
-                    </Reorder.Group> 
-               {listView ? <div style={{ position: 'fixed', marginLeft: 500 }}>
-                    <WorkoutCard />
-                </div> : null}
+            {listView ?
+                <AnimatePresence mode='wait'>
+                    <motion.div
+                        key="listView"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                        style={{ display: 'flex' }}>
 
-            </div>
+                   
+
+                            <Reorder.Group
+                                style={{ listStyle: "none", display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center' }
+
+                                }
+                                axis="y" values={items} onReorder={setItems}>
+                                {items.map((item) => (
+                                    <Reorder.Item key={item} value={item}>
+                                        <MinimizedWorkoutCard name={item} />
+                                    </Reorder.Item>
+                                ))}
+
+                            </Reorder.Group>
+                            <div style={{ position: 'fixed', marginLeft: 500 }}>
+                                <WorkoutCard />
+                            </div>
+
+                     
+                    </motion.div>
+
+                </AnimatePresence>
+
+                :
+
+                <AnimatePresence mode='wait'>
+                    <motion.div
+                        key="gridView"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}>
+                        <Grid />
+                    </motion.div>
+
+                </AnimatePresence>
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
 
         </div>
 
