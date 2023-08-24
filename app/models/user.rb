@@ -3,7 +3,7 @@ class User < ApplicationRecord
     has_many :participants
     has_many :workouts, through: :participants
     has_many :exercises, through: :workouts
-
+    before_save :downcase_email
     # validations
  
     validates :name, presence: true
@@ -31,7 +31,9 @@ class User < ApplicationRecord
         errors.add(:password, "must be at least 8 characters long")
       end
     end
-  
+    def downcase_email
+        self.email = email.downcase.strip if email
+        end
 
     has_secure_password
     has_one_attached :profile_pic
