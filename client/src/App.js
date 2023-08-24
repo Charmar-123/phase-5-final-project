@@ -12,9 +12,12 @@ import AutoTypeInput from './components/AutoTypeInput';
 
 import { useState } from 'react';
 import Grid from './components/Grid.js';
+import LoginScreen from './components/LoginScreen';
 
-
-
+import { UserContext } from './components/UserContext';
+import { Route, Routes } from 'react-router-dom';
+import UserPage from './components/UserPage';
+import CreateAccount from './components/CreateAccount';
 
 
 
@@ -24,19 +27,29 @@ function App() {
   return (
     <>
       <NavigationBar />
-      <WorkoutPage/>
-      {/* <CreateWorkout/> */}
-      {/* <Home /> */}
-      {/* <AboutUs/> */}
-      {/* <SubmitedWorkout/> */}
+      <Routes>
+        <Route path='/users/:id' element={<UserPage/>}/>
+        <Route path='/login' element={ <LoginScreen />}/>
+        <Route path='/' element={ <CreateAccount/>}/>
+        <Route path='/workoutpage' element={<WorkoutPage/>}/>
+        <Route path='/createworkout' element={<CreateWorkout/>}/>
+        <Route path='/submitedworkout' element={<SubmitedWorkout/>}/>
+
+        {/* <WorkoutPage/> */}
+        {/* <CreateWorkout/> */}
+        {/* <Home /> */}
+        {/* <AboutUs/> */}
+        {/* <SubmitedWorkout/> */}
+      </Routes>
 
 
 
 
 
-        </>
 
-        );
+    </>
+
+  );
 }
 
-        export default App;
+export default App;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import gymHomeVideo from '../assets/videos/gym-home-video.mp4'
-import TestLogo from './TestLogo'
 import { Typography } from '@mui/material'
 import IntroAnimation from './IntroAnimation'
 

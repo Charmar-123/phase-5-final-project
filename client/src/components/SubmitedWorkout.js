@@ -65,7 +65,7 @@ const SubmitedWorkout = () => {
             method: 'POST',
             body: formData,
             headers: {
-                'Content-Type': 'multipart/form-data'
+                // 'Content-Type': 'multipart/form-data'
             }
         })
 
@@ -82,7 +82,7 @@ const SubmitedWorkout = () => {
             <motion.div
                 variants={titleVaritants}
                 style={{
-                    height: '100vh', paddingLeft: 70, display: 'flex', flexDirection: 'row',
+                    minHeight: '100vh', paddingLeft: 70, display: 'flex', flexDirection: 'row',
                     background: 'linear-gradient(90deg, rgba(244,180,107,1) 12%, rgba(249,255,0,1) 46%)'
                 }} >
 

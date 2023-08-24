@@ -1,19 +1,55 @@
+User.create(
+    name: "John Doe",
+    bio: "Fitness enthusiast",
+    email: "john@example.com",
+    password_digest: BCrypt::Password.create("password")
+  )
+  
+  User.create(
+    name: "Jane Smith",
+    bio: "Yoga lover",
+    email: "jane@example.com",
+    password_digest: BCrypt::Password.create("password")
+  )
+  Workout.create(
+    name: "Morning Cardio",
+    datetime: DateTime.new(2023, 8, 22, 9, 0),
+    workout_type: "Cardio",
+    intensity: 3
+  )
+  
+  Workout.create(
+    name: "Strength Training",
+    datetime: DateTime.new(2023, 8, 23, 15, 30),
+    workout_type: "Strength",
+    intensity: 4
+  )
+  workout1 = Workout.find_by(name: "Morning Cardio")
+workout2 = Workout.find_by(name: "Strength Training")
 
-# db/seeds.rb
+Exercise.create(
+  name: "Running",
+  sets: "1",
+  reps: "30 minutes",
+  rest: "5 minutes",
+  description: "Steady-state running on the treadmill.",
+  workout_id: workout1.id
+)
 
-# Users
-user1 = User.create(name: 'Alice', bio: 'Fitness enthusiast', email: 'alice@example.com', password_digest: BCrypt::Password.create("1234"))
-user2 = User.create(name: 'Bob', bio: 'Gym addict', email: 'bob@example.com', password_digest: BCrypt::Password.create("1234"))
+Exercise.create(
+  name: "Squats",
+  sets: "3",
+  reps: "12",
+  rest: "1 minute",
+  description: "Barbell squats for leg strength.",
+  workout_id: workout2.id
+)
 
-# Workouts
-workout1 = Workout.create(date: '2023-08-15', time: 60, exercise_type: 'Cardio', intensity: 7)
-workout2 = Workout.create(date: '2023-08-16', time: 45, exercise_type: 'Strength Training', intensity: 8)
+user1 = User.find_by(email: "john@example.com")
+user2 = User.find_by(email: "jane@example.com")
 
-# Participants
-participant1 = Participant.create(user: user1, workout: workout1, admin: true)
-participant2 = Participant.create(user: user2, workout: workout1, admin: false)
-participant3 = Participant.create(user: user1, workout: workout2, admin: true)
+workout1 = Workout.find_by(name: "Morning Cardio")
+workout2 = Workout.find_by(name: "Strength Training")
 
-# Exercises
-exercise1 = Exercise.create(name: 'Running', sets: '1', reps: '1', weight: '0', target_area: 'Cardio', description: '30-minute jog', workout: workout1)
-exercise2 = Exercise.create(name: 'Squats', sets: '3', reps: '10', weight: '50', target_area: 'Legs', description: 'Bodyweight squats', workout: workout2)
+Participant.create(user_id: user1.id, workout_id: workout1.id, admin: true)
+Participant.create(user_id: user2.id, workout_id: workout2.id, admin: false)
