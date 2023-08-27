@@ -17,7 +17,7 @@ const CreateAccount = () => {
     const [errors, setErrors] = useState([])
 
     const navigate = useNavigate();
-    const { setUser } = useContext(UserContext)
+    const { setLoggedInUser } = useContext(UserContext)
 
 
     const titleVaritants = {
@@ -73,7 +73,7 @@ const CreateAccount = () => {
                 if (res.ok) {
                     res.json().then((user) => {
                         console.log(user);
-                        setUser(user)
+                        setLoggedInUser(user)
                     })
                 } else {
                     res.json().then(data => {
@@ -179,7 +179,7 @@ const CreateAccount = () => {
                         <h3 style={{ ...styles.font, fontSize: 25 }}>Tell us your full name!</h3>
 
 
-                        <motion.textarea
+                        <motion.input
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             style={{
@@ -187,7 +187,8 @@ const CreateAccount = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",
+                                height: 50, resize: "none", outline: "none" 
+                                
 
                             }}
                             onChange={(e) => {
@@ -209,7 +210,7 @@ const CreateAccount = () => {
                     >
                         <h3 variants={titleItem} style={{ ...styles.font, fontSize: 25 }}>What's your email address?</h3>
 
-                        <motion.textarea
+                        <motion.input
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             style={{
@@ -217,7 +218,7 @@ const CreateAccount = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",
+                                height: 50, resize: "none",outline: "none" 
 
                             }}
                             onChange={(e) => {
@@ -236,7 +237,7 @@ const CreateAccount = () => {
                     >
                         <h3 variants={titleItem} style={{ ...styles.font, fontSize: 25 }}>Pick a password.</h3>
 
-                        <motion.textarea
+                        <motion.input
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             style={{
@@ -244,7 +245,7 @@ const CreateAccount = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",
+                                height: 50, resize: "none",outline: "none" 
 
                             }}
                             onChange={(e) => {
@@ -265,7 +266,7 @@ const CreateAccount = () => {
                         <h3 variants={titleItem} style={{ ...styles.font, fontSize: 25 }}>Confirm your password.</h3>
 
 
-                        <motion.textarea
+                        <motion.input
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             style={{
@@ -273,7 +274,7 @@ const CreateAccount = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",
+                                height: 50, resize: "none",outline: "none" 
 
                             }}
                             onChange={(e) => {
@@ -303,7 +304,7 @@ const CreateAccount = () => {
                                     fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                     border: "solid",
                                     borderRadius: 9, width: 300,
-                                    minHeight: 50, resize: "none",
+                                    minHeight: 50, resize: "none",outline: "none" 
                                 }}
 
                                 onChange={(e) => {

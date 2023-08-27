@@ -141,7 +141,7 @@ const SubmitedWorkout = () => {
                         <h3 style={{ ...styles.font, fontSize: 25 }}>What's is called?</h3>
 
 
-                        {userInteracted ? <motion.textarea
+                        {userInteracted ? <motion.input
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             style={{
@@ -149,14 +149,14 @@ const SubmitedWorkout = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",
+                                height: 50, resize: "none", outline: "none"
 
                             }}
                             onChange={(e) => {
                                 console.log(e.target.value);
                                 setName(e.target.value)
                             }}
-                            maxLength={15}
+                            maxLength={13}
                         /> :
 
 
@@ -183,7 +183,7 @@ const SubmitedWorkout = () => {
                         <h3 variants={titleItem} style={{ ...styles.font, fontSize: 25 }}>How many Sets total?</h3>
 
 
-                        {userInteracted ? <motion.textarea
+                        {userInteracted ? <motion.input
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             style={{
@@ -191,7 +191,7 @@ const SubmitedWorkout = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",
+                                height: 50, resize: "none", outline: "none"
 
                             }}
                             onChange={(e) => {
@@ -199,6 +199,7 @@ const SubmitedWorkout = () => {
                                 setSets(e.target.value)
                             }}
                             maxLength={15}
+                            type='number'
                         /> : <AutoTypeInput
                             paddingLeft={4}
                             delay={5}
@@ -213,7 +214,7 @@ const SubmitedWorkout = () => {
                         <h3 variants={titleItem} style={{ ...styles.font, fontSize: 25 }}>Rest in seconds between sets?</h3>
 
 
-                        {userInteracted ? <motion.textarea
+                        {userInteracted ? <motion.input
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             style={{
@@ -221,9 +222,10 @@ const SubmitedWorkout = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",
+                                height: 50, resize: "none", outline: "none"
 
                             }}
+                            type='number'
                             onChange={(e) => {
                                 console.log(e.target.value);
                                 setRest(e.target.value)
@@ -243,7 +245,7 @@ const SubmitedWorkout = () => {
                         <h3 variants={titleItem} style={{ ...styles.font, fontSize: 25 }}>How many reps in a set?</h3>
 
 
-                        {userInteracted ? <motion.textarea
+                        {userInteracted ? <motion.input
                             initial={{ scale: 0.8 }}
                             animate={{ scale: 1 }}
                             style={{
@@ -251,9 +253,10 @@ const SubmitedWorkout = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",
+                                height: 50, resize: "none", outline: "none"
 
                             }}
+                            type='number'
                             onChange={(e) => {
                                 console.log(e.target.value);
                                 setReps(e.target.value)
@@ -284,7 +287,7 @@ const SubmitedWorkout = () => {
                                         fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                         border: "solid",
                                         borderRadius: 9, width: 300,
-                                        minHeight: 50, resize: "none",
+                                        minHeight: 50, resize: "none", outline: "none"
                                     }}
 
                                     onChange={(e) => {

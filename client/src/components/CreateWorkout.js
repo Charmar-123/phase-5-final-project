@@ -109,7 +109,7 @@ const CreateWorkout = () => {
                         <input
                             placeholder='Workout Name'
                             onChange={(e) => setWorkoutName(e.target.value)}
-                            style={{ width: 200, height: 50, borderRadius: 5, fontFamily: 'CardFont', fontWeight: '950', fontSize: 25, }}
+                            style={{ width: 200, height: 50, borderRadius: 5, fontFamily: 'CardFont', fontWeight: '950', fontSize: 25, outline: "none" }}
                         />
 
 
