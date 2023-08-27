@@ -5,36 +5,27 @@ class User < ApplicationRecord
     has_many :exercises, through: :workouts
     before_save :downcase_email
     # validations
- 
-    validates :name, presence: true
-    validates :password, presence: true
-    validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Invalid email format" }
-    validates :email, uniqueness: true
+    has_secure_password(options={validations:false})
+    validates :name, presence:  { message: "Name can't be blank" }
+    validates :password, presence: { message: "Password can't be blank" }
+    validates :email, presence: { message: "" }, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Not a valid email format" }
+    validates :email, uniqueness: { message: "An account already exists with this email address" }
     validate :password_complexity
+    validates :password, confirmation: {message: "Password does not match"}, if: -> { password.present? }
+    validates :password_confirmation, presence: {message: ""}
 
     def password_complexity
-        # byebug
         return unless password.present?
-      unless password.match?(/[A-Z]/)
-        errors.add(:password, "must contain at least one capital letter")
-      end
-  
-      unless password.match?(/\d/)
-        errors.add(:password, "must contain at least one number")
-      end
-  
-      unless password.match?(/[!@#$%^&*]/) # Replace with allowed symbols
-        errors.add(:password, "must contain at least one symbol !@#$%^&*")
-      end
-  
-      unless password.length >= 8
-        errors.add(:password, "must be at least 8 characters long")
-      end
+      
+        errors.add(:password, "Must contain at least one capital letter") unless password.match?(/[A-Z]/)
+        errors.add(:password, "Must contain at least one number") unless password.match?(/\d/)
+        errors.add(:password, "Must contain at least one symbol !@#$%^&*") unless password.match?(/[!@#$%^&*]/) 
+        errors.add(:password, "Must be at least 8 characters long") unless password.length >= 8
     end
     def downcase_email
         self.email = email.downcase.strip if email
-        end
+    end
 
-    has_secure_password
+
     has_one_attached :profile_pic
 end

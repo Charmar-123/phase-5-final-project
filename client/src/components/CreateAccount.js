@@ -53,12 +53,12 @@ const CreateAccount = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-
         const formData = new FormData()
         formData.append('name', name)
         formData.append('email', email)
         formData.append('bio', bio)
         formData.append('password', password)
+        formData.append('password_confirmation', confirmPassword)
         formData.append('profile_pic', selectedFile)
 
         fetch('/users', {
@@ -147,8 +147,8 @@ const CreateAccount = () => {
                                     style={{ display: 'none' }}
                                     type='file' accept='image/*'
                                     onChange={(e) => {
-                                        console.log(profilePic);
-                                        console.log(e.target.files[0]);
+                                        // console.log(profilePic);
+                                        // console.log(e.target.files[0]);
                                         setSelectedFile(e.target.files[0])
 
                                     }}
@@ -165,7 +165,7 @@ const CreateAccount = () => {
                         >
                             <img
                                 src={selectedFile && URL.createObjectURL(selectedFile)}
-                                  
+
                                 alt="Uploaded "
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
@@ -191,14 +191,15 @@ const CreateAccount = () => {
 
                             }}
                             onChange={(e) => {
-                                console.log(e.target.value);
+                                // console.log(e.target.value);
                                 setName(e.target.value)
                             }}
-                            maxLength={15}
+                
                         />
 
-
-
+                        {errors.name && errors.name.map((error, index) => {
+                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                        })}
                     </motion.div>
 
 
@@ -220,13 +221,13 @@ const CreateAccount = () => {
 
                             }}
                             onChange={(e) => {
-                                console.log(e.target.value);
+                                // console.log(e.target.value);
                                 setEmail(e.target.value)
                             }}
-                            maxLength={15}
+                   
                         />
-                         {errors.email && errors.email.map((error, index) => {
-                            return( <h6 key={index} style={{margin: 0}}>{error}</h6>)
+                        {errors.email && errors.email.map((error, index) => {
+                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
                         })}
                     </motion.div>
                     <motion.div
@@ -247,15 +248,15 @@ const CreateAccount = () => {
 
                             }}
                             onChange={(e) => {
-                                console.log(e.target.value);
+                                // console.log(e.target.value);
                                 setPassword(e.target.value)
                             }}
-                            maxLength={15}
+                        
                         />
                         {errors.password && errors.password.map((error, index) => {
-                            return( <h6 key={index} style={{margin: 0}}>{error}</h6>)
+                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
                         })}
-                       
+
                     </motion.div>
                     <motion.div
                         variants={titleItem}
@@ -276,11 +277,14 @@ const CreateAccount = () => {
 
                             }}
                             onChange={(e) => {
-                                console.log(e.target.value);
+                                // console.log(e.target.value);
                                 setConfirmPassword(e.target.value)
                             }}
-                            maxLength={15}
+                   
                         />
+                        {errors.password_confirmation && errors.password_confirmation.map((error, index) => {
+                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                        })}
                     </motion.div>
 
                     <motion.div
