@@ -10,10 +10,12 @@ class ApplicationController < ActionController::API
   # current_user and authorized_user
   def current_user
       user = User.find_by(id: session[:user_id])
+    #   byebug
       user
   end  
 
   def authorized_user
+    # byebug
       render json: {errors: "Not Authorized"}, status: :unauthorized unless current_user
   end 
 

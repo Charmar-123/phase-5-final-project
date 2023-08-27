@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext.js'
 import treadmillVideo from '../assets/videos/treadmill.mp4'
 
-const PatientPortal = () => {
+const LoginScreen = () => {
 
 
     const navigate = useNavigate();
@@ -177,4 +177,4 @@ const PatientPortal = () => {
     )
 }
 
-export default PatientPortal
+export default LoginScreen
