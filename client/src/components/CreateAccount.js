@@ -74,6 +74,7 @@ const CreateAccount = () => {
                     res.json().then((user) => {
                         console.log(user);
                         setLoggedInUser(user)
+                        navigate(`/users/${user.id}/workouts/new`)
                     })
                 } else {
                     res.json().then(data => {

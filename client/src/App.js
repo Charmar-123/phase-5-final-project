@@ -28,12 +28,13 @@ function App() {
     <>
       <NavigationBar />
       <Routes>
-        <Route path='/users/:id' element={<UserPage/>}/>
+        <Route path='/users/:userId' element={<UserPage/>}/>
         <Route path='/login' element={ <LoginScreen />}/>
-        <Route path='/' element={ <CreateAccount/>}/>
-        <Route path='/workoutpage' element={<WorkoutPage/>}/>
-        <Route path='/createworkout' element={<CreateWorkout/>}/>
-        <Route path='/submitedworkout' element={<SubmitedWorkout/>}/>
+        <Route path='/signup' element={ <CreateAccount/>}/>
+        <Route path='/users/:userId/workouts/:workoutId' element={<WorkoutPage/>}/>
+        <Route path='/users/:userId/workouts/new' element={<CreateWorkout/>}/>
+        <Route path='/users/:userId/workouts/:workoutId/exercises/new' element={<SubmitedWorkout/>}/>
+        <Route path='/' element={<Home/>}/>
 
         {/* <WorkoutPage/> */}
         {/* <CreateWorkout/> */}

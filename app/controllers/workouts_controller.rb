@@ -1,7 +1,9 @@
 class WorkoutsController < ApplicationController
 
     def create
-        workout = Workout.create(workout_params)
+     
+        workout = Workout.create!(workout_params)
+        byebug
         render json: workout, status: :created
     end
 

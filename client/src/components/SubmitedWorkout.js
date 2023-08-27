@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import AnimationWorkoutCard from './AnimationWorkoutCard'
 import { AnimatePresence, motion } from 'framer-motion'
 import { TextField, TextareaAutosize, Typography } from '@mui/material'
 import AutoTypeInput from './AutoTypeInput'
-
-
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from './UserContext.js'
+import { useParams } from 'react-router-dom';
 const SubmitedWorkout = () => {
     const [name, setName] = useState("")
     const [reps, setReps] = useState()
@@ -12,10 +13,11 @@ const SubmitedWorkout = () => {
     const [rest, setRest] = useState()
     const [description, setDescription] = useState("")
     const [selectedFile, setSelectedFile] = useState(null)
-
+    const [errors, setErrors] = useState([])
     const [userInteracted, setUserInteracted] = useState(false)
-
-
+    const navigate = useNavigate();
+    const { loggedInUser, addExercise } = useContext(UserContext)
+    const { workoutId } = useParams();
     const titleVaritants = {
         hidden: { opacity: 0 },
         show: {
@@ -58,7 +60,7 @@ const SubmitedWorkout = () => {
         formData.append('reps', reps)
         formData.append('rest', rest)
         formData.append('description', description)
-        formData.append('workout_id', 1)
+        formData.append('workout_id', workoutId)
         formData.append('video', selectedFile)
 
         fetch('/exercises', {
@@ -69,10 +71,20 @@ const SubmitedWorkout = () => {
             }
         })
 
-        .then(res => res.json())
-        .then(data => {         
-            console.log(data)})
-        .catch(error => console.error('Fetch error:', error));
+        .then(res => {
+            if (res.ok) {
+                res.json().then((exercise) => {
+                    console.log(exercise);
+                    addExercise(exercise, workoutId)
+                    navigate(`/users/${loggedInUser.id}`)
+                })
+            } else {
+                res.json().then(data => {
+                    setErrors(data.errors)
+                    console.log(data.errors);
+                })
+            }
+        })
   
     }
 

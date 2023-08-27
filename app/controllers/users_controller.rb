@@ -3,12 +3,13 @@ class UsersController < ApplicationController
 
     def show 
         user = current_user
-        render json: user, status: :ok
+        render json: user, status: :ok, include: [:workouts]
     end 
 
     def create
         # byebug
         user = User.create!(user_params)
+        session[:user_id] = user.id
         render json: user, status: :created
     end 
     

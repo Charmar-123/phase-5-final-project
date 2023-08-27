@@ -24,6 +24,19 @@ User.create(
     workout_type: "Strength",
     intensity: 4
   )
+  Workout.create(
+    name: "Morning Tr",
+    datetime: DateTime.new(2023, 8, 22, 9, 0),
+    workout_type: "Cardio",
+    intensity: 3
+  )
+  
+  Workout.create(
+    name: "Strength PRs",
+    datetime: DateTime.new(2023, 8, 23, 15, 30),
+    workout_type: "Strength",
+    intensity: 4
+  )
   workout1 = Workout.find_by(name: "Morning Cardio")
 workout2 = Workout.find_by(name: "Strength Training")
 

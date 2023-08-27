@@ -11,7 +11,7 @@ const PatientPortal = () => {
 
 
     const navigate = useNavigate();
-    const { setLoggedInUser } = useContext(UserContext);
+    const { setLoggedInUser, loggedInUser } = useContext(UserContext);
 
 
 
@@ -23,15 +23,9 @@ const PatientPortal = () => {
 
 
     useEffect(() => {
-        fetch('/authorized_user')
-            .then(res => {
-                if (res.ok) {
-                    res.json().then(user => {
-                        setLoggedInUser(user)
-                        navigate(`/users/${user.id}`)
-                    })
-                }
-            })
+        if (loggedInUser){
+            navigate(`/users/${loggedInUser.id}`)
+        }
 
     }, [])
 
@@ -62,7 +56,7 @@ const PatientPortal = () => {
             .then(res => {
                 if (res.ok) {
                     res.json().then(user => {
-                        console.log(user);
+                        // console.log(user);
                         setLoggedInUser(user)
                         navigate(`/users/${user.id}`)
                     })
@@ -173,7 +167,7 @@ const PatientPortal = () => {
                          marginTop: 15, textDecoration: "none", color: "black",
                         }}
                         
-                        href='/'>Don't have an account? Create one!</a>
+                        href='/signup'>Don't have an account? Create one!</a>
                     </div>
 
                 </div>

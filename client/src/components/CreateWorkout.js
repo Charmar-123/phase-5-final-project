@@ -1,20 +1,22 @@
 
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { motion } from "framer-motion";
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import RatingsDropdown from './RatingsDropdown';
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from './UserContext.js'
 
 const CreateWorkout = () => {
     const [workoutName, setWorkoutName] = useState('')
     const [dateTime, setDateTime] = useState(dayjs().add(5, "minute"))
     const [workoutExerciseType, setWorkoutExerciseType] = useState('')
-
+    const [errors, setErrors] = useState([])
     const [workoutIntensity, setWorkoutIntensity] = useState('')
-
-
+    const navigate = useNavigate();
+    const { loggedInUser, addWorkout } = useContext(UserContext)
     const styles = {
         ' input:focus': {
             outline: 'none',
@@ -58,16 +60,24 @@ const CreateWorkout = () => {
                 name: workoutName,
                 datetime: dateTime,
                 workout_type: workoutExerciseType,
-                intensity: workoutIntensity
+                intensity: workoutIntensity,
+                user_id: loggedInUser.id
             })
         })
-        .then(response => response.json()) // Parse the response as JSON
-        .then(data => {
-            console.log('Response data:', data);
+        .then(res => {
+            if (res.ok) {
+                res.json().then((workout) => {
+                    console.log(workout);
+                    addWorkout(workout)
+                    navigate(`/users/${loggedInUser.id}/workouts/${workout.id}/exercises/new`)
+                })
+            } else {
+                res.json().then(data => {
+                    setErrors(data.errors)
+                    console.log(data.errors);
+                })
+            }
         })
-        .catch(error => {
-            console.error('Error:', error);
-        });
     }
 
 
@@ -135,7 +145,7 @@ const CreateWorkout = () => {
 
                     </LocalizationProvider>
                 </motion.div>
-                <div style={{ display: 'flex'}}>
+                <div style={{ display: 'flex' }}>
                     <motion.div
                         style={{ marginRight: 40, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}
                         variants={titleItem}>
@@ -150,13 +160,23 @@ const CreateWorkout = () => {
                         >
                         </textarea>
 
-                        <button
-                            type='submit'
-                            style={{
-                                fontSize: 20, fontFamily: 'CardFont', fontWeight: '950', marginTop: 10, width: 200, height: 50, borderRadius: 10,
+                        <div>
+                            <button
+                                type='submit'
+                                style={{
+                                    fontSize: 20, fontFamily: 'CardFont', fontWeight: '950', marginTop: 10, width: 200, height: 50, borderRadius: 10, marginRight: 10,
 
-                                background: 'linear-gradient(90deg, rgba(107,227,244,1) 12%, rgba(249,255,0,1) 79%)'
-                            }}>Create Workout!</button>
+                                    background: 'linear-gradient(90deg, rgba(107,227,244,1) 12%, rgba(249,255,0,1) 79%)'
+                                }}>Create Workout!</button>
+                            <button
+                                onClick={() => navigate(`/users/${loggedInUser.id}`)}
+                                style={{
+                                    fontSize: 20, fontFamily: 'CardFont', fontWeight: '950', marginTop: 10, width: 200, height: 50, borderRadius: 10,
+
+                                    background: 'linear-gradient(90deg, rgba(107,227,244,1) 12%, rgba(249,255,0,1) 79%)'
+                                }}>Skip</button>
+                        </div>
+
 
                     </motion.div>
 

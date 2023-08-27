@@ -5,8 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './components/UserContext';
 import { BrowserRouter } from "react-router-dom";
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
+import { createRoot } from 'react-dom/client';
+const root = createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <UserProvider>
