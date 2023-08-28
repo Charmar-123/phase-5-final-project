@@ -44,7 +44,7 @@ const UserPage = () => {
           return (
             <div>
               <h6>name:{workout.name} date:{workout.datetime}</h6>
-              {workout.exercises.map((exec) => {
+              {workout.exercises && workout.exercises.map((exec) => {
                 return <h6>{exec.name}</h6>
               })}
             </div>
