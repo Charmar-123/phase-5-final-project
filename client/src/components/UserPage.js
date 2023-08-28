@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from './UserContext.js'
 import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import dayjs from 'dayjs';
 const UserPage = () => {
 
   const navigate = useNavigate();
@@ -21,7 +22,8 @@ const UserPage = () => {
     </div>
   }
   const { name, id, workouts, profile_pic_url } = loggedInUser
-
+  const firstWorkoutDate = dayjs(workouts[0].datetime).format('YYYY-MM-DD')
+  const firstWorkoutTime = dayjs(workouts[0].datetime).format('HH:mm ')
   console.log(loggedInUser);
   return (
     <div style={{ padding: 15 }}>
@@ -38,7 +40,7 @@ const UserPage = () => {
         />
       </div>
       {workouts.length > 0 ? <>
-        <h3>Your next workout is in ... minutes!</h3>
+        <h3>Your next workout is at {firstWorkoutTime} on {firstWorkoutDate}!</h3>
         <h3>Upcoming Workouts:</h3>
         {workouts.map((workout) => {
           return (
