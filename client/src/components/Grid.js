@@ -5,7 +5,7 @@ import {
   GridItem,
   swap
 } from "react-grid-dnd";
-import WorkoutCard from "./WorkoutCard";
+import ExerciseCard from "./ExerciseCard";
 
 const Grid = () => {
   const [items, setItems] = React.useState([
@@ -38,7 +38,7 @@ const Grid = () => {
                   height: "100%",
                 }}
               >
-                <WorkoutCard/>
+                <ExerciseCard/>
               </div>
             </GridItem>
           ))}

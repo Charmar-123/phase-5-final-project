@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import WorkoutCard from './WorkoutCard'
+import ExerciseCard from './ExerciseCard'
 import MinimizedWorkoutCard from './MinimizedWorkoutCard'
 import { AnimatePresence, Reorder, motion } from 'framer-motion'
 import Grid from './Grid'
@@ -71,7 +71,7 @@ const WorkoutPage = () => {
 
                             </Reorder.Group>
                             <div style={{ position: 'fixed', marginLeft: 500}}>
-                                <WorkoutCard />
+                                <ExerciseCard />
                             </div>
 
                      

@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { motion } from 'framer-motion';
 
 
-const WorkoutCard = ({name}) => {
+const MinimizedWorkoutCardWorkoutCard = ({name}) => {
 
     return (
 
@@ -43,4 +43,4 @@ const WorkoutCard = ({name}) => {
 
 
 
-export default WorkoutCard
+export default MinimizedWorkoutCardWorkoutCard

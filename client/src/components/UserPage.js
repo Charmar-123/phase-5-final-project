@@ -3,6 +3,7 @@ import { UserContext } from './UserContext.js'
 import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import dayjs from 'dayjs';
+import WorkoutCard from './WorkoutCard.js';
 const UserPage = () => {
 
   const navigate = useNavigate();
@@ -23,8 +24,8 @@ const UserPage = () => {
   }
   const { name, id, workouts, profile_pic_url } = loggedInUser
 
-  const accessibleWorkouts = workouts.filter((workout) => workout.accessible === true)
-  const unaccessibleWorkouts = workouts.filter((workout) => workout.accessible === false)
+  const accessibleUserWorkouts = workouts.filter((workout) => workout.accessible === true && workout.admin === true)
+  const unaccessibleUserWorkouts = workouts.filter((workout) => workout.accessible === false && workout.admin === true)
 
   console.log(loggedInUser);
   return (
@@ -41,10 +42,11 @@ const UserPage = () => {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
       </div>
-      {accessibleWorkouts.length > 0 ? <>
-        <h3>Your next workout is at {dayjs(accessibleWorkouts[0].datetime).format('YYYY-MM-DD')} on {dayjs(accessibleWorkouts[0].datetime).format('HH:mm ')}!</h3>
+      <h3>User Workouts accessible</h3>
+      {accessibleUserWorkouts.length > 0 ? <>
+        <h3>Your next workout is at {dayjs(accessibleUserWorkouts[0].datetime).format('YYYY-MM-DD')} on {dayjs(accessibleUserWorkouts[0].datetime).format('HH:mm ')}!</h3>
         <h3>Upcoming Workouts:</h3>
-        {accessibleWorkouts.map((workout) => {
+        {accessibleUserWorkouts.map((workout) => {
           return (
             <div>
               <h6>name:{workout.name} date:{workout.datetime}</h6>
@@ -58,18 +60,19 @@ const UserPage = () => {
       </> :
         <button onClick={() => navigate(`/users/${id}/workouts/new`)}>Create Workout</button>
       }
-      {unaccessibleWorkouts.length > 0 ?
+      {unaccessibleUserWorkouts.length > 0 ?
         <>
-
-          <h3>Completed Workouts:</h3>
-          {unaccessibleWorkouts.map((workout) => {
+          
+          <h3>User Workouts Unaccessible:</h3>
+          {unaccessibleUserWorkouts.map((workout) => {
           return (
-            <div>
-              <h6>name:{workout.name} date:{workout.datetime}</h6>
-              {workout.exercises && workout.exercises.map((exec) => {
-                return <h6>{exec.name}</h6>
-              })}
-            </div>
+            <WorkoutCard workout={workout}/>
+            // <div>
+            //   <h6>name:{workout.name} date:{workout.datetime}</h6>
+            //   {workout.exercises && workout.exercises.map((exec) => {
+            //     return <h6>{exec.name}</h6>
+            //   })}
+            // </div>
           )
         })}
           <button onClick={() => navigate(`/users/${id}/workouts/new`)}>Create Workout</button>
