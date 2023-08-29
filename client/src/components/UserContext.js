@@ -14,10 +14,10 @@ const UserProvider = ({ children }) => {
     //   code addExercise
     const addExercise = (newExercise, workout_id) => {
 
-        // const newExercises = [...loggedInUser.workouts.workout_id.exercises, newExercise]
-
-        // setLoggedInUser({ ...loggedInUser.workouts.workout_id, newExercises })
-        // console.log(loggedInUser.workouts);
+        const updatedLoggedInUser = {...loggedInUser}
+        const newExercises = [...loggedInUser.workouts[parseInt(workout_id)].exercises, newExercise]
+        updatedLoggedInUser.workouts[parseInt(workout_id)].exercises = newExercises
+        setLoggedInUser(updatedLoggedInUser)
     }
 
     // code delete workout

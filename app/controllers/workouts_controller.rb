@@ -10,7 +10,7 @@ class WorkoutsController < ApplicationController
 
     def destroy
         byebug
-        workout = Workout.find_by(id: params[:id])
+        workout = Workout.find(id: params[:id])
         if workout.participants.find_by(user_id: session[:user_id], admin: true)
             workout.destroy
              head :no_content
