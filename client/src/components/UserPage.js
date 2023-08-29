@@ -26,7 +26,7 @@ const UserPage = () => {
   const accessibleWorkouts = workouts.filter((workout) => workout.accessible === true)
   const unaccessibleWorkouts = workouts.filter((workout) => workout.accessible === false)
 
-  console.log(accessibleWorkouts);
+  console.log(loggedInUser);
   return (
     <div style={{ padding: 15 }}>
       <h1>Welcome {name}</h1>
