@@ -48,12 +48,13 @@ const UserPage = () => {
         <h3>Upcoming Workouts:</h3>
         {accessibleUserWorkouts.map((workout) => {
           return (
-            <div>
-              <h6>name:{workout.name} date:{workout.datetime}</h6>
-              {workout.exercises && workout.exercises.map((exec) => {
-                return <h6>{exec.name}</h6>
-              })}
-            </div>
+            <WorkoutCard workout={workout}/>
+            // <div>
+            //   <h6>name:{workout.name} date:{workout.datetime}</h6>
+            //   {workout.exercises && workout.exercises.map((exec) => {
+            //     return <h6>{exec.name}</h6>
+            //   })}
+            // </div>
           )
         })}
 

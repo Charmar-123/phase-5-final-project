@@ -8,9 +8,19 @@ class WorkoutsController < ApplicationController
         render json: workout, status: :created
     end
 
+    def update 
+        workout = Workout.find(params[:id])
+       
+        if workout.participants.find_by(user_id: session[:user_id], admin: true)
+            workout.update!(workout_params)
+            render json: workout, status: :accepted
+
+        end
+      
+    end 
+
     def destroy
-        byebug
-        workout = Workout.find(id: params[:id])
+        workout = Workout.find(params[:id])
         if workout.participants.find_by(user_id: session[:user_id], admin: true)
             workout.destroy
              head :no_content
@@ -22,6 +32,6 @@ class WorkoutsController < ApplicationController
     private
 
     def workout_params
-        params.permit(:name, :datetime, :workout_type, :intensity)
+        params.permit(:name, :datetime, :workout_type, :intensity, :accessible)
     end
 end

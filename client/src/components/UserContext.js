@@ -4,6 +4,9 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const [loggedInUser, setLoggedInUser] = useState(null)
+
+
+    // workout Code
     const addWorkout = (newWorkout) => {
 
         const newWorkouts = [...loggedInUser.workouts, newWorkout]
@@ -11,28 +14,46 @@ const UserProvider = ({ children }) => {
         setLoggedInUser({ ...loggedInUser, workouts: newWorkouts })
     }
 
-    //   code addExercise
+    const deleteWorkout = (id) => {
+        const filteredWorkouts = loggedInUser.workouts.filter(workout => workout.id !== parseInt(id))
+        console.log(filteredWorkouts);
+
+        setLoggedInUser({ ...loggedInUser, workouts: filteredWorkouts })
+    }
+    const updateWorkout = (updatedWorkout) => {
+
+
+        const updatedWorkouts = loggedInUser.workouts.map((workout => {
+          if (workout.id === updatedWorkout.id) {
+            return updatedWorkout
+          } else {
+            return workout
+          }
+        }))
+        
+    setLoggedInUser({
+        ...loggedInUser, workouts: updatedWorkouts
+      })
+    
+    }
+    // exercise code
     const addExercise = (newExercise, workout_id) => {
 
-        const updatedLoggedInUser = {...loggedInUser}
+        const updatedLoggedInUser = { ...loggedInUser }
         const newExercises = [...loggedInUser.workouts[parseInt(workout_id)].exercises, newExercise]
         updatedLoggedInUser.workouts[parseInt(workout_id)].exercises = newExercises
         setLoggedInUser(updatedLoggedInUser)
     }
 
-    // code delete workout
-    const deleteWorkout = (id) => {
-        const filteredWorkouts = loggedInUser.workouts.filter(workout => workout.id !== parseInt(id))
-        console.log(filteredWorkouts);
-    
-        setLoggedInUser({ ...loggedInUser, workouts: filteredWorkouts })
-    }
+
+
     const contextValue = {
         loggedInUser,
         setLoggedInUser,
         addWorkout,
         addExercise,
-        deleteWorkout
+        deleteWorkout,
+        updateWorkout
     };
 
     useEffect(() => {
