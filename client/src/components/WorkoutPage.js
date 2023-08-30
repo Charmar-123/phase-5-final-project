@@ -1,36 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import ExerciseCard from './ExerciseCard'
 import MinimizedWorkoutCard from './MinimizedWorkoutCard'
 import { AnimatePresence, Reorder, motion } from 'framer-motion'
 import Grid from './Grid'
-
-
-
+import { UserContext } from './UserContext.js'
+import { useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 const WorkoutPage = () => {
+    const { loggedInUser, addWorkout } = useContext(UserContext)
+    const { userId, workoutId } = useParams();
 
-    // const container = {
-    //     hidden: {
+    
 
-    //     },
-    //     show: {
-    //     }
-    // }
-
-    // const item = {
-    //     hidden: {
-
-    //     },
-    //     show: {
-
-    //     }
-    // }
-
-
-
-
-
-    const [items, setItems] = useState(["test 1", "test 2", "test 3", "test 4", "test 5",])
+    const workoutExercises = loggedInUser.workouts.find(workout => workout.id === parseInt(workoutId)).exercises
+    const orderNumbers = workoutExercises.map((ex) => {
+        return ex.order
+    })
+    const [items, setItems] = useState(orderNumbers)
     const [listView, setListView] = useState(true)
+
+    console.log(workoutExercises);
+    console.log(workoutExercises.find((workout) => workout.order === 1));
     return (
 
         <div style={{ padding: 20 }}>
@@ -62,15 +52,21 @@ const WorkoutPage = () => {
                                 style={{ listStyle: "none", display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center' }
 
                                 }
-                                axis="y" values={items} onReorder={setItems}>
-                                {items.map((item) => (
-                                    <Reorder.Item key={item} value={item}>
-                                        <MinimizedWorkoutCard name={item} />
+                                axis="y" values={items} 
+                                onReorder={setItems}
+                                >
+                                {orderNumbers.map((orderNumber) => (
+                                    // Pass in data
+                                    <Reorder.Item key={orderNumbers} value={orderNumbers}>
+                                        <MinimizedWorkoutCard 
+                                        name={workoutExercises.find((workout) => workout.order === orderNumber).name} 
+                                        />
                                     </Reorder.Item>
                                 ))}
 
                             </Reorder.Group>
                             <div style={{ position: 'fixed', marginLeft: 500}}>
+                                {/* set selected card */}
                                 <ExerciseCard />
                             </div>
 
@@ -88,6 +84,7 @@ const WorkoutPage = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}>
+                            {/* pass in data */}
                         <Grid />
                     </motion.div>
 

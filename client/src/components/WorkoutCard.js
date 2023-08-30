@@ -4,7 +4,10 @@ import { UserContext } from './UserContext.js'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 const WorkoutCard = ({ workout }) => {
+    const navigate = useNavigate();
     const [editEnabled, setEditEnabled] = useState(false)
     const styles = {
         div: {
@@ -116,7 +119,11 @@ const WorkoutCard = ({ workout }) => {
         })
     }
     return (
-        <div style={{ border: "solid" }}>
+        <motion.div 
+        onClick={() => navigate(`/users/${loggedInUser.id}/workouts/${id}/exercises`)}
+        whileHover={{scale: 1.1}}
+        whileTap={{scale: 0.9}}
+        style={{ border: "solid" }}>
 
             <form onSubmit={handleSubmitEditWorkout}>
                 <div style={{ display: 'flex', margin: '-30px 0', alignItems: 'center' }}>
@@ -207,7 +214,7 @@ const WorkoutCard = ({ workout }) => {
                 <button type='submit'>Set New Time</button>
             </form>}
 
-        </div>
+        </motion.div>
     )
 }
 
