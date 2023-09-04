@@ -10,11 +10,10 @@ class WorkoutsController < ApplicationController
 
     def update 
         workout = Workout.find(params[:id])
-       
+       byebug
         if workout.participants.find_by(user_id: session[:user_id], admin: true)
             workout.update!(workout_params)
             render json: workout, status: :accepted
-
         end
       
     end 
@@ -32,6 +31,6 @@ class WorkoutsController < ApplicationController
     private
 
     def workout_params
-        params.permit(:name, :datetime, :workout_type, :intensity, :accessible)
+        params.permit(:name, :datetime, :workout_type, :intensity, :accessible, :exercises)
     end
 end
