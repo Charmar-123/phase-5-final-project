@@ -25,34 +25,34 @@ const WorkoutPage = () => {
         // Set the order attribute of each exercise to its index in 'items'
         setItems(e)
         const updatedExercises = items.map((exercise, index) => {
-          return { ...exercise, order: index + 1 };
+            return { ...exercise, order: index + 1 };
         });
         console.log(updatedExercises);
-    
-        // Send an API request to update exercise order in the backend
-        fetch(`/workouts/${workoutId}`,{
-            method:'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body:JSON.stringify({
-                name: "testparams",
-                exercises: updatedExercises
-            })
-          })
-          .then(res => {
-            if (res.ok) {
-                res.json().then((workout) => {
-                    console.log(workout);
-                    // addWorkout(workout)
 
+        updatedExercises.forEach((exercise) => {
+            fetch(`/exercises/${exercise.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(exercise)
+            })
+                .then(res => {
+                    if (res.ok) {
+                        res.json().then((workout) => {
+                            console.log(workout);
+                            // addWorkout(workout)
+
+                        })
+                    } else {
+                        res.json().then(data => {
+                            setErrors(data.errors)
+                            console.log(data.errors);
+                        })
+                    }
                 })
-            } else {
-                res.json().then(data => {
-                    setErrors(data.errors)
-                    console.log(data.errors);
-                })
-            }
         })
-      };
+        // Send an API request to update exercise order in the backend
+
+    };
 
     // console.log(items);
     return (
