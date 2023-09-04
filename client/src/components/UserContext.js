@@ -40,9 +40,41 @@ const UserProvider = ({ children }) => {
     const addExercise = (newExercise, workout_id) => {
 
         const updatedLoggedInUser = { ...loggedInUser }
-        const newExercises = [...loggedInUser.workouts[parseInt(workout_id)].exercises, newExercise]
+        const newExercises = [...loggedInUser.workouts.find((workout) =>  workout.id === parseInt(workout_id)
+        ).exercises, newExercise]
         updatedLoggedInUser.workouts[parseInt(workout_id)].exercises = newExercises
         setLoggedInUser(updatedLoggedInUser)
+    }
+
+    const updateExercise = (updatedExercise, workout_id) => {
+
+        const updatedLoggedInUser = { ...loggedInUser };
+    
+        const targetWorkout = updatedLoggedInUser.workouts.find((workout) => workout.id === parseInt(workout_id));
+    
+        if (targetWorkout) {
+            const updatedExercises = targetWorkout.exercises.map((exercise) => {
+                if (exercise.id === updatedExercise.id) {
+                    return updatedExercise;
+                } else {
+                    return exercise;
+                }
+            });
+    
+            targetWorkout.exercises = updatedExercises;
+            // console.log(updatedLoggedInUser);
+            setLoggedInUser(updatedLoggedInUser);
+        } else {
+            console.error(`Workout with ID ${workout_id} not found.`);
+        }
+    };
+    
+    const updateWorkoutExercises = (updatedExercises, workout_id) => {
+        const updatedLoggedInUser = { ...loggedInUser };
+        updatedLoggedInUser.workouts.find((workout) => workout.id === parseInt(workout_id)).exercises = updatedExercises
+        setLoggedInUser(updatedLoggedInUser);
+        console.log(updatedLoggedInUser);
+
     }
 
 
@@ -53,7 +85,9 @@ const UserProvider = ({ children }) => {
         addWorkout,
         addExercise,
         deleteWorkout,
-        updateWorkout
+        updateWorkout,
+        updateExercise,
+        updateWorkoutExercises
     };
 
     useEffect(() => {

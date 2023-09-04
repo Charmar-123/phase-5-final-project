@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 
 const MinimizedWorkoutCardWorkoutCard = ({name}) => {
-
+// console.log(name);
     return (
 
         <motion.div

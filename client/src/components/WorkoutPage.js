@@ -7,27 +7,28 @@ import { UserContext } from './UserContext.js'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 const WorkoutPage = () => {
-    const { loggedInUser, addWorkout } = useContext(UserContext)
+    const { loggedInUser, updateWorkoutExercises, updateExercise } = useContext(UserContext)
     const { userId, workoutId } = useParams();
     const [errors, setErrors] = useState([])
 
+    console.log(loggedInUser.workouts.find(workout => workout.id === parseInt(workoutId)).exercises);
 
-
-    const workoutExercises = loggedInUser.workouts.find(workout => workout.id === parseInt(workoutId)).exercises
-    // const orderNumbers = workoutExercises.map((ex) => {
-    //     return { id: ex.id, order: ex.order }
-    //     // return ex.order 
-    // })
+    // const workoutExercises = loggedInUser.workouts.find(workout => workout.id === parseInt(workoutId)).exercises.sort((a, b) => a.order - b.order);
+    const workoutExercises = loggedInUser.workouts
+        .find(workout => workout.id === parseInt(workoutId))
+        .exercises.sort((a, b) => a.order - b.order);
+    // console.log(workoutExercises);
     const [items, setItems] = useState(workoutExercises)
     const [listView, setListView] = useState(true)
-
+    // console.log(items);
     const updateExerciseOrder = (e) => {
         // Set the order attribute of each exercise to its index in 'items'
-        setItems(e)
-        const updatedExercises = items.map((exercise, index) => {
+        // setItems(e)
+        const updatedExercises = e.map((exercise, index) => {
             return { ...exercise, order: index + 1 };
         });
-        console.log(updatedExercises);
+        setItems(updatedExercises)
+        // console.log(updatedExercises)
 
         updatedExercises.forEach((exercise) => {
             fetch(`/exercises/${exercise.id}`, {
@@ -37,9 +38,9 @@ const WorkoutPage = () => {
             })
                 .then(res => {
                     if (res.ok) {
-                        res.json().then((workout) => {
-                            console.log(workout);
-                            // addWorkout(workout)
+                        res.json().then((exercise) => {
+                            // console.log(exercise);
+                            updateExercise(exercise, workoutId)
 
                         })
                     } else {
@@ -50,6 +51,8 @@ const WorkoutPage = () => {
                     }
                 })
         })
+        // updateWorkoutExercises(updatedExercises, workoutId)
+
         // Send an API request to update exercise order in the backend
 
     };
@@ -95,7 +98,11 @@ const WorkoutPage = () => {
                                 // console.log(item.order)
                                 <Reorder.Item key={item.id} value={item}>
                                     <MinimizedWorkoutCard
-                                        name={workoutExercises.find((workout) => workout.order === item.order).name}
+                                        // name={workoutExercises.find((workout) => workout.order === item.order).name}
+                                        name={
+                                            (workoutExercises.find((workout) => workout.order === item.order) || { name: "Loading" }).name
+                                        }
+
                                     />
                                 </Reorder.Item>
                             ))}
@@ -121,7 +128,7 @@ const WorkoutPage = () => {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}>
                         {/* pass in data */}
-                        <Grid />
+                        <Grid items={items} updateExerciseOrder={updateExerciseOrder} workoutExercises={workoutExercises} />
                     </motion.div>
 
                 </AnimatePresence>

@@ -46,7 +46,7 @@ const ExerciseCard = ({ name, reps, sets, rest, description }) => {
                     Exercise:
                 </Typography>
                 <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
-                    Dumbbell Press
+                    {name}
                 </Typography>
 
 

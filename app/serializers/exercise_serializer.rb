@@ -1,5 +1,5 @@
 class ExerciseSerializer < ActiveModel::Serializer
-  attributes :id, :name, :sets, :reps, :rest, :description, :video_url, :order
+  attributes :id, :name, :order, :sets, :reps, :rest, :description, :video_url
 
 # belongs_to :workout
   def video_url
