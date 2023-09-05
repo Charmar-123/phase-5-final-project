@@ -19,8 +19,10 @@ import AutoTypeInput from './AutoTypeInput';
 // t.string "target_area"
 // t.string "description"
 
-const ExerciseCard = ({ name, reps, sets, rest, description }) => {
+const ExerciseCard = ({ selectedExercise }) => {
 
+    console.log(selectedExercise);
+    const {description, id,name, reps,rest, sets, video_url} = selectedExercise
     return (
         <Card sx={{
             textAlign: 'left',
@@ -32,21 +34,17 @@ const ExerciseCard = ({ name, reps, sets, rest, description }) => {
 
         }}>
             <CardMedia>
-                <video
-                    style={{ width: 345, height: 194 }}
-                    autoPlay
-                    loop
-                    muted
-                >
-                    <source src={benchPress} />
+            <video autoPlay loop muted style={{ width: 345, height: 194 }}>
+                    <source src={video_url} type="video/mp4" />
+                    Your browser does not support the video tag.
                 </video>
             </CardMedia>
             <CardContent>
                 <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800,}} variant="h5" component="div">
-                    Exercise:
+                    Exercise: 
                 </Typography>
                 <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
-                    {name}
+                {name}
                 </Typography>
 
 
@@ -57,7 +55,7 @@ const ExerciseCard = ({ name, reps, sets, rest, description }) => {
                     </Typography>
 
                     <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
-                        4
+                        {sets}
                     </Typography>
 
 
@@ -69,7 +67,7 @@ const ExerciseCard = ({ name, reps, sets, rest, description }) => {
                     </Typography>
 
                     <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
-                        4
+                        {rest}
                     </Typography>
 
 
@@ -92,7 +90,7 @@ const ExerciseCard = ({ name, reps, sets, rest, description }) => {
                     </Typography>
 
                     <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
-                        Push from an incline bench
+                        {description}
                     </Typography>
 
 

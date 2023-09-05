@@ -38,11 +38,12 @@ const UserProvider = ({ children }) => {
     }
     // exercise code
     const addExercise = (newExercise, workout_id) => {
-
+        // console.log(loggedInUser.workouts.find((workout) =>  workout.id === parseInt(workout_id)
+        // ).exercises);
         const updatedLoggedInUser = { ...loggedInUser }
-        const newExercises = [...loggedInUser.workouts.find((workout) =>  workout.id === parseInt(workout_id)
-        ).exercises, newExercise]
-        updatedLoggedInUser.workouts[parseInt(workout_id)].exercises = newExercises
+        const newExercises = [...loggedInUser.workouts.find((workout) =>  workout.id === parseInt(workout_id)).exercises, newExercise]
+        console.log(newExercises);
+        updatedLoggedInUser.workouts.find((workout) =>  workout.id === parseInt(workout_id)).exercises = newExercises
         setLoggedInUser(updatedLoggedInUser)
     }
 

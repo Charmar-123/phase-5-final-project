@@ -1,6 +1,10 @@
 class WorkoutSerializer < ActiveModel::Serializer
-  attributes :id, :name, :datetime, :workout_type, :intensity, :exercises, :accessible, :admin
+  attributes :id, :name, :datetime, :workout_type, :intensity, :accessible, :admin, :exercises
 
+  # has_many :exercises
+  def exercises
+    ActiveModel::SerializableResource.new(object.exercises,  each_serializer: ExerciseSerializer)
+  end
   def admin 
     current_user_id = scope[:id]
 

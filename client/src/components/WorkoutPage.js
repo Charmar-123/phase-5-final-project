@@ -10,20 +10,18 @@ const WorkoutPage = () => {
     const { loggedInUser, updateWorkoutExercises, updateExercise } = useContext(UserContext)
     const { userId, workoutId } = useParams();
     const [errors, setErrors] = useState([])
-
-    console.log(loggedInUser.workouts.find(workout => workout.id === parseInt(workoutId)).exercises);
-
-    // const workoutExercises = loggedInUser.workouts.find(workout => workout.id === parseInt(workoutId)).exercises.sort((a, b) => a.order - b.order);
+    const navigate = useNavigate();
     const workoutExercises = loggedInUser.workouts
         .find(workout => workout.id === parseInt(workoutId))
         .exercises.sort((a, b) => a.order - b.order);
-    // console.log(workoutExercises);
+    const [selectedExercise, setSelectedExercise] = useState(workoutExercises[0])
+
+
     const [items, setItems] = useState(workoutExercises)
     const [listView, setListView] = useState(true)
-    // console.log(items);
+
     const updateExerciseOrder = (e) => {
-        // Set the order attribute of each exercise to its index in 'items'
-        // setItems(e)
+
         const updatedExercises = e.map((exercise, index) => {
             return { ...exercise, order: index + 1 };
         });
@@ -51,13 +49,10 @@ const WorkoutPage = () => {
                     }
                 })
         })
-        // updateWorkoutExercises(updatedExercises, workoutId)
 
-        // Send an API request to update exercise order in the backend
 
     };
 
-    // console.log(items);
     return (
 
         <div style={{ padding: 20 }}>
@@ -67,8 +62,9 @@ const WorkoutPage = () => {
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Check out your {"NAME"} workout!</h1>
 
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: -50 }}>Exercises:</h1>
-
-
+            <button
+                onClick={() => navigate(`/users/${userId}/workouts/${workoutId}/exercises/new`)}
+            >Add Exercise</button>
 
 
 
@@ -96,11 +92,17 @@ const WorkoutPage = () => {
                             {items.map((item) => (
                                 // Pass in data
                                 // console.log(item.order)
-                                <Reorder.Item key={item.id} value={item}>
+                                <Reorder.Item
+                                    onClick={() => {
+                                        console.log("clicked");
+                                        setSelectedExercise(item)
+                                    }}
+                                    key={item.id} value={item}>
                                     <MinimizedWorkoutCard
-                                        // name={workoutExercises.find((workout) => workout.order === item.order).name}
+
+
                                         name={
-                                            (workoutExercises.find((workout) => workout.order === item.order) || { name: "Loading" }).name
+                                            (item || { name: "Loading" }).name
                                         }
 
                                     />
@@ -110,7 +112,7 @@ const WorkoutPage = () => {
                         </Reorder.Group>
                         <div style={{ position: 'fixed', marginLeft: 500 }}>
                             {/* set selected card */}
-                            <ExerciseCard />
+                            <ExerciseCard selectedExercise={selectedExercise} />
                         </div>
 
 

@@ -35,7 +35,7 @@ function App() {
         <Route path='/users/:userId/workouts/new' element={<CreateWorkout/>}/>
         <Route path='/users/:userId/workouts/:workoutId/exercises/new' element={<SubmitedWorkout/>}/>
         <Route path='/users/:userId/workouts/:workoutId/exercises' element={<WorkoutPage/>}/>
-        <Route />
+        <Route path='/' element={<Home/>}/>
         {/* <WorkoutPage/> */}
         {/* <AboutUs/> */}
         {/* <SubmitedWorkout/> */}

@@ -74,9 +74,10 @@ const SubmitedWorkout = () => {
         .then(res => {
             if (res.ok) {
                 res.json().then((exercise) => {
-                    console.log(exercise);
+                    // console.log(exercise);
                     addExercise(exercise, workoutId)
-                    navigate(`/users/${loggedInUser.id}`)
+                    navigate(`/users/${loggedInUser.id}/workouts/${workoutId}/exercises`)
+                    // console.log("success");
                 })
             } else {
                 res.json().then(data => {
@@ -108,7 +109,7 @@ const SubmitedWorkout = () => {
                         variants={titleItem}
 
                         style={{ ...styles.div, marginTop: -15 }}>
-                        <h1 style={styles.font} >Let's start adding some exercises!</h1>
+                        <h1 style={styles.font} >Let's add an exercise!</h1>
 
                     </motion.div>
 
@@ -134,7 +135,7 @@ const SubmitedWorkout = () => {
                                 style={{ display: 'none' }}
                                 type='file' accept='video/*'
                                 onChange={(e) => {
-                                    console.log(e.target.files[0]);
+                                    // console.log(e.target.files[0]);
                                     setSelectedFile(e.target.files[0])
                                 }}
 
@@ -165,7 +166,7 @@ const SubmitedWorkout = () => {
 
                             }}
                             onChange={(e) => {
-                                console.log(e.target.value);
+                                // console.log(e.target.value);
                                 setName(e.target.value)
                             }}
                             maxLength={13}
@@ -207,7 +208,7 @@ const SubmitedWorkout = () => {
 
                             }}
                             onChange={(e) => {
-                                console.log(e.target.value);
+                                // console.log(e.target.value);
                                 setSets(e.target.value)
                             }}
                             maxLength={15}
@@ -239,7 +240,7 @@ const SubmitedWorkout = () => {
                             }}
                             type='number'
                             onChange={(e) => {
-                                console.log(e.target.value);
+                                // console.log(e.target.value);
                                 setRest(e.target.value)
                             }}
                             maxLength={15}
@@ -270,7 +271,7 @@ const SubmitedWorkout = () => {
                             }}
                             type='number'
                             onChange={(e) => {
-                                console.log(e.target.value);
+                                // console.log(e.target.value);
                                 setReps(e.target.value)
                             }}
                             maxLength={15}
@@ -303,7 +304,7 @@ const SubmitedWorkout = () => {
                                     }}
 
                                     onChange={(e) => {
-                                        console.log(e.target.value);
+                                        // console.log(e.target.value);
                                         setDescription(e.target.value)
                                     }}
                                     maxLength={100}       >
