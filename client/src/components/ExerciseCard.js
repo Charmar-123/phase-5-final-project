@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -23,6 +23,7 @@ const ExerciseCard = ({ selectedExercise }) => {
 
     console.log(selectedExercise);
     const {description, id,name, reps,rest, sets, video_url} = selectedExercise
+    const videoKey = id
     return (
         <Card sx={{
             textAlign: 'left',
@@ -33,7 +34,7 @@ const ExerciseCard = ({ selectedExercise }) => {
 
 
         }}>
-            <CardMedia>
+            <CardMedia key={videoKey}>
             <video autoPlay loop muted style={{ width: 345, height: 194 }}>
                     <source src={video_url} type="video/mp4" />
                     Your browser does not support the video tag.
@@ -80,7 +81,7 @@ const ExerciseCard = ({ selectedExercise }) => {
                         Reps:
                     </Typography>
                     <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
-                        20
+                        {reps}
                     </Typography>
                 </Box>
                 <Divider />

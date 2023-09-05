@@ -94,7 +94,7 @@ const WorkoutPage = () => {
                                 // console.log(item.order)
                                 <Reorder.Item
                                     onClick={() => {
-                                        console.log("clicked");
+                                        console.log(item);
                                         setSelectedExercise(item)
                                     }}
                                     key={item.id} value={item}>
