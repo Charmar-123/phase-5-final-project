@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import ExerciseCard from './ExerciseCard'
 import MinimizedWorkoutCard from './MinimizedWorkoutCard'
 import { AnimatePresence, Reorder, motion } from 'framer-motion'
@@ -7,17 +7,27 @@ import { UserContext } from './UserContext.js'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 const WorkoutPage = () => {
-    const { loggedInUser, updateWorkoutExercises, updateExercise } = useContext(UserContext)
+    const { loggedInUser, updateExercise } = useContext(UserContext)
     const { userId, workoutId } = useParams();
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState([]);
+    const [workoutExercises, setWorkoutExercises] = useState([])
     const navigate = useNavigate();
-    const workoutExercises = loggedInUser.workouts
+    const [selectedExercise, setSelectedExercise] = useState([])
+    // const workoutExercises = loggedInUser.workouts
+    //     .find(workout => workout.id === parseInt(workoutId))
+    //     .exercises.sort((a, b) => a.order - b.order);
+
+    useEffect(() => {
+        const targetExercises = loggedInUser.workouts
         .find(workout => workout.id === parseInt(workoutId))
-        .exercises.sort((a, b) => a.order - b.order);
-    const [selectedExercise, setSelectedExercise] = useState(workoutExercises[0])
+        .exercises.sort((a, b) => a.order - b.order)
+        setWorkoutExercises(targetExercises)
+        setSelectedExercise(targetExercises[0])
+    }, [loggedInUser])
 
 
-    const [items, setItems] = useState(workoutExercises)
+
+    // const [items, setItems] = useState(workoutExercises)
     const [listView, setListView] = useState(true)
 
     const updateExerciseOrder = (e) => {
@@ -25,7 +35,7 @@ const WorkoutPage = () => {
         const updatedExercises = e.map((exercise, index) => {
             return { ...exercise, order: index + 1 };
         });
-        setItems(updatedExercises)
+        setWorkoutExercises(updatedExercises)
         // console.log(updatedExercises)
 
         updatedExercises.forEach((exercise) => {
@@ -55,7 +65,7 @@ const WorkoutPage = () => {
 
     return (
 
-        <div style={{ padding: 20 }}>
+        <div style={{ padding: 20, height: '100vh' }}>
             <button onClick={() => setListView(true)}>list</button>
             <button onClick={() => setListView(false)}>grid</button>
 
@@ -77,7 +87,7 @@ const WorkoutPage = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
-                        style={{ display: 'flex' }}>
+                        style={{ display: 'flex', marginTop: 100 }}>
 
 
 
@@ -85,16 +95,17 @@ const WorkoutPage = () => {
                             style={{ listStyle: "none", display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center' }
 
                             }
-                            axis="y" values={items}
+                            axis="y" values={workoutExercises}
                             // onReorder={(e) => console.log(e)}
                             onReorder={(e) => updateExerciseOrder(e)}
                         >
-                            {items.map((item) => (
+                            {workoutExercises.map((item) => (
                                 // Pass in data
                                 // console.log(item.order)
                                 <Reorder.Item
-                                    onClick={() => {
-                                        console.log(item);
+
+                                    onDoubleClick={() => {
+                                        // console.log(item);
                                         setSelectedExercise(item)
                                     }}
                                     key={item.id} value={item}>
@@ -110,7 +121,7 @@ const WorkoutPage = () => {
                             ))}
 
                         </Reorder.Group>
-                        <div style={{ position: 'fixed', marginLeft: 500 }}>
+                        <div style={{ position: 'fixed', marginLeft: 500, marginTop: -150 }}>
                             {/* set selected card */}
                             <ExerciseCard selectedExercise={selectedExercise} />
                         </div>
@@ -130,29 +141,12 @@ const WorkoutPage = () => {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}>
                         {/* pass in data */}
-                        <Grid items={items} updateExerciseOrder={updateExerciseOrder} workoutExercises={workoutExercises} />
+                        <Grid items={workoutExercises} updateExerciseOrder={updateExerciseOrder} workoutExercises={workoutExercises} />
                     </motion.div>
 
                 </AnimatePresence>
-
-
-
-
-
             }
-
-
-
-
-
-
-
-
-
-
         </div>
-
-
     )
 }
 

@@ -121,8 +121,8 @@ const WorkoutCard = ({ workout }) => {
     return (
         <motion.div 
         onClick={() => navigate(`/users/${loggedInUser.id}/workouts/${id}/exercises`)}
-        whileHover={{scale: 1.1}}
-        whileTap={{scale: 0.9}}
+        // whileHover={{scale: 1.1}}
+        // whileTap={{scale: 0.9}}
         style={{ border: "solid" }}>
 
             <form onSubmit={handleSubmitEditWorkout}>

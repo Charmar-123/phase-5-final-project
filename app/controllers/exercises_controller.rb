@@ -16,7 +16,14 @@ class ExercisesController < ApplicationController
         exercise = Exercise.create(exercise_params)
         render json: exercise, status: :ok
     end
-
+    def destroy
+        exercise = Exercise.find(params[:id])
+        if exercise.workout.participants.find_by(user_id: session[:user_id], admin: true)
+            exercise.destroy
+            head :no_content 
+        end
+      
+    end
 
     private 
 

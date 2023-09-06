@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -6,12 +6,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Divider, Box } from '@mui/material';
-
+import { useNavigate } from 'react-router-dom'
 import benchPress from '../assets/videos/bench-press.mp4'
 import AutoTypeInput from './AutoTypeInput';
+import { UserContext } from './UserContext.js'
 
-
-
+import { useParams } from 'react-router-dom';
 // t.string "name"
 // t.string "sets"
 // t.string "reps"
@@ -20,10 +20,29 @@ import AutoTypeInput from './AutoTypeInput';
 // t.string "description"
 
 const ExerciseCard = ({ selectedExercise }) => {
-
+    const params = useParams();
+    const { deleteExercise } = useContext(UserContext)
+    const navigate = useNavigate();
+    if (!selectedExercise) return <h1>Loading</h1>
     console.log(selectedExercise);
-    const {description, id,name, reps,rest, sets, video_url} = selectedExercise
+    const { description, id, name, reps, rest, sets, video_url } = selectedExercise
     const videoKey = id
+
+    const handleDeleteCard = () => {
+        fetch(`/exercises/${id}`, {
+            method: 'DELETE',
+          })
+            .then(res => {
+              if (res.ok) {
+                deleteExercise(id, params.workoutId)
+
+              }
+            })
+    }
+
+    const handleEditCard = () => {
+
+    }
     return (
         <Card sx={{
             textAlign: 'left',
@@ -35,17 +54,17 @@ const ExerciseCard = ({ selectedExercise }) => {
 
         }}>
             <CardMedia key={videoKey}>
-            <video autoPlay loop muted style={{ width: 345, height: 194 }}>
+                <video autoPlay loop muted style={{ width: 345, height: 194 }}>
                     <source src={video_url} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             </CardMedia>
             <CardContent>
-                <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800,}} variant="h5" component="div">
-                    Exercise: 
+                <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800, }} variant="h5" component="div">
+                    Exercise:
                 </Typography>
                 <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
-                {name}
+                    {name}
                 </Typography>
 
 
@@ -96,6 +115,15 @@ const ExerciseCard = ({ selectedExercise }) => {
 
 
                 </Box>
+                <CardActions>
+                    <Button
+                        onClick={() => handleEditCard()}
+                        variant='contained' >Edit</Button>
+                    <Button
+                        onClick={() => handleDeleteCard()}
+                        color='error'
+                        variant='contained'>Delete</Button>
+                </CardActions>
             </CardContent>
 
         </Card>

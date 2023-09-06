@@ -44,9 +44,8 @@ const Grid = ({items, updateExerciseOrder, workoutExercises}) => {
               >
                 <ExerciseCard
                 
-                name={
-                  (workoutExercises.find((workout) => workout.order === item.order) || { name: "Loading" }).name
-              }/>
+                selectedExercise={item}
+              />
               </div>
             </GridItem>
           ))}
