@@ -20,29 +20,51 @@ import { useParams } from 'react-router-dom';
 // t.string "description"
 
 const ExerciseCard = ({ selectedExercise }) => {
+    const [name, setName] = useState(selectedExercise.name)
+    const [reps, setReps] = useState(selectedExercise.reps)
+    const [sets, setSets] = useState(selectedExercise.sets)
+    const [rest, setRest] = useState()
+    const [description, setDescription] = useState(selectedExercise.description)
+    const [selectedFile, setSelectedFile] = useState(selectedExercise.video_url)
+    const [isEditing, setIsEditing] = useState(false);
     const params = useParams();
     const { deleteExercise } = useContext(UserContext)
     const navigate = useNavigate();
     if (!selectedExercise) return <h1>Loading</h1>
     console.log(selectedExercise);
-    const { description, id, name, reps, rest, sets, video_url } = selectedExercise
-    const videoKey = id
+    const { id } = selectedExercise
+    const videoKey = selectedExercise.id
+
+
 
     const handleDeleteCard = () => {
         fetch(`/exercises/${id}`, {
             method: 'DELETE',
-          })
+        })
             .then(res => {
-              if (res.ok) {
-                deleteExercise(id, params.workoutId)
+                if (res.ok) {
+                    deleteExercise(id, params.workoutId)
 
-              }
+                }
             })
     }
 
     const handleEditCard = () => {
-
+        setIsEditing(true);
     }
+    const handleCancelCard = () => {
+        setIsEditing(false);
+        setName(selectedExercise.name)
+        setReps(selectedExercise.reps)
+        setRest(selectedExercise.rest)
+        setSets(selectedExercise.sets)
+        setDescription(selectedExercise.description)
+        setSelectedFile(selectedExercise.video_url)
+    }
+
+    const handleSaveCard = () => {
+        setIsEditing(false);
+    };
     return (
         <Card sx={{
             textAlign: 'left',
@@ -55,7 +77,7 @@ const ExerciseCard = ({ selectedExercise }) => {
         }}>
             <CardMedia key={videoKey}>
                 <video autoPlay loop muted style={{ width: 345, height: 194 }}>
-                    <source src={video_url} type="video/mp4" />
+                    <source src={selectedFile} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             </CardMedia>
@@ -63,9 +85,18 @@ const ExerciseCard = ({ selectedExercise }) => {
                 <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800, }} variant="h5" component="div">
                     Exercise:
                 </Typography>
-                <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
-                    {name}
-                </Typography>
+                {isEditing ?
+                    <input
+                    style={{   
+                    fontSize: '30px',fontFamily: "CardFont", fontWeight: 800, width: "300px" }}
+                    value={name}
+                    maxLength={13}
+                    onChange={(e) => setName(e.target.value)}
+                    />
+                    :
+                    <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
+                        {name}
+                    </Typography>}
 
 
                 <Divider />
@@ -74,9 +105,9 @@ const ExerciseCard = ({ selectedExercise }) => {
                         Sets:
                     </Typography>
 
-                    <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                    {<Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                         {sets}
-                    </Typography>
+                    </Typography>}
 
 
 
@@ -86,10 +117,10 @@ const ExerciseCard = ({ selectedExercise }) => {
                         Rest:
                     </Typography>
 
-                    <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                    {<Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                         {rest}
                     </Typography>
-
+                    }
 
 
                 </Box>
@@ -99,9 +130,9 @@ const ExerciseCard = ({ selectedExercise }) => {
                     <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
                         Reps:
                     </Typography>
-                    <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                    {<Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                         {reps}
-                    </Typography>
+                    </Typography>}
                 </Box>
                 <Divider />
                 <Box>
@@ -109,16 +140,26 @@ const ExerciseCard = ({ selectedExercise }) => {
                         Description:
                     </Typography>
 
-                    <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                    {<Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
                         {description}
-                    </Typography>
+                    </Typography>}
 
 
                 </Box>
                 <CardActions>
-                    <Button
-                        onClick={() => handleEditCard()}
-                        variant='contained' >Edit</Button>
+                    {isEditing ?
+                        <>
+                        <Button
+                         variant='contained'
+                         color='success'>Save</Button>
+                        <Button 
+                         variant='contained'
+                        onClick={() => handleCancelCard()}>Cancel</Button>
+                        </>
+                        :
+                        <Button
+                            onClick={() => handleEditCard()}
+                            variant='contained' >Edit</Button>}
                     <Button
                         onClick={() => handleDeleteCard()}
                         color='error'

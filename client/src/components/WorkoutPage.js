@@ -121,7 +121,7 @@ const WorkoutPage = () => {
                             ))}
 
                         </Reorder.Group>
-                        <div style={{ position: 'fixed', marginLeft: 500, marginTop: -150 }}>
+                        <div style={{ position: 'fixed', marginLeft: 500, marginTop: -200 }}>
                             {/* set selected card */}
                             <ExerciseCard selectedExercise={selectedExercise} />
                         </div>
