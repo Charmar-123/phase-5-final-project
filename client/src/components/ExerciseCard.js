@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -20,23 +20,33 @@ import { useParams } from 'react-router-dom';
 // t.string "description"
 
 const ExerciseCard = ({ selectedExercise }) => {
-    const [name, setName] = useState(selectedExercise.name)
-    const [reps, setReps] = useState(selectedExercise.reps)
-    const [sets, setSets] = useState(selectedExercise.sets)
-    const [rest, setRest] = useState()
-    const [description, setDescription] = useState(selectedExercise.description)
-    const [selectedFile, setSelectedFile] = useState(selectedExercise.video_url)
     const [isEditing, setIsEditing] = useState(false);
     const params = useParams();
     const { deleteExercise } = useContext(UserContext)
     const navigate = useNavigate();
-    if (!selectedExercise) return <h1>Loading</h1>
-    console.log(selectedExercise);
-    const { id } = selectedExercise
-    const videoKey = selectedExercise.id
-
-
-
+ 
+    // console.log(selectedExercise.name);
+    const { id, name, reps, sets,rest, description, video_url } = selectedExercise
+ 
+    const [formData, setFormData] = useState({
+        name: '',
+        reps: "",
+        sets: "",
+        rest: "",
+        description: "",
+        video_url: video_url
+    })
+    useEffect(() => {
+        setFormData({
+            name: name,
+            reps: reps,
+            sets: sets,
+            rest: rest,
+            description: description,
+            video_url: video_url
+        })
+    }, [selectedExercise])
+    const videoKey = id
     const handleDeleteCard = () => {
         fetch(`/exercises/${id}`, {
             method: 'DELETE',
@@ -54,17 +64,27 @@ const ExerciseCard = ({ selectedExercise }) => {
     }
     const handleCancelCard = () => {
         setIsEditing(false);
-        setName(selectedExercise.name)
-        setReps(selectedExercise.reps)
-        setRest(selectedExercise.rest)
-        setSets(selectedExercise.sets)
-        setDescription(selectedExercise.description)
-        setSelectedFile(selectedExercise.video_url)
+        setFormData({
+            name: name,
+            reps: reps,
+            sets: sets,
+            rest: rest,
+            description: description,
+            video_url: video_url,
+        })
     }
-
     const handleSaveCard = () => {
         setIsEditing(false);
     };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    }
+    if (!selectedExercise) return <h1>Loading</h1>
     return (
         <Card sx={{
             textAlign: 'left',
@@ -77,7 +97,9 @@ const ExerciseCard = ({ selectedExercise }) => {
         }}>
             <CardMedia key={videoKey}>
                 <video autoPlay loop muted style={{ width: 345, height: 194 }}>
-                    <source src={selectedFile} type="video/mp4" />
+                    <source 
+                    src={video_url} 
+                    type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             </CardMedia>
@@ -89,9 +111,10 @@ const ExerciseCard = ({ selectedExercise }) => {
                     <input
                     style={{   
                     fontSize: '30px',fontFamily: "CardFont", fontWeight: 800, width: "300px" }}
-                    value={name}
+                    name='name'
+                    value={formData.name}
                     maxLength={13}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => handleChange(e)}
                     />
                     :
                     <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
