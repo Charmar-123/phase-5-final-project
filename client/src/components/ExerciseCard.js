@@ -24,17 +24,17 @@ const ExerciseCard = ({ selectedExercise }) => {
     const params = useParams();
     const { deleteExercise } = useContext(UserContext)
     const navigate = useNavigate();
- 
+
     // console.log(selectedExercise.name);
-    const { id, name, reps, sets,rest, description, video_url } = selectedExercise
- 
+    const { id, name, reps, sets, rest, description, video_url } = selectedExercise
+
     const [formData, setFormData] = useState({
         name: '',
         reps: "",
         sets: "",
         rest: "",
         description: "",
-        video_url: video_url
+        video_url: "",
     })
     useEffect(() => {
         setFormData({
@@ -97,9 +97,9 @@ const ExerciseCard = ({ selectedExercise }) => {
         }}>
             <CardMedia key={videoKey}>
                 <video autoPlay loop muted style={{ width: 345, height: 194 }}>
-                    <source 
-                    src={video_url} 
-                    type="video/mp4" />
+                    <source
+                        src={video_url}
+                        type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             </CardMedia>
@@ -109,12 +109,13 @@ const ExerciseCard = ({ selectedExercise }) => {
                 </Typography>
                 {isEditing ?
                     <input
-                    style={{   
-                    fontSize: '30px',fontFamily: "CardFont", fontWeight: 800, width: "300px" }}
-                    name='name'
-                    value={formData.name}
-                    maxLength={13}
-                    onChange={(e) => handleChange(e)}
+                        style={{
+                            fontSize: '30px', fontFamily: "CardFont", fontWeight: 800, width: "300px"
+                        }}
+                        name='name'
+                        value={formData.name}
+                        maxLength={13}
+                        onChange={(e) => handleChange(e)}
                     />
                     :
                     <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
@@ -128,9 +129,21 @@ const ExerciseCard = ({ selectedExercise }) => {
                         Sets:
                     </Typography>
 
-                    {<Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
-                        {sets}
-                    </Typography>}
+                    {isEditing ?
+                        <input
+                            type='number'
+                            min="0"
+                            style={{
+                                fontSize: '30px', fontFamily: "CardFont", fontWeight: 800, width: "150px"
+                            }}
+                            name='sets'
+                            value={formData.sets}
+                            maxLength={13}
+                            onChange={(e) => handleChange(e)}
+                        />
+                        : <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                            {sets}
+                        </Typography>}
 
 
 
@@ -140,9 +153,21 @@ const ExerciseCard = ({ selectedExercise }) => {
                         Rest:
                     </Typography>
 
-                    {<Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
-                        {rest}
-                    </Typography>
+                    {isEditing ?
+                        <input
+                            min="0"
+                            type='number'
+                            style={{
+                                fontSize: '30px', fontFamily: "CardFont", fontWeight: 800, width: "150px"
+                            }}
+                            name='rest'
+                            value={formData.rest}
+                            maxLength={13}
+                            onChange={(e) => handleChange(e)}
+                        /> :
+                        <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                            {rest}
+                        </Typography>
                     }
 
 
@@ -153,9 +178,21 @@ const ExerciseCard = ({ selectedExercise }) => {
                     <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h6">
                         Reps:
                     </Typography>
-                    {<Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
-                        {reps}
-                    </Typography>}
+                    {isEditing ?
+                        <input
+                            min="0"
+                            type='number'
+                            style={{
+                                fontSize: '30px', fontFamily: "CardFont", fontWeight: 800, width: "150px"
+                            }}
+                            name='reps'
+                            value={formData.reps}
+                            maxLength={13}
+                            onChange={(e) => handleChange(e)}
+                        /> :
+                        <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                            {reps}
+                        </Typography>}
                 </Box>
                 <Divider />
                 <Box>
@@ -163,21 +200,31 @@ const ExerciseCard = ({ selectedExercise }) => {
                         Description:
                     </Typography>
 
-                    {<Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
-                        {description}
-                    </Typography>}
+                    {isEditing ?
+                        <textarea
+                            style={{
+                                fontSize: '30px', fontFamily: "CardFont", fontWeight: 800, width: "300px", resize: 'none'
+                            }}
+                            name='description'
+                            value={formData.description}
+                            maxLength={150}
+                            onChange={(e) => handleChange(e)}
+                        /> :
+                        <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
+                            {description}
+                        </Typography>}
 
 
                 </Box>
                 <CardActions>
                     {isEditing ?
                         <>
-                        <Button
-                         variant='contained'
-                         color='success'>Save</Button>
-                        <Button 
-                         variant='contained'
-                        onClick={() => handleCancelCard()}>Cancel</Button>
+                            <Button
+                                variant='contained'
+                                color='success'>Save</Button>
+                            <Button
+                                variant='contained'
+                                onClick={() => handleCancelCard()}>Cancel</Button>
                         </>
                         :
                         <Button

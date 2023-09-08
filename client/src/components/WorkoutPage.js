@@ -6,6 +6,7 @@ import Grid from './Grid'
 import { UserContext } from './UserContext.js'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
+import { Button } from '@mui/material'
 const WorkoutPage = () => {
     const { loggedInUser, updateExercise } = useContext(UserContext)
     const { userId, workoutId } = useParams();
@@ -13,18 +14,17 @@ const WorkoutPage = () => {
     const [workoutExercises, setWorkoutExercises] = useState([])
     const navigate = useNavigate();
     const [selectedExercise, setSelectedExercise] = useState([])
-    // const workoutExercises = loggedInUser.workouts
-    //     .find(workout => workout.id === parseInt(workoutId))
-    //     .exercises.sort((a, b) => a.order - b.order);
+    const workoutName = loggedInUser.workouts
+        .find(workout => workout.id === parseInt(workoutId))
+        .name;
 
     useEffect(() => {
         const targetExercises = loggedInUser.workouts
-        .find(workout => workout.id === parseInt(workoutId))
-        .exercises.sort((a, b) => a.order - b.order)
+            .find(workout => workout.id === parseInt(workoutId))
+            .exercises.sort((a, b) => a.order - b.order)
         setWorkoutExercises(targetExercises)
         setSelectedExercise(targetExercises[0])
     }, [loggedInUser])
-
 
 
     // const [items, setItems] = useState(workoutExercises)
@@ -66,15 +66,21 @@ const WorkoutPage = () => {
     return (
 
         <div style={{ padding: 20, height: '100vh' }}>
-            <button onClick={() => setListView(true)}>list</button>
-            <button onClick={() => setListView(false)}>grid</button>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Check out your {workoutName} workout!</h1>
+                <div>
+                    <Button variant="outlined" color="warning" onClick={() => setListView(true)}>list</Button>
+                    <Button variant="outlined" color="warning" onClick={() => setListView(false)}>grid</Button>
+                </div>
+            </div>
 
-            <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Check out your {"NAME"} workout!</h1>
+
 
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: -50 }}>Exercises:</h1>
-            <button
+            <Button
+                variant='contained'
                 onClick={() => navigate(`/users/${userId}/workouts/${workoutId}/exercises/new`)}
-            >Add Exercise</button>
+            >Add Exercise</Button>
 
 
 
@@ -87,7 +93,7 @@ const WorkoutPage = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
-                        style={{ display: 'flex', marginTop: 100 }}>
+                        style={{ display: 'flex', marginTop: 0, marginLeft: 200 }}>
 
 
 
@@ -121,7 +127,9 @@ const WorkoutPage = () => {
                             ))}
 
                         </Reorder.Group>
-                        <div style={{ position: 'fixed', marginLeft: 500, marginTop: -200 }}>
+                        <div style={{
+                            position: 'fixed', marginLeft: 650, marginTop: -150,
+                        }}>
                             {/* set selected card */}
                             <ExerciseCard selectedExercise={selectedExercise} />
                         </div>
@@ -139,7 +147,9 @@ const WorkoutPage = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}>
+                        transition={{ duration: 0.5 }}
+                        style={{marginTop: 20}}
+                        >
                         {/* pass in data */}
                         <Grid items={workoutExercises} updateExerciseOrder={updateExerciseOrder} workoutExercises={workoutExercises} />
                     </motion.div>
