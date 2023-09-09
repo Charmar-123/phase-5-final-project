@@ -127,12 +127,14 @@ const WorkoutPage = () => {
                             ))}
 
                         </Reorder.Group>
-                        <div style={{
+                        {selectedExercise ?   <div style={{
                             position: 'fixed', marginLeft: 650, marginTop: -150,
                         }}>
-                            {/* set selected card */}
-                            <ExerciseCard selectedExercise={selectedExercise} />
-                        </div>
+                          <ExerciseCard selectedExercise={selectedExercise} />
+                        </div> :
+                        
+                        <h1>Click on the button above to start adding exercises!</h1>}
+                      
 
 
                     </motion.div>
