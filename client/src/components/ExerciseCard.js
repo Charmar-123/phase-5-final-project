@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Divider, Box } from '@mui/material';
+import { Divider, Box, TextareaAutosize } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import benchPress from '../assets/videos/bench-press.mp4'
 import AutoTypeInput from './AutoTypeInput';
@@ -88,7 +88,7 @@ const ExerciseCard = ({ selectedExercise }) => {
         formDataToPatch.append('sets', formData.sets);
         formDataToPatch.append('rest', formData.rest);
         formDataToPatch.append('description', formData.description);
-        
+
         // Append the video file if it's present
         if (formData.video) {
             formDataToPatch.append('video', formData.video);
@@ -315,9 +315,20 @@ const ExerciseCard = ({ selectedExercise }) => {
                                 maxLength={150}
                                 onChange={(e) => handleChange(e)}
                             /> :
-                            <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800 }} variant="h5">
-                                {description}
-                            </Typography>}
+                            // <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800, width: 300 }} variant="body1">
+                            //     {description}
+                            // </Typography>
+                            <TextareaAutosize
+                            disabled
+                                style={{
+                                    fontSize: 15, fontFamily: 'CardFont', fontWeight: '800',
+                                    border: "none",
+                                    width: 300,
+                                    minHeight: 50, resize: "none", outline: "none"
+                                }}
+                                value={description}
+                            ></TextareaAutosize>
+                        }
 
 
                     </Box>
@@ -328,7 +339,7 @@ const ExerciseCard = ({ selectedExercise }) => {
                                     variant='contained'
                                     color='success'
                                     type='submit'
-                                    >Save</Button>
+                                >Save</Button>
                                 <Button
                                     variant='contained'
                                     onClick={() => handleCancelCard()}>Cancel</Button>
