@@ -20,14 +20,22 @@ import { useParams } from 'react-router-dom';
 // t.string "description"
 
 const ExerciseCard = ({ selectedExercise }) => {
+
+    //     <video autoPlay loop muted style={{ width: 345, height: 194 }}>
+    //     <source src={URL.createObjectURL(selectedFile)} type={selectedFile.type} />
+    //     Your browser does not support the video tag.
+    // </video>
     const [isEditing, setIsEditing] = useState(false);
+    const [displayVideo, setDisplayVideo] = useState()
+    const [errors, setErrors] = useState([])
     const params = useParams();
-    const { deleteExercise } = useContext(UserContext)
+    const { deleteExercise, updateExercise } = useContext(UserContext)
     const navigate = useNavigate();
+    // const [selectedFile, setSelectedFile] = useState(null)
 
     // console.log(selectedExercise.name);
     const { id, name, reps, sets, rest, description, video_url } = selectedExercise
-
+    const videoKey = displayVideo
     const [formData, setFormData] = useState({
         name: '',
         reps: "",
@@ -35,6 +43,7 @@ const ExerciseCard = ({ selectedExercise }) => {
         rest: "",
         description: "",
         video_url: "",
+        video: null,
     })
     useEffect(() => {
         setFormData({
@@ -43,10 +52,12 @@ const ExerciseCard = ({ selectedExercise }) => {
             sets: sets,
             rest: rest,
             description: description,
-            video_url: video_url
+            video_url: video_url,
+            video: null
         })
+        setDisplayVideo(video_url)
     }, [selectedExercise])
-    const videoKey = id
+
     const handleDeleteCard = () => {
         fetch(`/exercises/${id}`, {
             method: 'DELETE',
@@ -71,10 +82,35 @@ const ExerciseCard = ({ selectedExercise }) => {
             rest: rest,
             description: description,
             video_url: video_url,
+            video: null
         })
+        setDisplayVideo(video_url)
+        console.log(video_url);
     }
-    const handleSaveCard = () => {
-        setIsEditing(false);
+    const handleSaveCard = (e) => {
+        e.preventDefault();
+
+        fetch(`/exercises/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                // datetime: dateTime,
+                // accessible: true
+            })
+        }).then(res => {
+            if (res.ok) {
+                res.json().then((exercise) => {
+                    updateExercise(exercise)
+                    setIsEditing(false);
+                })
+            } else {
+                res.json().then(json => {
+                    // console.log(json.errors);
+                    setErrors(json.errors)
+                })
+            }
+        })
+
     };
 
     const handleChange = (e) => {
@@ -84,6 +120,16 @@ const ExerciseCard = ({ selectedExercise }) => {
             [name]: value,
         });
     }
+    const handleVideoChange = (e) => {
+        const selectedFile = e.target.files[0];
+        console.log(URL.createObjectURL(e.target.files[0]));
+        // setFormData({
+        //     ...formData,
+        //     video: selectedFile,
+        // });
+        setDisplayVideo(URL.createObjectURL(selectedFile));
+        // console.log(URL.createObjectURL(selectedFile));
+    };
     if (!selectedExercise) return <h1>Loading</h1>
     return (
         <Card sx={{
@@ -96,12 +142,65 @@ const ExerciseCard = ({ selectedExercise }) => {
 
         }}>
             <CardMedia key={videoKey}>
-                <video autoPlay loop muted style={{ width: 345, height: 194 }}>
-                    <source
-                        src={video_url}
-                        type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+                {isEditing ?
+                    <div style={{ display: 'flex', justifyContent: 'center', }}>
+                        <div style={{ opacity: 0.5 }}>
+                            <video autoPlay loop muted style={{ width: 345, height: 194 }}>
+                                <source
+                                    src={displayVideo}
+                                    type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div style={{
+                            position: 'absolute', zIndex: 1000,
+                            marginTop: '100px'
+                        }}>
+                            <label style={{
+                                display: 'inline-block',
+                                width: '50px',
+                                height: '50px',
+                                borderRadius: '50%',
+                                backgroundColor: 'grey',
+                                textAlign: 'center',
+                                lineHeight: '50px',
+                                cursor: 'pointer',
+                                position: 'relative',
+                                overflow: 'hidden',
+                            }}>
+                                <input
+                                    type='file'
+                                    accept='video/*'
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        opacity: 0,
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        cursor: 'pointer',
+                                    }}
+                                    onChange={(e) => 
+                                       { 
+                                        handleVideoChange(e)
+                                        // console.log("Changed")
+                                    }
+                                    }
+                                />
+                                Edit
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    : <video autoPlay loop muted style={{ width: 345, height: 194 }}>
+                        <source
+                            src={displayVideo}
+                            type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                }
             </CardMedia>
             <CardContent>
                 <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800, }} variant="h5" component="div">

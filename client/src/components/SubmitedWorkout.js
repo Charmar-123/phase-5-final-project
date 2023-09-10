@@ -135,7 +135,6 @@ const SubmitedWorkout = () => {
                                 style={{ display: 'none' }}
                                 type='file' accept='video/*'
                                 onChange={(e) => {
-                                    // console.log(e.target.files[0]);
                                     setSelectedFile(e.target.files[0])
                                 }}
 
