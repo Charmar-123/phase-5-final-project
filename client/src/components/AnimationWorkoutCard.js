@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -22,6 +22,16 @@ import AnimationVideo from './AnimationVideo';
 
 const AnimationWorkoutCard = ({ userInteracted, name, reps, sets, rest, description, selectedFile }) => {
 
+    const [videoKey, setVideoKey] = useState(null);
+
+    // Update the video key whenever selectedFile changes
+    useEffect(() => {
+      if (selectedFile) {
+        setVideoKey(selectedFile.name); // You can use a unique identifier instead of the file name if needed
+      } else {
+        setVideoKey(null);
+      }
+    }, [selectedFile]);
     const renderVideo = () => {
         if (userInteracted && selectedFile) {
             return (
@@ -38,6 +48,7 @@ const AnimationWorkoutCard = ({ userInteracted, name, reps, sets, rest, descript
             )
         }
     }
+
     return (
         <Card sx={{
             width: 345, marginLeft: 20,
@@ -49,6 +60,7 @@ const AnimationWorkoutCard = ({ userInteracted, name, reps, sets, rest, descript
 
         }}>
             <CardMedia
+            key={videoKey}
                 sx={{ minHeight: 200, }}
             >
 
