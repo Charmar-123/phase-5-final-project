@@ -24,10 +24,10 @@ const AnimationWorkoutCard = ({ userInteracted, name, reps, sets, rest, descript
 
     const [videoKey, setVideoKey] = useState(null);
 
-    // Update the video key whenever selectedFile changes
+
     useEffect(() => {
       if (selectedFile) {
-        setVideoKey(selectedFile.name); // You can use a unique identifier instead of the file name if needed
+        setVideoKey(selectedFile.name); 
       } else {
         setVideoKey(null);
       }

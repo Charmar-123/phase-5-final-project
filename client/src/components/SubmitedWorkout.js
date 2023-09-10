@@ -209,7 +209,7 @@ const SubmitedWorkout = () => {
                                 // console.log(e.target.value);
                                 setSets(e.target.value)
                             }}
-                            maxLength={15}
+                            min={0}
                             type='number'
                         /> : <AutoTypeInput
                             paddingLeft={4}
@@ -237,6 +237,7 @@ const SubmitedWorkout = () => {
 
                             }}
                             type='number'
+                            min={0}
                             onChange={(e) => {
                                 // console.log(e.target.value);
                                 setRest(e.target.value)
@@ -268,6 +269,7 @@ const SubmitedWorkout = () => {
 
                             }}
                             type='number'
+                            min={0}
                             onChange={(e) => {
                                 // console.log(e.target.value);
                                 setReps(e.target.value)
