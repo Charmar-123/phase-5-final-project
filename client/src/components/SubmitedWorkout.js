@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import AnimationWorkoutCard from './AnimationWorkoutCard'
 import { AnimatePresence, motion } from 'framer-motion'
 import { TextField, TextareaAutosize, Typography } from '@mui/material'
@@ -6,6 +6,8 @@ import AutoTypeInput from './AutoTypeInput'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from './UserContext.js'
 import { useParams } from 'react-router-dom';
+
+import gymVideoWorkout from '../assets/videos/gym-video-workout.mp4'
 const SubmitedWorkout = () => {
     const [name, setName] = useState("")
     const [reps, setReps] = useState()
@@ -88,6 +90,17 @@ const SubmitedWorkout = () => {
         })
   
     }
+    useEffect(() => {
+        const fileName = 'gym-video-workout.mp4';
+
+        fetch(gymVideoWorkout)
+            .then(response => response.blob())
+            .then(blob => {
+                const file = new File([blob], fileName);
+                // console.log(file);
+                setSelectedFile(file)
+            })
+    }, [])
     return (
 
         <form onSubmit={handleSubmit}>

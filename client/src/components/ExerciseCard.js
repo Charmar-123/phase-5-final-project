@@ -321,6 +321,7 @@ const ExerciseCard = ({ selectedExercise }) => {
                             <TextareaAutosize
                             disabled
                                 style={{
+                                    backgroundColor: "white",
                                     fontSize: 15, fontFamily: 'CardFont', fontWeight: '800',
                                     border: "none",
                                     width: 300,

@@ -176,7 +176,9 @@ const NavigationBar = () => {
                 </Menu>
               </Box>
               :
-              <button onClick={() => navigate('/login')}> LogIn</button>}
+              <Button 
+              variant='contained'
+              onClick={() => navigate('/login')}> LogIn</Button>}
 
 
           </Toolbar>

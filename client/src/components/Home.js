@@ -14,28 +14,33 @@ const Home = () => {
 
   return (
     <div>
-
-
-      {/* {showSplash ? <TestLogo setShowSplash={setShowSplash} /> : null} */}
-
-     
-
-    
-      <IntroAnimation />
+      <div
+      style={{margin:0}}>
+        <IntroAnimation />
         <video
           autoPlay
           muted
-          style={{ width: '100%', borderBottom: 5 }}
+          style={{ width: '100%', margin: 0 }}
           loop
         >
           <source src={gymHomeVideo} />
         </video>
 
-      
+      </div>
 
-      <Typography variant='h3'>
-        Find The Workout That Fits Your Time And Level!
-      </Typography>
+      <div
+
+        style={{ background: "linear-gradient(180deg, rgba(255,0,35,1) 10%, rgba(255,126,154,1) 67%)", fontSize: 30}}>
+        <h1
+        style={{margin:0}}>The best way to organize workouts with your friends!</h1>
+        <h1>
+          Create your own workouts and add the exercises!
+        </h1>
+        <h1>
+          Or join others in the community on their workouts!
+        </h1>
+      </div>
+
 
     </div>
   )
