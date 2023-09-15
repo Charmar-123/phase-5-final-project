@@ -6,6 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 const WorkoutCard = ({ workout }) => {
     const navigate = useNavigate();
     const [editEnabled, setEditEnabled] = useState(false)
@@ -103,99 +104,125 @@ const WorkoutCard = ({ workout }) => {
                 user_id: loggedInUser.id
             })
         })
-        .then(res => {
-            if (res.ok) {
-                res.json().then((workout) => {
-                    // console.log(workout);
-                    updateWorkout(workout)
-                    setEditEnabled(false);
-                })
-            } else {
-                res.json().then(json => {
-                    // console.log(json.errors);
-                    setErrors(json.errors)
-                })
-            }
-        })
+            .then(res => {
+                if (res.ok) {
+                    res.json().then((workout) => {
+                        // console.log(workout);
+                        updateWorkout(workout)
+                        setEditEnabled(false);
+                    })
+                } else {
+                    res.json().then(json => {
+                        // console.log(json.errors);
+                        setErrors(json.errors)
+                    })
+                }
+            })
     }
     return (
-        <motion.div 
-        onClick={() => navigate(`/users/${loggedInUser.id}/workouts/${id}/exercises`)}
-        // whileHover={{scale: 1.1}}
-        // whileTap={{scale: 0.9}}
-        style={{ border: "solid" }}>
+        <motion.div
+
+            // whileHover={{scale: 1.1}}
+            // whileTap={{scale: 0.9}}
+            style={{ border: "solid", width: 600, padding: 8, borderRadius: 16 }}>
 
             <form onSubmit={handleSubmitEditWorkout}>
-                <div style={{ display: 'flex', margin: '-30px 0', alignItems: 'center' }}>
-                    <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Name: </h3>
-                    <input
-                        style={
-                            styles.div
-                        }
-                        value={workoutName}
-                        onChange={(e) => setWorkoutName(e.target.value)}
-                        disabled={editEnabled ? false : true}
-                    />
-                </div>
-                <div style={{ display: 'flex', margin: '-30px 0', alignItems: 'center' }}>
-                    <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Type: </h3>
-                    <input
-                        style={
-                            styles.div
-                        }
-                        value={workoutExerciseType}
-                        onChange={(e) => setWorkoutExerciseType(e.target.value)}
-                        disabled={editEnabled ? false : true}
-                    />
-                </div>
-                <div style={{ display: 'flex', margin: '-30px 0', alignItems: 'center' }}>
-                    <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Intensity: </h3>
-                    <input
-                        style={
-                            styles.div
-                        }
-                        type='number'
-                        value={workoutIntensity}
-                        onChange={(e) => setWorkoutIntensity(e.target.value)}
-                        min="1" max="5"
-                        disabled={editEnabled ? false : true}
-                    />
-                </div>
-                <div style={{ display: 'flex' }}>
-                    <h3>Workout datetime: {dayjs(datetime).format('YYYY-MM-DD HH:mm')}</h3>
-                    {editEnabled &&
-                        <>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DateTimePicker
-                                    disablePast
+                <div 
+                style={{position: 'relative'}}
+                >
+                    <Button
+                        variant='contained'
+                        onClick={() => navigate(`/users/${loggedInUser.id}/workouts/${id}/exercises`)}
+                        style={{ position: 'absolute', top: 30, right: 0 }}
 
-                                    value={dateTime}
-                                    onChange={(value) => {
-                                        setDateTime(value)
-                                    }}
-                                    sx={{ border: 3, borderRadius: 2, backgroundColor: "white" }}
-                                />
-                            </LocalizationProvider>
-                            <button type='submit'>Set New Time</button>
-                        </>}
+                    >View</Button>
+
+                    <div style={{ display: 'flex', margin: '-30px 0', alignItems: 'center' }}>
+                        <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Name: </h3>
+                        <input
+                            style={
+                                styles.div
+                            }
+                            value={workoutName}
+                            onChange={(e) => setWorkoutName(e.target.value)}
+                            disabled={editEnabled ? false : true}
+                        />
+                    </div>
+
+
+                    <div style={{ display: 'flex', margin: '-30px 0', alignItems: 'center' }}>
+                        <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Type: </h3>
+                        <input
+                            style={
+                                styles.div
+                            }
+                            value={workoutExerciseType}
+                            onChange={(e) => setWorkoutExerciseType(e.target.value)}
+                            disabled={editEnabled ? false : true}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', margin: '-30px 0', alignItems: 'center' }}>
+                        <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Intensity: </h3>
+                        <input
+                            style={
+                                styles.div
+                            }
+                            type='number'
+                            value={workoutIntensity}
+                            onChange={(e) => setWorkoutIntensity(e.target.value)}
+                            min="1" max="5"
+                            disabled={editEnabled ? false : true}
+                        />
+                    </div>
+                    <div style={{ display: 'flex' }}>
+                        <h3>Workout datetime: {dayjs(datetime).format('YYYY-MM-DD HH:mm')}</h3>
+                        {editEnabled &&
+                            <>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DateTimePicker
+                                        disablePast
+
+                                        value={dateTime}
+                                        onChange={(value) => {
+                                            setDateTime(value)
+                                        }}
+                                        sx={{ border: 3, borderRadius: 2, backgroundColor: "white" }}
+                                    />
+                                </LocalizationProvider>
+
+                                <Button
+                                    variant='contained'
+                                    type='submit'>Set New Time</Button>
+                            </>}
+                    </div>
+                    {editEnabled ?
+                        <div>
+                            <Button
+                                variant='contained'
+                                onClick={() => cancelEdit()}>Cancel</Button>
+                            <Button
+                                variant='contained'
+                                type='submit'>Save</Button>
+                        </div>
+                        : <Button
+                            variant='contained'
+                            onClick={() => setEditEnabled(true)}>Edit</Button>}
                 </div>
-                {editEnabled ?
-                <div>
-                    <button onClick={() => cancelEdit()}>Cancel</button>
-                    <button type='submit'>Save</button>
-                </div>
-                : <button onClick={() => setEditEnabled(true)}>Edit</button>}
             </form>
 
 
-            {admin === true ? <button
+            {admin === true ? <Button
+                variant='contained'
                 onClick={handleDelete}
-            >Delete</button> : null}
-            {admin === false && accessible === true ? <button>Join</button> : null}
-            {admin === true && accessible === false ? <button
+            >Delete</Button> : null}
+            {admin === false && accessible === true ? <Button
+                variant='contained'
+            >Join</Button> : null}
+            {admin === true && accessible === false ? <Button
+                variant='contained'
                 onClick={() => setShowDate(true)}
-            >Rescheduel</button> : null}
- 
+            >Rescheduel</Button> : null}
+
             {showDate && <form onSubmit={handleSubmitTime}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
 
@@ -211,7 +238,9 @@ const WorkoutCard = ({ workout }) => {
                     />
 
                 </LocalizationProvider>
-                <button type='submit'>Set New Time</button>
+                <Button
+                    variant='contained'
+                    type='submit'>Set New Time</Button>
             </form>}
 
         </motion.div>

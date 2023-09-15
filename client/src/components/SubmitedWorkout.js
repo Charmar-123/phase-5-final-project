@@ -339,6 +339,9 @@ const SubmitedWorkout = () => {
 
                     <motion.p variants={titleItem} style={{ ...styles.font, fontSize: 10 }}>*If you had 2 set of 20 reps on the bench press then you would do 20 bench presses rest for 2 minutes and then do another 20</motion.p>
                     <motion.button variants={titleItem} style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50 }}>Create Exercise!</motion.button>
+                    <motion.button 
+                    onClick={() => navigate(`/users/${loggedInUser.id}/workouts/${workoutId}/exercises`)}
+                    variants={titleItem} style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50, marginLeft: 10 }}>Cancel</motion.button>
                 </motion.div>
 
                 <motion.div
