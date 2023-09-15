@@ -10,9 +10,9 @@ import { useParams } from 'react-router-dom';
 import gymVideoWorkout from '../assets/videos/gym-video-workout.mp4'
 const SubmitedWorkout = () => {
     const [name, setName] = useState("")
-    const [reps, setReps] = useState()
-    const [sets, setSets] = useState()
-    const [rest, setRest] = useState()
+    const [reps, setReps] = useState(0)
+    const [sets, setSets] = useState(0)
+    const [rest, setRest] = useState(0)
     const [description, setDescription] = useState("")
     const [selectedFile, setSelectedFile] = useState(null)
     const [errors, setErrors] = useState([])
