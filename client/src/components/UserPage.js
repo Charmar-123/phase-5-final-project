@@ -75,6 +75,8 @@ const UserPage = () => {
         <ToggleButton value="your-workouts">Your Workouts</ToggleButton>
       </ToggleButtonGroup>
 
+      
+
       {accessibleUserWorkouts.length > 0 ? <>
         <h1>Your next workout is on {dayjs(accessibleUserWorkouts[0].datetime).format('YYYY-MM-DD')} at {dayjs(accessibleUserWorkouts[0].datetime).format('HH:mm ')}!</h1>
         <h3>Upcoming Workouts:</h3>
@@ -95,7 +97,6 @@ const UserPage = () => {
               <WorkoutCard workout={workout} />
             )
           })}
-          <button onClick={() => navigate(`/users/${id}/workouts/new`)}>Create Workout</button>
         </>
         : null
       }

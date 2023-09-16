@@ -10,7 +10,7 @@ class WorkoutsController < ApplicationController
 
     def update 
         workout = Workout.find(params[:id])
-       byebug
+    #    byebug
         if workout.participants.find_by(user_id: session[:user_id], admin: true)
             workout.update!(workout_params)
             render json: workout, status: :accepted
