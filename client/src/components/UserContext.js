@@ -4,7 +4,17 @@ const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const [loggedInUser, setLoggedInUser] = useState(null)
+    const [workouts, setWorkouts] = useState([])
 
+
+    useEffect(() => {
+        fetch('/workouts')
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+                setWorkouts(data)
+            })
+    }, [])
 
     // workout Code
     const addWorkout = (newWorkout) => {
@@ -95,6 +105,8 @@ const UserProvider = ({ children }) => {
         addWorkout,
         deleteWorkout,
         updateWorkout,
+
+        workouts,
     };
 
     useEffect(() => {

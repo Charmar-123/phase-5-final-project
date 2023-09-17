@@ -18,6 +18,8 @@ import { UserContext } from './components/UserContext';
 import { Route, Routes } from 'react-router-dom';
 import UserPage from './components/UserPage';
 import CreateAccount from './components/CreateAccount';
+import Workouts from './components/Workouts';
+import ViewWorkout from './components/ViewWorkout';
 
 
 
@@ -35,6 +37,8 @@ function App() {
         <Route path='/users/:userId/workouts/new' element={<CreateWorkout/>}/>
         <Route path='/users/:userId/workouts/:workoutId/exercises/new' element={<SubmitedWorkout/>}/>
         <Route path='/users/:userId/workouts/:workoutId/exercises' element={<WorkoutPage/>}/>
+        <Route path='/workouts' element={<Workouts/>}/>
+        <Route path='/workouts/:workoutId' element={<ViewWorkout/>}/>
         <Route path='/' element={<Home/>}/>
         {/* <WorkoutPage/> */}
         {/* <AboutUs/> */}

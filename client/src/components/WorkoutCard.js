@@ -8,6 +8,8 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 const WorkoutCard = ({ workout }) => {
+
+
     const navigate = useNavigate();
     const [editEnabled, setEditEnabled] = useState(false)
     const styles = {
@@ -19,6 +21,7 @@ const WorkoutCard = ({ workout }) => {
         },
 
     }
+
     const { id, name, datetime, workout_type, intensity, accessible, admin } = workout
     const [dateTime, setDateTime] = useState()
 
@@ -119,6 +122,7 @@ const WorkoutCard = ({ workout }) => {
                 }
             })
     }
+
     return (
         <motion.div
 
@@ -132,7 +136,12 @@ const WorkoutCard = ({ workout }) => {
                 >
                     <Button
                         variant='contained'
-                        onClick={() => navigate(`/users/${loggedInUser.id}/workouts/${id}/exercises`)}
+
+                        onClick={
+                            admin ?
+                                () => navigate(`/users/${loggedInUser.id}/workouts/${id}/exercises`)
+                                :
+                                () => navigate(`/workouts/${id}`)}
                         style={{ position: 'absolute', top: 30, right: 0 }}
 
                     >View</Button>
@@ -141,7 +150,7 @@ const WorkoutCard = ({ workout }) => {
                         <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Name: </h3>
                         <input
                             style={
-                                {...styles.div, width: 250}
+                                { ...styles.div, width: 250 }
                             }
                             value={workoutName}
                             onChange={(e) => setWorkoutName(e.target.value)}
@@ -155,7 +164,7 @@ const WorkoutCard = ({ workout }) => {
                         <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Type: </h3>
                         <textarea
                             style={
-                                {...styles.div, resize:'none'}
+                                { ...styles.div, resize: 'none' }
                             }
                             value={workoutExerciseType}
                             onChange={(e) => setWorkoutExerciseType(e.target.value)}
@@ -176,7 +185,7 @@ const WorkoutCard = ({ workout }) => {
                         />
                     </div>
                     <div style={{ display: 'flex' }}>
-                        <h3>Date and time: {dayjs(datetime).format('dddd, MMMM D, YYYY') +' at '+ dayjs(datetime).format('HH:mm')}</h3>
+                        <h3>Date and time: {dayjs(datetime).format('dddd, MMMM D, YYYY') + ' at ' + dayjs(datetime).format('HH:mm')}</h3>
                         {editEnabled &&
                             <>
                                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -187,7 +196,7 @@ const WorkoutCard = ({ workout }) => {
                                         onChange={(value) => {
                                             setDateTime(value)
                                         }}
-                                        // sx={{ border: 3, borderRadius: 2, backgroundColor: "white" }}
+                                    // sx={{ border: 3, borderRadius: 2, backgroundColor: "white" }}
                                     />
                                 </LocalizationProvider>
 
@@ -196,6 +205,14 @@ const WorkoutCard = ({ workout }) => {
                                     type='submit'>Set New Time</Button> */}
                             </>}
                     </div>
+
+
+                    {editEnabled === false && admin === true ?
+                        <Button
+                            variant='contained'
+                            onClick={() => setEditEnabled(true)}>Edit</Button> :
+                        null
+                    }
                     {editEnabled ?
                         <div>
                             <Button
@@ -205,9 +222,9 @@ const WorkoutCard = ({ workout }) => {
                                 variant='contained'
                                 type='submit'>Save</Button>
                         </div>
-                        : <Button
-                            variant='contained'
-                            onClick={() => setEditEnabled(true)}>Edit</Button>}
+                        :
+                        null
+                    }
                 </div>
             </form>
 

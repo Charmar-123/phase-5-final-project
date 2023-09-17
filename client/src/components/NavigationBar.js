@@ -32,7 +32,7 @@ const NavigationBar = () => {
       })
   }
   const navigate = useNavigate();
-  const pages = ['About Us'];
+  const pages = [{pageName: 'About Us', pageFunction: () => navigate(`/aboutus`)}, {pageName: 'WorkOuts', pageFunction: () => navigate(`/workouts`)}];
   const settings = [{settingName: 'Profile',settingFunction:() => navigate(`/users/${loggedInUser.id}`)}, {settingName: 'Account', settingFunction: () => {}}, {settingName: 'Logout',settingFunction: handleLogOut }];
 
 
@@ -106,8 +106,8 @@ const NavigationBar = () => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                  <MenuItem key={page.pageName} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page.pageName}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -134,11 +134,11 @@ const NavigationBar = () => {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               {pages.map((page) => (
                 <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
+                  key={page.pageName}
+                  onClick={page.pageFunction}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  {page}
+                  {page.pageName}
                 </Button>
               ))}
             </Box>
