@@ -37,6 +37,9 @@ const UserPage = () => {
   const accessibleUserWorkouts = workouts.filter((workout) => workout.accessible === true && workout.admin === true)
   const unaccessibleUserWorkouts = workouts.filter((workout) => workout.accessible === false && workout.admin === true)
 
+  const accessibleJoinedWorkouts = workouts.filter((workout) => workout.accessible === true && workout.admin === false)
+  const unaccessibleJoinedWorkouts = workouts.filter((workout) => workout.accessible === false && workout.admin === false)
+
   // console.log(loggedInUser);
   return (
     <div style={{ height: '100vh', padding: 15, background: "linear-gradient(180deg, rgba(87,121,255,1) 0%, rgba(255,126,154,1) 67%)" }}>
@@ -63,38 +66,73 @@ const UserPage = () => {
       </div>
 
       <ToggleButtonGroup
-        sx={{background: "white"}}
+        sx={{ background: "white", marginTop: 5, marginBottom: 3 }}
         color="standard"
         value={alignment}
         exclusive
         onChange={handleChange}
         aria-label="Platform"
       >
+        <ToggleButton value="your-upcoming-workouts">Your Upcoming Workouts</ToggleButton>
+        <ToggleButton value="your-previous-workouts">Your Previous Workouts</ToggleButton>
         <ToggleButton value="upcoming">Upcoming</ToggleButton>
         <ToggleButton value="previous">Previous</ToggleButton>
-        <ToggleButton value="your-workouts">Your Workouts</ToggleButton>
       </ToggleButtonGroup>
 
-      
 
-      {accessibleUserWorkouts.length > 0 ? <>
+      {alignment === "your-upcoming-workouts" && accessibleUserWorkouts.length > 0 ? <>
         <h1>Your next workout is on {dayjs(accessibleUserWorkouts[0].datetime).format('YYYY-MM-DD')} at {dayjs(accessibleUserWorkouts[0].datetime).format('HH:mm ')}!</h1>
-        <h3>Upcoming Workouts:</h3>
         {accessibleUserWorkouts.map((workout) => {
           return (
-            <WorkoutCard workout={workout} />
+            <WorkoutCard
+              key={workout.name}
+              workout={workout} />
           )
         })}
 
       </> : null
       }
-      {unaccessibleUserWorkouts.length > 0 ?
+
+
+      {alignment === "your-previous-workouts" && unaccessibleUserWorkouts.length > 0 ?
         <>
 
-          <h3>User Workouts Unaccessible:</h3>
+          {/* <h3>User Workouts Unaccessible:</h3> */}
           {unaccessibleUserWorkouts.map((workout) => {
             return (
-              <WorkoutCard workout={workout} />
+              <WorkoutCard
+                key={workout.name}
+                workout={workout} />
+            )
+          })}
+        </>
+        : null
+      }
+
+      {alignment === "previous" && unaccessibleJoinedWorkouts.length > 0 ?
+        <>
+
+          {/* <h3>User Workouts Unaccessible:</h3> */}
+          {unaccessibleUserWorkouts.map((workout) => {
+            return (
+              <WorkoutCard
+                key={workout.name}
+                workout={workout} />
+            )
+          })}
+        </>
+        : null
+      }
+
+      {alignment === "upcoming" && accessibleJoinedWorkouts.length > 0 ?
+        <>
+
+          {/* <h3>User Workouts Unaccessible:</h3> */}
+          {unaccessibleUserWorkouts.map((workout) => {
+            return (
+              <WorkoutCard
+                key={workout.name}
+                workout={workout} />
             )
           })}
         </>
