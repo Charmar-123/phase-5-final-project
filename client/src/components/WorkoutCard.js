@@ -141,7 +141,7 @@ const WorkoutCard = ({ workout }) => {
                             admin ?
                                 () => navigate(`/users/${loggedInUser.id}/workouts/${id}/exercises`)
                                 :
-                                () => navigate(`/workouts/${id}`)}
+                                () => navigate(`/users/${loggedInUser.id}/communityworkouts/${id}/exercises`)}
                         style={{ position: 'absolute', top: 30, right: 0 }}
 
                     >View</Button>

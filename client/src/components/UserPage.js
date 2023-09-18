@@ -75,8 +75,8 @@ const UserPage = () => {
       >
         <ToggleButton value="your-upcoming-workouts">Your Upcoming Workouts</ToggleButton>
         <ToggleButton value="your-previous-workouts">Your Previous Workouts</ToggleButton>
-        <ToggleButton value="upcoming">Upcoming</ToggleButton>
-        <ToggleButton value="previous">Previous</ToggleButton>
+        <ToggleButton value="upcoming">Joined Upcoming Workouts</ToggleButton>
+        <ToggleButton value="previous">Joined Previous Workouts</ToggleButton>
       </ToggleButtonGroup>
 
 

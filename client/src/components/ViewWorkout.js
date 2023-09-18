@@ -10,7 +10,7 @@ import { Button } from '@mui/material'
 import ViewExerciseCard from './ViewExerciseCard'
 import ViewGrid from './ViewGrid'
 const ViewWorkout = () => {
-    const { loggedInUser, updateExercise, workouts } = useContext(UserContext)
+    const { loggedInUser, workouts } = useContext(UserContext)
     const { userId, workoutId } = useParams();
     const [errors, setErrors] = useState([]);
     const [workoutExercises, setWorkoutExercises] = useState([])
@@ -36,7 +36,7 @@ const ViewWorkout = () => {
 
         <div style={{ padding: 20, height: '100vh' }}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Check out the {workoutName} workout!</h1>
+                <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Check out The {workoutName} workout!</h1>
                 <div>
                     <Button variant="outlined" color="warning" onClick={() => setListView(true)}>list</Button>
                     <Button variant="outlined" color="warning" onClick={() => setListView(false)}>grid</Button>
@@ -46,6 +46,13 @@ const ViewWorkout = () => {
 
 
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: -50 }}>Exercises:</h1>
+            <Button
+                variant='contained'
+                // onClick={() => navigate(`/users/${userId}/workouts/${workoutId}/exercises/new`)}
+            >Join</Button>
+
+
+
 
             {listView ?
                 <AnimatePresence mode='wait'>
@@ -64,16 +71,12 @@ const ViewWorkout = () => {
 
                             }
                             axis="y" values={workoutExercises}
-                            // onReorder={(e) => console.log(e)}
-                            // onReorder={(e) => updateExerciseOrder(e)}
+
                         >
                             {workoutExercises.map((item) => (
-                                // Pass in data
-                                // console.log(item.order)
                                 <div
 
                                     onDoubleClick={() => {
-                                        // console.log(item);
                                         setSelectedExercise(item)
                                     }}
                                     key={item.id} value={item}>
@@ -90,7 +93,7 @@ const ViewWorkout = () => {
 
                         </div>
                         {selectedExercise ?   <div style={{
-                            position: 'fixed', marginLeft: 650, marginTop: -100,
+                            position: 'fixed', marginLeft: 650, marginTop: -150,
                         }}>
                             
                           <ViewExerciseCard 

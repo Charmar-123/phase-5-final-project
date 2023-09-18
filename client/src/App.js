@@ -38,7 +38,8 @@ function App() {
         <Route path='/users/:userId/workouts/:workoutId/exercises/new' element={<SubmitedWorkout/>}/>
         <Route path='/users/:userId/workouts/:workoutId/exercises' element={<WorkoutPage/>}/>
         <Route path='/workouts' element={<Workouts/>}/>
-        <Route path='/workouts/:workoutId' element={<ViewWorkout/>}/>
+        <Route path='/users/:userId/communityworkouts' element={<Workouts/>}/>
+        <Route path='/users/:userId/communityworkouts/:workoutId/exercises' element={<ViewWorkout/>}/>
         <Route path='/' element={<Home/>}/>
         {/* <WorkoutPage/> */}
         {/* <AboutUs/> */}

@@ -2,19 +2,33 @@ import React, { useEffect, useState, useContext } from 'react'
 import WorkoutCard from './WorkoutCard'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext.js'
+
 const Workouts = () => {
   const navigate = useNavigate();
   const { workouts } = useContext(UserContext);
+
+  // Create an array to group workouts into pairs
+  
+  const communityWorkouts = workouts.filter((workout) => workout.admin === false)
+  const workoutsInPairs = [];
+  for (let i = 0; i < communityWorkouts.length; i += 2) {
+    const pair = communityWorkouts.slice(i, i + 2);
+    workoutsInPairs.push(pair);
+  }
+
   return (
     <div>
-        {workouts.map((workout) => {
-            return (
-                <WorkoutCard
-                key={workout.id}
-                workout={workout}
-                />
-            )
-        })}
+      <h1>Browse through the community workouts and join the ones that interest you!</h1>
+      {workoutsInPairs.map((pair, index) => (
+        <div key={index} style={{ display: 'flex', justifyContent: 'space-between', margin: '10px 50px' }}>
+          {pair.map((workout) => (
+            <WorkoutCard
+              key={workout.id}
+              workout={workout}
+            />
+          ))}
+        </div>
+      ))}
     </div>
   )
 }
