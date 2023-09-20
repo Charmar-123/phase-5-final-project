@@ -15,10 +15,10 @@ const UserPage = () => {
   const { setLoggedInUser, loggedInUser } = useContext(UserContext);
   const [alignment, setAlignment] = useState('upcoming');
 
-  console.log(loggedInUser);
+  // console.log(loggedInUser);
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
-    console.log(newAlignment);
+    // console.log(newAlignment);
   };
   if (!loggedInUser) {
     return <div

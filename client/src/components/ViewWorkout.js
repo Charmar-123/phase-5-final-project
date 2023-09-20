@@ -10,7 +10,7 @@ import { Button } from '@mui/material'
 import ViewExerciseCard from './ViewExerciseCard'
 import ViewGrid from './ViewGrid'
 const ViewWorkout = () => {
-    const { loggedInUser, workouts } = useContext(UserContext)
+    const { loggedInUser, workouts,addWorkout } = useContext(UserContext)
     const { userId, workoutId } = useParams();
     const [errors, setErrors] = useState([]);
     const [workoutExercises, setWorkoutExercises] = useState([])
@@ -30,7 +30,30 @@ const ViewWorkout = () => {
 
 
     const [listView, setListView] = useState(true)
-
+    const handleJoinWorkout = () => {
+        fetch(`/participants`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                workout_id: workoutId,
+                user_id: loggedInUser.id
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    res.json().then((workout) => {
+                        addWorkout(workout)
+                        navigate(`/users/${loggedInUser.id}`
+                        )
+                    })
+                } else {
+                    res.json().then(json => {
+                        setErrors(json.errors)
+                        console.log("Errors");
+                    })
+                }
+            })
+    }
  
     return (
 
@@ -48,7 +71,8 @@ const ViewWorkout = () => {
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: -50 }}>Exercises:</h1>
             <Button
                 variant='contained'
-                // onClick={() => navigate(`/users/${userId}/workouts/${workoutId}/exercises/new`)}
+                onClick={() => {
+                    handleJoinWorkout()}}
             >Join</Button>
 
 

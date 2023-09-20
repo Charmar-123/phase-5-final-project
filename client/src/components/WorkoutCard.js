@@ -38,7 +38,7 @@ const WorkoutCard = ({ workout, user }) => {
     }, [])
 
     // console.log(datetime);
-    const { deleteWorkout, updateWorkout, loggedInUser } = useContext(UserContext);
+    const { deleteWorkout, updateWorkout, loggedInUser,addWorkout } = useContext(UserContext);
 
     const [showDate, setShowDate] = useState(false)
     const [errors, setErrors] = useState([])
@@ -73,7 +73,6 @@ const WorkoutCard = ({ workout, user }) => {
         }).then(res => {
             if (res.ok) {
                 res.json().then((workout) => {
-                    // console.log(workout);
                     updateWorkout(workout)
                     setShowDate(false);
                 })
@@ -135,13 +134,25 @@ const WorkoutCard = ({ workout, user }) => {
             .then(res => {
                 if (res.ok) {
                     res.json().then((workout) => {
-                        // console.log(workout);
-                        updateWorkout(workout)
+                        addWorkout(workout)
+                        navigate(`/users/${loggedInUser.id}`)
+                      
                     })
                 } else {
                     res.json().then(json => {
                         setErrors(json.errors)
                     })
+                }
+            })
+    }
+
+    const handleDeleteJoined = () => {
+        fetch(`/participants/${id}`, {
+            method: 'DELETE',
+        })
+            .then(res => {
+                if (res.ok) {
+                    deleteWorkout(id)
                 }
             })
     }
@@ -251,6 +262,10 @@ const WorkoutCard = ({ workout, user }) => {
             {admin === true ? <Button
                 variant='contained'
                 onClick={handleDelete}
+            >Delete</Button> : null}
+            {admin === false ? <Button
+                variant='contained'
+                onClick={handleDeleteJoined}
             >Delete</Button> : null}
             {admin === false && accessible === true && user === false? <Button
                 onClick={() => handleJoinWorkout()}

@@ -40,10 +40,8 @@ function App() {
         <Route path='/workouts' element={<Workouts/>}/>
         <Route path='/users/:userId/communityworkouts' element={<Workouts/>}/>
         <Route path='/users/:userId/communityworkouts/:workoutId/exercises' element={<ViewWorkout/>}/>
+        <Route path='/aboutus' element={<AboutUs/>}/>
         <Route path='/' element={<Home/>}/>
-        {/* <WorkoutPage/> */}
-        {/* <AboutUs/> */}
-        {/* <SubmitedWorkout/> */}
       </Routes>
 
 
