@@ -7,7 +7,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
-const WorkoutCard = ({ workout }) => {
+const WorkoutCard = ({ workout, user }) => {
 
 
     const navigate = useNavigate();
@@ -123,11 +123,30 @@ const WorkoutCard = ({ workout }) => {
             })
     }
 
+    const handleJoinWorkout = () => {
+        fetch(`/participants`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                workout_id: id,
+                user_id: loggedInUser.id
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    res.json().then((workout) => {
+                        // console.log(workout);
+                        updateWorkout(workout)
+                    })
+                } else {
+                    res.json().then(json => {
+                        setErrors(json.errors)
+                    })
+                }
+            })
+    }
     return (
         <motion.div
-
-            // whileHover={{scale: 1.1}}
-            // whileTap={{scale: 0.9}}
             style={{ border: "solid", width: 600, padding: 8, borderRadius: 16, background: "white" }}>
 
             <form onSubmit={handleSubmitEditWorkout}>
@@ -233,7 +252,8 @@ const WorkoutCard = ({ workout }) => {
                 variant='contained'
                 onClick={handleDelete}
             >Delete</Button> : null}
-            {admin === false && accessible === true ? <Button
+            {admin === false && accessible === true && user === false? <Button
+                onClick={() => handleJoinWorkout()}
                 variant='contained'
             >Join</Button> : null}
             {admin === true && accessible === false ? <Button

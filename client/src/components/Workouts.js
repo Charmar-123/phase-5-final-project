@@ -23,6 +23,7 @@ const Workouts = () => {
         <div key={index} style={{ display: 'flex', justifyContent: 'space-between', margin: '10px 50px' }}>
           {pair.map((workout) => (
             <WorkoutCard
+            user={false}
               key={workout.id}
               workout={workout}
             />

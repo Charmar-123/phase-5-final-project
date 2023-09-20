@@ -15,6 +15,7 @@ const UserPage = () => {
   const { setLoggedInUser, loggedInUser } = useContext(UserContext);
   const [alignment, setAlignment] = useState('upcoming');
 
+  console.log(loggedInUser);
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
     console.log(newAlignment);
@@ -85,6 +86,7 @@ const UserPage = () => {
         {accessibleUserWorkouts.map((workout) => {
           return (
             <WorkoutCard
+              user={true}
               key={workout.name}
               workout={workout} />
           )
@@ -113,7 +115,7 @@ const UserPage = () => {
         <>
 
           {/* <h3>User Workouts Unaccessible:</h3> */}
-          {unaccessibleUserWorkouts.map((workout) => {
+          {unaccessibleJoinedWorkouts.map((workout) => {
             return (
               <WorkoutCard
                 key={workout.name}
@@ -128,7 +130,7 @@ const UserPage = () => {
         <>
 
           {/* <h3>User Workouts Unaccessible:</h3> */}
-          {unaccessibleUserWorkouts.map((workout) => {
+          {accessibleJoinedWorkouts.map((workout) => {
             return (
               <WorkoutCard
                 key={workout.name}
