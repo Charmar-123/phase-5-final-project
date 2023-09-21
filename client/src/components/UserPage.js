@@ -103,6 +103,7 @@ const UserPage = () => {
           {unaccessibleUserWorkouts.map((workout) => {
             return (
               <WorkoutCard
+                user={true}
                 key={workout.name}
                 workout={workout} />
             )
@@ -118,6 +119,7 @@ const UserPage = () => {
           {unaccessibleJoinedWorkouts.map((workout) => {
             return (
               <WorkoutCard
+                user={true}
                 key={workout.name}
                 workout={workout} />
             )
@@ -133,6 +135,7 @@ const UserPage = () => {
           {accessibleJoinedWorkouts.map((workout) => {
             return (
               <WorkoutCard
+                user={true}
                 key={workout.name}
                 workout={workout} />
             )

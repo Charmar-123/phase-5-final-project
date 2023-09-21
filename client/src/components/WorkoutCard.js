@@ -226,13 +226,8 @@ const WorkoutCard = ({ workout, user }) => {
                                         onChange={(value) => {
                                             setDateTime(value)
                                         }}
-                                    // sx={{ border: 3, borderRadius: 2, backgroundColor: "white" }}
                                     />
                                 </LocalizationProvider>
-
-                                {/* <Button
-                                    variant='contained'
-                                    type='submit'>Set New Time</Button> */}
                             </>}
                     </div>
 
@@ -263,14 +258,19 @@ const WorkoutCard = ({ workout, user }) => {
                 variant='contained'
                 onClick={handleDelete}
             >Delete</Button> : null}
-            {admin === false ? <Button
+
+            {/* Only if workout is joined show delete button */}
+
+            {admin === false && user === true ? <Button
                 variant='contained'
                 onClick={handleDeleteJoined}
             >Delete</Button> : null}
-            {admin === false && accessible === true && user === false? <Button
+
+            {admin === false && user === false? <Button
                 onClick={() => handleJoinWorkout()}
                 variant='contained'
             >Join</Button> : null}
+
             {admin === true && accessible === false ? <Button
                 variant='contained'
                 onClick={() => setShowDate(true)}
