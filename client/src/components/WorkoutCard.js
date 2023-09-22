@@ -22,7 +22,7 @@ const WorkoutCard = ({ workout, user }) => {
 
     }
 
-    const { id, name, datetime, workout_type, intensity, accessible, admin } = workout
+    const { id, name, datetime, workout_type, intensity, accessible, admin, zoom_link } = workout
     const [dateTime, setDateTime] = useState()
 
     const checkIfDateAfter = () => {
@@ -47,6 +47,7 @@ const WorkoutCard = ({ workout, user }) => {
     const [workoutName, setWorkoutName] = useState(name)
     const [workoutExerciseType, setWorkoutExerciseType] = useState(workout_type)
     const [workoutIntensity, setWorkoutIntensity] = useState(intensity)
+    const [workoutLink, setWorkoutLink] = useState(zoom_link)
 
 
     const handleDelete = () => {
@@ -89,6 +90,7 @@ const WorkoutCard = ({ workout, user }) => {
         setWorkoutName(name);
         setWorkoutExerciseType(workout_type);
         setWorkoutIntensity(intensity);
+        setWorkoutLink(workoutLink)
         checkIfDateAfter();
         setEditEnabled(false)
     }
@@ -100,6 +102,7 @@ const WorkoutCard = ({ workout, user }) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 name: workoutName,
+                zoom_link: workoutLink,
                 datetime: dateTime,
                 workout_type: workoutExerciseType,
                 intensity: workoutIntensity,
@@ -184,6 +187,18 @@ const WorkoutCard = ({ workout, user }) => {
                             }
                             value={workoutName}
                             onChange={(e) => setWorkoutName(e.target.value)}
+                            disabled={editEnabled ? false : true}
+                            maxLength={13}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', margin: '-30px 0', alignItems: 'center' }}>
+                        <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Link: </h3>
+                        <input
+                            style={
+                                { ...styles.div, width: 250 }
+                            }
+                            value={workoutLink}
+                            onChange={(e) => setWorkoutLink(e.target.value)}
                             disabled={editEnabled ? false : true}
                             maxLength={13}
                         />

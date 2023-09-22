@@ -5,6 +5,11 @@ class Exercise < ApplicationRecord
 
     before_create :set_order
 
+    validates :name, presence: {message: "Give the exercise a name!"}
+    validates :sets, presence: {message: "Pick the number of sets!"}
+    validates :reps, presence: {message: "Pick the number of reps!"}
+    validates :rest, presence: {message: "Pick how many seconds of rest!"}
+
     private
   
     def set_order

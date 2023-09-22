@@ -1,5 +1,5 @@
 class WorkoutSerializer < ActiveModel::Serializer
-  attributes :id, :name, :datetime, :workout_type, :intensity, :accessible, :admin, :exercises
+  attributes :id, :name, :datetime, :workout_type, :intensity, :accessible, :admin, :exercises, :zoom_link
 
   # has_many :exercises
   def exercises

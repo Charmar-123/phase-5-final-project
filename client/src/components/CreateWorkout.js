@@ -11,6 +11,7 @@ import { UserContext } from './UserContext.js'
 
 const CreateWorkout = () => {
     const [workoutName, setWorkoutName] = useState('')
+    const [zoomLink, setZoomLink] = useState('')
     const [dateTime, setDateTime] = useState(dayjs().add(5, "minute"))
     const [workoutExerciseType, setWorkoutExerciseType] = useState('')
     const [errors, setErrors] = useState([])
@@ -58,26 +59,27 @@ const CreateWorkout = () => {
             },
             body: JSON.stringify({
                 name: workoutName,
+                zoom_link: zoomLink,
                 datetime: dateTime,
                 workout_type: workoutExerciseType,
                 intensity: workoutIntensity,
                 user_id: loggedInUser.id
             })
         })
-        .then(res => {
-            if (res.ok) {
-                res.json().then((workout) => {
-                    console.log(workout);
-                    addWorkout(workout)
-                    navigate(`/users/${loggedInUser.id}/workouts/${workout.id}/exercises/new`)
-                })
-            } else {
-                res.json().then(data => {
-                    setErrors(data.errors)
-                    console.log(data.errors);
-                })
-            }
-        })
+            .then(res => {
+                if (res.ok) {
+                    res.json().then((workout) => {
+                        console.log(workout);
+                        addWorkout(workout)
+                        navigate(`/users/${loggedInUser.id}/workouts/${workout.id}/exercises/new`)
+                    })
+                } else {
+                    res.json().then(data => {
+                        setErrors(data.errors)
+                        console.log(data.errors);
+                    })
+                }
+            })
     }
 
 
@@ -120,11 +122,34 @@ const CreateWorkout = () => {
                             placeholder='Workout Name'
                             onChange={(e) => setWorkoutName(e.target.value)}
                             style={{ width: 200, height: 50, borderRadius: 5, fontFamily: 'CardFont', fontWeight: '950', fontSize: 25, outline: "none" }}
+                            maxLength={15}
                         />
 
 
                     </div>
+                    {errors.name && errors.name.map((error, index) => {
+                        return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                    })}
+                </motion.div>
+                <motion.div
+                    variants={titleItem}>
+                    <div
 
+                    >
+                        <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 35, marginTop: 0 }}>Add A Zoom or Google Meets link!</h1>
+
+
+                        <input
+                            placeholder='Link'
+                            onChange={(e) => setZoomLink(e.target.value)}
+                            style={{ width: 500, height: 50, borderRadius: 5, fontFamily: 'CardFont', fontWeight: '950', fontSize: 25, outline: "none" }}
+                        />
+
+
+                    </div>
+                    {errors.zoom_link && errors.zoom_link.map((error, index) => {
+                        return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                    })}
                 </motion.div>
                 <motion.div
                     variants={titleItem}>
@@ -144,6 +169,9 @@ const CreateWorkout = () => {
                         />
 
                     </LocalizationProvider>
+                    {errors.datetime && errors.datetime.map((error, index) => {
+                        return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                    })}
                 </motion.div>
                 <div style={{ display: 'flex' }}>
                     <motion.div
@@ -159,6 +187,9 @@ const CreateWorkout = () => {
                             onChange={(e) => setWorkoutExerciseType(e.target.value)}
                         >
                         </textarea>
+                        {errors.workout_type && errors.workout_type.map((error, index) => {
+                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                        })}
 
                         <div>
                             <button
@@ -180,7 +211,13 @@ const CreateWorkout = () => {
 
                     </motion.div>
 
-                    <RatingsDropdown setWorkoutIntensity={setWorkoutIntensity} titleItem={titleItem} />
+                    <div>
+                        <RatingsDropdown setWorkoutIntensity={setWorkoutIntensity} titleItem={titleItem} />
+                        {errors.intensity && errors.intensity.map((error, index) => {
+                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                        })}
+                    </div>
+
                 </div>
 
 

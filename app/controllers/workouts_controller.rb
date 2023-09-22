@@ -36,6 +36,6 @@ class WorkoutsController < ApplicationController
     private
 
     def workout_params
-        params.permit(:name, :datetime, :workout_type, :intensity, :accessible)
+        params.permit(:name, :datetime, :workout_type, :intensity, :accessible, :zoom_link)
     end
 end
