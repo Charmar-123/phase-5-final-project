@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2023_08_30_215632) do
     t.datetime "datetime"
     t.string "workout_type"
     t.integer "intensity"
+    t.string "zoom_link"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "accessible", default: true

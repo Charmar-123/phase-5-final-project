@@ -153,7 +153,7 @@ const CreateWorkout = () => {
                         <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 25, }}>What equipment do we need and what type of workout is it.</h1>
 
                         <textarea
-                            style={{ fontFamily: 'CardFont', fontWeight: '950', width: 300, borderRadius: 10, height: 200, fontSize: 15, resize: 'none', padding: '8px', outline: 'none', borderWidth: 2 }}
+                            style={{ fontFamily: 'CardFont', fontWeight: '950', width: 300, borderRadius: 10, height: 200, fontSize: 17, resize: 'none', padding: '8px', outline: 'none', borderWidth: 2 }}
                             maxLength={300}
                             placeholder='Write here...(max 300 characters)'
                             onChange={(e) => setWorkoutExerciseType(e.target.value)}

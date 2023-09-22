@@ -253,6 +253,7 @@ const CreateAccount = () => {
                                 // console.log(e.target.value);
                                 setPassword(e.target.value)
                             }}
+                            type='password'
                         
                         />
                         {errors.password && errors.password.map((error, index) => {
@@ -282,6 +283,7 @@ const CreateAccount = () => {
                                 // console.log(e.target.value);
                                 setConfirmPassword(e.target.value)
                             }}
+                            type='password'
                    
                         />
                         {errors.password_confirmation && errors.password_confirmation.map((error, index) => {

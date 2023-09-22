@@ -32,8 +32,10 @@ const NavigationBar = () => {
       })
   }
   const navigate = useNavigate();
-  const pages = [{pageName: 'About Us', pageFunction: () => navigate(`/aboutus`)}, {pageName: 'WorkOuts', pageFunction: () => navigate(`/users/${loggedInUser.id}/communityworkouts`)}];
-  const settings = [{settingName: 'Profile',settingFunction:() => navigate(`/users/${loggedInUser.id}`)}, {settingName: 'Account', settingFunction: () => {}}, {settingName: 'Logout',settingFunction: handleLogOut }];
+  const pages = [{pageName: 'About Us', pageFunction: () => navigate(`/aboutus`)}, 
+  loggedInUser ? {pageName: 'Community WorkOuts', pageFunction: () => navigate(`/users/${loggedInUser.id}/communityworkouts`)} : ''
+];
+  const settings = [{settingName: 'Workouts',settingFunction:() => navigate(`/users/${loggedInUser.id}`)}, {settingName: 'Logout',settingFunction: handleLogOut }];
 
 
   const handleOpenNavMenu = (event) => {

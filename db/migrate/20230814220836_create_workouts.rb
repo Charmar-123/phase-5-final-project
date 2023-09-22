@@ -5,6 +5,7 @@ class CreateWorkouts < ActiveRecord::Migration[6.1]
       t.datetime :datetime
       t.string :workout_type
       t.integer :intensity
+      t.string :zoom_link
 
       t.timestamps
     end

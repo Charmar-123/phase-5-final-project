@@ -194,7 +194,7 @@ const WorkoutCard = ({ workout, user }) => {
                         <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Type: </h3>
                         <textarea
                             style={
-                                { ...styles.div, resize: 'none' }
+                                { ...styles.div, resize: 'none'}
                             }
                             value={workoutExerciseType}
                             onChange={(e) => setWorkoutExerciseType(e.target.value)}
