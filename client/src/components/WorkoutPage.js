@@ -77,6 +77,8 @@ const WorkoutPage = () => {
 
 
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: -50 }}>Exercises:</h1>
+            <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 20, marginTop: -50 }}>Drag and drop to reorder your exercises.</h1>
+            {listView && <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 20, marginTop: -20 }}>Double click to view exercise.</h1>}
             <Button
                 variant='contained'
                 onClick={() => navigate(`/users/${userId}/workouts/${workoutId}/exercises/new`)}
