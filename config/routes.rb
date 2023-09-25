@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+  root 'home#index'
   resources :participants
   resources :exercises
   resources :workouts
