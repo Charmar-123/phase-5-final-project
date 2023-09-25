@@ -1,0 +1,19 @@
+databases:
+  - name: gym_bud_db
+    databaseName: gym_bud_db
+    user: gym_bud_db
+
+services:
+  - type: web
+    name: gym_bud
+    env: ruby
+    repo: https://github.com/Charmar-123/phase-5-final-project
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gym_bud
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
