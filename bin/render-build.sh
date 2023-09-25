@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # exit on error
-set -o errexit
+# set -o errexit
 
 # builds the front end code
 rm -rf public
