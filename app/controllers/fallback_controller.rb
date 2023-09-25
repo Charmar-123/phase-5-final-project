@@ -4,6 +4,7 @@ class FallbackController < ActionController::Base
 
   def index
     # React app index page
-    render file: 'public/index.html'
+    file_path = Rails.root.join('public', 'index.html')
+    render file: file_path, layout: false
   end
 end

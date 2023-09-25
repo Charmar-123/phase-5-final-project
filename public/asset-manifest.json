@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.e6d85d9d.css",
-    "main.js": "/static/js/main.a85ef566.js",
+    "main.js": "/static/js/main.e02a8f52.js",
     "static/js/787.c229d825.chunk.js": "/static/js/787.c229d825.chunk.js",
     "static/media/gym-home-video.mp4": "/static/media/gym-home-video.798a724a1814ec59e74b.mp4",
     "static/media/treadmill.mp4": "/static/media/treadmill.4b777208f1d8e162b44f.mp4",
@@ -12,11 +12,11 @@
     "static/media/Caprasimo-Regular.ttf": "/static/media/Caprasimo-Regular.1fb14e3bf85c52709856.ttf",
     "index.html": "/index.html",
     "main.e6d85d9d.css.map": "/static/css/main.e6d85d9d.css.map",
-    "main.a85ef566.js.map": "/static/js/main.a85ef566.js.map",
+    "main.e02a8f52.js.map": "/static/js/main.e02a8f52.js.map",
     "787.c229d825.chunk.js.map": "/static/js/787.c229d825.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6d85d9d.css",
-    "static/js/main.a85ef566.js"
+    "static/js/main.e02a8f52.js"
   ]
 }
