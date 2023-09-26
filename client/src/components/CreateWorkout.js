@@ -8,11 +8,13 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import RatingsDropdown from './RatingsDropdown';
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from './UserContext.js'
+import { CircularProgress } from '@mui/material';
 
 const CreateWorkout = () => {
     const [workoutName, setWorkoutName] = useState('')
     const [zoomLink, setZoomLink] = useState('')
     const [dateTime, setDateTime] = useState(dayjs().add(5, "minute"))
+    const [isLoading, setIsLoading] = useState(false)
     const [workoutExerciseType, setWorkoutExerciseType] = useState('')
     const [errors, setErrors] = useState([])
     const [workoutIntensity, setWorkoutIntensity] = useState('')
@@ -51,7 +53,7 @@ const CreateWorkout = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        setIsLoading(true)
         fetch('/workouts', {
             method: 'POST',
             headers: {
@@ -72,11 +74,13 @@ const CreateWorkout = () => {
                         console.log(workout);
                         addWorkout(workout)
                         navigate(`/users/${loggedInUser.id}/workouts/${workout.id}/exercises/new`)
+                        setIsLoading(false)
                     })
                 } else {
                     res.json().then(data => {
                         setErrors(data.errors)
                         console.log(data.errors);
+                        setIsLoading(false)
                     })
                 }
             })
@@ -193,12 +197,15 @@ const CreateWorkout = () => {
 
                         <div>
                             <button
+                                disabled = {isLoading ? true : false}
                                 type='submit'
                                 style={{
                                     fontSize: 20, fontFamily: 'CardFont', fontWeight: '950', marginTop: 10, width: 200, height: 50, borderRadius: 10, marginRight: 10,
 
                                     background: 'linear-gradient(90deg, rgba(107,227,244,1) 12%, rgba(249,255,0,1) 79%)'
-                                }}>Create Workout!</button>
+                                }}>
+                                    {isLoading ? <CircularProgress/> : 'Create Workout!'}
+                                    </button>
                             <button
                                 onClick={() => navigate(`/users/${loggedInUser.id}`)}
                                 style={{

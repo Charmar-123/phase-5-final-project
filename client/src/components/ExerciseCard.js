@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Divider, Box, TextareaAutosize } from '@mui/material';
+import { Divider, Box, TextareaAutosize, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import benchPress from '../assets/videos/bench-press.mp4'
 import AutoTypeInput from './AutoTypeInput';
@@ -21,6 +21,8 @@ const ExerciseCard = ({ selectedExercise }) => {
     const params = useParams();
     const { deleteExercise, updateExercise } = useContext(UserContext)
     const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(false)
     // const [selectedFile, setSelectedFile] = useState(null)
 
     // console.log(selectedExercise.name);
@@ -49,12 +51,14 @@ const ExerciseCard = ({ selectedExercise }) => {
     }, [selectedExercise])
 
     const handleDeleteCard = () => {
+        setIsLoading(true)
         fetch(`/exercises/${id}`, {
             method: 'DELETE',
         })
             .then(res => {
                 if (res.ok) {
                     deleteExercise(id, params.workoutId)
+                    setIsLoading(false)
 
                 }
             })
@@ -79,7 +83,7 @@ const ExerciseCard = ({ selectedExercise }) => {
     }
     const handleSaveCard = (e) => {
         e.preventDefault();
-
+        setIsLoading(true)
         const formDataToPatch = new FormData();
 
         // Append each field to the FormData
@@ -105,11 +109,13 @@ const ExerciseCard = ({ selectedExercise }) => {
                 res.json().then((exercise) => {
                     updateExercise(exercise, params.workoutId)
                     setIsEditing(false);
+                    setIsLoading(false)
                 })
             } else {
                 res.json().then(json => {
                     console.log(json.errors);
                     setErrors(json.errors)
+                    setIsLoading(false)
                 })
             }
         })
@@ -319,7 +325,7 @@ const ExerciseCard = ({ selectedExercise }) => {
                             //     {description}
                             // </Typography>
                             <TextareaAutosize
-                            disabled
+                                disabled
                                 style={{
                                     backgroundColor: "white",
                                     fontSize: 15, fontFamily: 'CardFont', fontWeight: '800',
@@ -337,10 +343,13 @@ const ExerciseCard = ({ selectedExercise }) => {
                         {isEditing ?
                             <>
                                 <Button
+                                    disabled={isLoading ? true : false}
                                     variant='contained'
                                     color='success'
                                     type='submit'
-                                >Save</Button>
+                                >
+                                    {isLoading ? <CircularProgress /> : 'Save'}
+                                    Save</Button>
                                 <Button
                                     variant='contained'
                                     onClick={() => handleCancelCard()}>Cancel</Button>
@@ -350,9 +359,12 @@ const ExerciseCard = ({ selectedExercise }) => {
                                 onClick={() => handleEditCard()}
                                 variant='contained' >Edit</Button>}
                         <Button
+                            disabled={isLoading ? true : false}
                             onClick={() => handleDeleteCard()}
                             color='error'
-                            variant='contained'>Delete</Button>
+                            variant='contained'>
+                                {isLoading ? <CircularProgress /> : 'Delete'}
+                                Delete</Button>
                     </CardActions>
                 </CardContent>
 

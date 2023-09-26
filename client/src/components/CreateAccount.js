@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import AnimationWorkoutCard from './AnimationWorkoutCard'
 import { AnimatePresence, motion } from 'framer-motion'
-import { TextField, TextareaAutosize, Typography } from '@mui/material'
+import { CircularProgress, TextField, TextareaAutosize, Typography } from '@mui/material'
 import AutoTypeInput from './AutoTypeInput'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,6 +15,8 @@ const CreateAccount = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [selectedFile, setSelectedFile] = useState(null)
     const [errors, setErrors] = useState([])
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate();
     const { setLoggedInUser } = useContext(UserContext)
@@ -53,6 +55,7 @@ const CreateAccount = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        setIsLoading(true)
         const formData = new FormData()
         formData.append('name', name)
         formData.append('email', email)
@@ -75,11 +78,13 @@ const CreateAccount = () => {
                         console.log(user);
                         setLoggedInUser(user)
                         navigate(`/users/${user.id}/workouts/new`)
+                        setIsLoading(false)
                     })
                 } else {
                     res.json().then(data => {
                         setErrors(data.errors)
                         console.log(data.errors);
+                        setIsLoading(false)
                     })
                 }
             })
@@ -188,15 +193,15 @@ const CreateAccount = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none", outline: "none" 
-                                
+                                height: 50, resize: "none", outline: "none"
+
 
                             }}
                             onChange={(e) => {
                                 // console.log(e.target.value);
                                 setName(e.target.value)
                             }}
-                
+
                         />
 
                         {errors.name && errors.name.map((error, index) => {
@@ -219,14 +224,14 @@ const CreateAccount = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",outline: "none" 
+                                height: 50, resize: "none", outline: "none"
 
                             }}
                             onChange={(e) => {
                                 // console.log(e.target.value);
                                 setEmail(e.target.value)
                             }}
-                   
+
                         />
                         {errors.email && errors.email.map((error, index) => {
                             return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
@@ -246,7 +251,7 @@ const CreateAccount = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",outline: "none" 
+                                height: 50, resize: "none", outline: "none"
 
                             }}
                             onChange={(e) => {
@@ -254,7 +259,7 @@ const CreateAccount = () => {
                                 setPassword(e.target.value)
                             }}
                             type='password'
-                        
+
                         />
                         {errors.password && errors.password.map((error, index) => {
                             return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
@@ -276,7 +281,7 @@ const CreateAccount = () => {
                                 fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                 border: "solid",
                                 borderRadius: 9, width: 300,
-                                height: 50, resize: "none",outline: "none" 
+                                height: 50, resize: "none", outline: "none"
 
                             }}
                             onChange={(e) => {
@@ -284,7 +289,7 @@ const CreateAccount = () => {
                                 setConfirmPassword(e.target.value)
                             }}
                             type='password'
-                   
+
                         />
                         {errors.password_confirmation && errors.password_confirmation.map((error, index) => {
                             return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
@@ -307,7 +312,7 @@ const CreateAccount = () => {
                                     fontSize: 35, fontFamily: 'CardFont', fontWeight: '800',
                                     border: "solid",
                                     borderRadius: 9, width: 300,
-                                    minHeight: 50, resize: "none",outline: "none" 
+                                    minHeight: 50, resize: "none", outline: "none"
                                 }}
 
                                 onChange={(e) => {
@@ -323,7 +328,14 @@ const CreateAccount = () => {
 
                     </motion.div>
 
-                    <motion.button variants={titleItem} style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50 }}>Create Account!</motion.button>
+                    <motion.button
+                        type='submit'
+                        disabled={isLoading ? true : false}
+                        variants={titleItem} 
+                        style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50 }}>
+                        {isLoading ? <CircularProgress /> : 'Create Account!'}
+                        {/* <CircularProgress/> */}
+                    </motion.button>
                 </motion.div>
 
                 <motion.div

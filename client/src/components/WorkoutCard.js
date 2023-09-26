@@ -6,7 +6,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 const WorkoutCard = ({ workout, user }) => {
 
 
@@ -38,7 +38,7 @@ const WorkoutCard = ({ workout, user }) => {
     }, [])
 
     // console.log(datetime);
-    const { deleteWorkout, updateWorkout, loggedInUser,addWorkout } = useContext(UserContext);
+    const { deleteWorkout, updateWorkout, loggedInUser, addWorkout } = useContext(UserContext);
 
     const [showDate, setShowDate] = useState(false)
     const [errors, setErrors] = useState([])
@@ -48,22 +48,23 @@ const WorkoutCard = ({ workout, user }) => {
     const [workoutExerciseType, setWorkoutExerciseType] = useState(workout_type)
     const [workoutIntensity, setWorkoutIntensity] = useState(intensity)
     const [workoutLink, setWorkoutLink] = useState(zoom_link)
-
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleDelete = () => {
+        setIsLoading(true)
         fetch(`/workouts/${id}`, {
             method: 'DELETE',
         })
             .then(res => {
                 if (res.ok) {
                     deleteWorkout(id)
-
+                    setIsLoading(false)
                 }
             })
     }
     const handleSubmitTime = (e) => {
         e.preventDefault();
-
+        setIsLoading(true)
         fetch(`/workouts/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -76,11 +77,13 @@ const WorkoutCard = ({ workout, user }) => {
                 res.json().then((workout) => {
                     updateWorkout(workout)
                     setShowDate(false);
+                    setIsLoading(false)
                 })
             } else {
                 res.json().then(json => {
                     // console.log(json.errors);
                     setErrors(json.errors)
+                    setIsLoading(false)
                 })
             }
         })
@@ -139,7 +142,7 @@ const WorkoutCard = ({ workout, user }) => {
                     res.json().then((workout) => {
                         addWorkout(workout)
                         navigate(`/users/${loggedInUser.id}`)
-                      
+
                     })
                 } else {
                     res.json().then(json => {
@@ -209,7 +212,7 @@ const WorkoutCard = ({ workout, user }) => {
                         <h3 style={{ fontSize: 30, marginRight: 8 }}>Workout Type: </h3>
                         <textarea
                             style={
-                                { ...styles.div, resize: 'none'}
+                                { ...styles.div, resize: 'none' }
                             }
                             value={workoutExerciseType}
                             onChange={(e) => setWorkoutExerciseType(e.target.value)}
@@ -256,11 +259,15 @@ const WorkoutCard = ({ workout, user }) => {
                     {editEnabled ?
                         <div>
                             <Button
+                                disabled={isLoading ? true : false}
                                 variant='contained'
                                 onClick={() => cancelEdit()}>Cancel</Button>
                             <Button
+                            disabled={isLoading ? true : false}
                                 variant='contained'
-                                type='submit'>Save</Button>
+                                type='submit'>
+                                     {isLoading ? <CircularProgress/> : 'Save'}
+                                    </Button>
                         </div>
                         :
                         null
@@ -270,21 +277,30 @@ const WorkoutCard = ({ workout, user }) => {
 
 
             {admin === true ? <Button
+            disabled={isLoading ? true : false}
                 variant='contained'
                 onClick={handleDelete}
-            >Delete</Button> : null}
+            >
+                {isLoading ? <CircularProgress/> : 'Delete'}
+                </Button> : null}
 
             {/* Only if workout is joined show delete button */}
 
             {admin === false && user === true ? <Button
+            disabled={isLoading ? true : false}
                 variant='contained'
                 onClick={handleDeleteJoined}
-            >Delete</Button> : null}
+            >
+                {isLoading ? <CircularProgress/> : 'Delete'}
+              </Button> : null}
 
-            {admin === false && user === false? <Button
+            {admin === false && user === false ? <Button
+            disabled={isLoading ? true : false}
                 onClick={() => handleJoinWorkout()}
                 variant='contained'
-            >Join</Button> : null}
+            >
+                {isLoading ? <CircularProgress/> : 'Join'}
+                </Button> : null}
 
             {admin === true && accessible === false ? <Button
                 variant='contained'
@@ -308,8 +324,11 @@ const WorkoutCard = ({ workout, user }) => {
 
                     </LocalizationProvider>
                     <Button
+                    disabled={isLoading ? true : false}
                         variant='contained'
-                        type='submit'>Set New Time</Button>
+                        type='submit'>
+                            {isLoading ? <CircularProgress/> : 'Set New Time'}
+                            </Button>
                     <Button
                         variant='contained'
                         onClick={() => setShowDate(false)}
