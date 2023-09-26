@@ -199,9 +199,9 @@ const SubmitedWorkout = () => {
 
                         }
 
-{errors.name && errors.name.map((error, index) => {
-                        return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
-                    })}
+                        {errors.name && errors.name.map((error, index) => {
+                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                        })}
 
                     </motion.div>
 
@@ -345,11 +345,11 @@ const SubmitedWorkout = () => {
 
 
                     <motion.p variants={titleItem} style={{ ...styles.font, fontSize: 10 }}>*If you had 2 set of 20 reps on the bench press then you would do 20 bench presses rest for 20 seconds and then do another 20</motion.p>
-                    <motion.button 
-                    variants={titleItem} 
-                    style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50 }}
-                    disabled={isLoading ? true : false}
-                    >{isLoading ? <CircularProgress/>: 'Create Exercise!'}</motion.button>
+                    <motion.button
+                        variants={titleItem}
+                        style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50 }}
+                        disabled={isLoading ? true : false}
+                    >{isLoading ? <CircularProgress /> : 'Create Exercise!'}</motion.button>
                     <motion.button
                         onClick={() => navigate(`/users/${loggedInUser.id}/workouts/${workoutId}/exercises`)}
                         variants={titleItem} style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50, marginLeft: 10 }}>Cancel</motion.button>
