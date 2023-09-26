@@ -164,9 +164,9 @@ const LoginScreen = () => {
                             >
                                  {isLoading ? <CircularProgress/> : 'Sign In'}
                                 </button>
-                            <a
+                            {/* <a
                                 style={{ marginLeft: 195, textDecoration: "none", color: "black", fontFamily: 'CardFont', fontWeight: '950', }}
-                                href='/'>forgot password?</a>
+                                href='/'>forgot password?</a> */}
                         </form>
                         <a style={{
                             fontSize: 15, fontFamily: 'CardFont', fontWeight: '950',
