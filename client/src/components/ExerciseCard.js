@@ -364,7 +364,7 @@ const ExerciseCard = ({ selectedExercise }) => {
                             color='error'
                             variant='contained'>
                                 {isLoading ? <CircularProgress /> : 'Delete'}
-                                Delete</Button>
+                                </Button>
                     </CardActions>
                 </CardContent>
 

@@ -14,8 +14,8 @@ class ExercisesController < ApplicationController
       
     end 
     def create
-        exercise = Exercise.create(exercise_params)
-        render json: exercise, status: :ok
+        exercise = Exercise.create!(exercise_params)
+        render json: exercise, status: :created
     end
     def destroy
         exercise = Exercise.find(params[:id])

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import AnimationWorkoutCard from './AnimationWorkoutCard'
 import { AnimatePresence, motion } from 'framer-motion'
-import { TextField, TextareaAutosize, Typography } from '@mui/material'
+import { CircularProgress, TextField, TextareaAutosize, Typography } from '@mui/material'
 import AutoTypeInput from './AutoTypeInput'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from './UserContext.js'
@@ -17,6 +17,9 @@ const SubmitedWorkout = () => {
     const [selectedFile, setSelectedFile] = useState(null)
     const [errors, setErrors] = useState([])
     const [userInteracted, setUserInteracted] = useState(false)
+
+    const [isLoading, setIsLoading] = useState(false)
+
     const navigate = useNavigate();
     const { loggedInUser, addExercise } = useContext(UserContext)
     const { workoutId } = useParams();
@@ -52,10 +55,10 @@ const SubmitedWorkout = () => {
         }
     }
 
-  
+
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        setIsLoading(true)
         const formData = new FormData()
         formData.append('name', name)
         formData.append('sets', sets)
@@ -73,22 +76,24 @@ const SubmitedWorkout = () => {
             }
         })
 
-        .then(res => {
-            if (res.ok) {
-                res.json().then((exercise) => {
-                    // console.log(exercise);
-                    addExercise(exercise, workoutId)
-                    navigate(`/users/${loggedInUser.id}/workouts/${workoutId}/exercises`)
-                    // console.log("success");
-                })
-            } else {
-                res.json().then(data => {
-                    setErrors(data.errors)
-                    console.log(data.errors);
-                })
-            }
-        })
-  
+            .then(res => {
+                if (res.ok) {
+                    res.json().then((exercise) => {
+                        // console.log(exercise);
+                        addExercise(exercise, workoutId)
+                        navigate(`/users/${loggedInUser.id}/workouts/${workoutId}/exercises`)
+                        // console.log("success");
+                        setIsLoading(false)
+                    })
+                } else {
+                    res.json().then(data => {
+                        setErrors(data.errors)
+                        console.log(data);
+                        setIsLoading(false)
+                    })
+                }
+            })
+
     }
     useEffect(() => {
         const fileName = 'gym-video-workout.mp4';
@@ -194,7 +199,9 @@ const SubmitedWorkout = () => {
 
                         }
 
-
+{errors.name && errors.name.map((error, index) => {
+                        return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                    })}
 
                     </motion.div>
 
@@ -337,11 +344,15 @@ const SubmitedWorkout = () => {
 
 
 
-                    <motion.p variants={titleItem} style={{ ...styles.font, fontSize: 10 }}>*If you had 2 set of 20 reps on the bench press then you would do 20 bench presses rest for 2 minutes and then do another 20</motion.p>
-                    <motion.button variants={titleItem} style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50 }}>Create Exercise!</motion.button>
+                    <motion.p variants={titleItem} style={{ ...styles.font, fontSize: 10 }}>*If you had 2 set of 20 reps on the bench press then you would do 20 bench presses rest for 20 seconds and then do another 20</motion.p>
                     <motion.button 
-                    onClick={() => navigate(`/users/${loggedInUser.id}/workouts/${workoutId}/exercises`)}
-                    variants={titleItem} style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50, marginLeft: 10 }}>Cancel</motion.button>
+                    variants={titleItem} 
+                    style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50 }}
+                    disabled={isLoading ? true : false}
+                    >{isLoading ? <CircularProgress/>: 'Create Exercise!'}</motion.button>
+                    <motion.button
+                        onClick={() => navigate(`/users/${loggedInUser.id}/workouts/${workoutId}/exercises`)}
+                        variants={titleItem} style={{ ...styles.font, fontSize: 20, borderRadius: 16, height: 50, marginLeft: 10 }}>Cancel</motion.button>
                 </motion.div>
 
                 <motion.div
@@ -365,7 +376,7 @@ const SubmitedWorkout = () => {
 
             </motion.div>
 
-            
+
 
         </form>
 
