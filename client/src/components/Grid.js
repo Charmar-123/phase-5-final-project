@@ -7,7 +7,7 @@ import {
 } from "react-grid-dnd";
 import ExerciseCard from "./ExerciseCard";
 
-const Grid = ({items, updateExerciseOrder, workoutExercises}) => {
+const Grid = ({items, updateExerciseOrder}) => {
 
   // console.log(items);
   // const [items, setItems] = React.useState([
