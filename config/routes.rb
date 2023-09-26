@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
  
-    resources :participants, , only: [:create, :destroy]
+    resources :participants, only: [:create, :destroy]
     resources :exercises, only: [ :index, :create, :update, :destroy]
     resources :workouts, only: [ :index, :create, :update, :destroy]
     resources :users, only: [:show, :create]
