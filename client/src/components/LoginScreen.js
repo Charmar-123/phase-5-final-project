@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 
-import { Container, Typography, TextField, Button } from '@mui/material';
+import { Container, Typography, TextField, Button, CircularProgress } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ import treadmillVideo from '../assets/videos/treadmill.mp4'
 
 const LoginScreen = () => {
 
-
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate();
     const { setLoggedInUser, loggedInUser } = useContext(UserContext);
 
@@ -42,6 +42,7 @@ const LoginScreen = () => {
     const { email, password } = loginData;
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsLoading(true)
         const user = {
             email,
             password
@@ -59,6 +60,7 @@ const LoginScreen = () => {
                         // console.log(user);
                         setLoggedInUser(user)
                         navigate(`/users/${user.id}`)
+                        setIsLoading(false)
                     })
                 }
                 else {
@@ -66,6 +68,7 @@ const LoginScreen = () => {
 
                         console.log(json);
                         setErrors(json.errors)
+                        setIsLoading(false)
                     })
                 }
             })
@@ -155,9 +158,12 @@ const LoginScreen = () => {
                             </div>
                             {errors ? <h6 style={{ fontSize: 15, margin: 0 }}>{errors}</h6> : null}
                             <button
+                            disabled={isLoading ? true : false}
                                 style={{ fontSize: 20, fontFamily: 'CardFont', fontWeight: '950', width: 100, marginTop: 10, height: 30, borderRadius: 8 }}
                                 type='submit'
-                            >Sign In</button>
+                            >
+                                 {isLoading ? <CircularProgress/> : 'Sign In'}
+                                </button>
                             <a
                                 style={{ marginLeft: 195, textDecoration: "none", color: "black", fontFamily: 'CardFont', fontWeight: '950', }}
                                 href='/'>forgot password?</a>
