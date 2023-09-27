@@ -45,7 +45,7 @@ const WorkoutPage = () => {
         // console.log(updatedExercises)
 
         updatedExercises.forEach((exercise) => {
-            fetch(`/exercises/${exercise.id}`, {
+            fetch(`/api/exercises/${exercise.id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(exercise)

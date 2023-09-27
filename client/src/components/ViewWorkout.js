@@ -32,7 +32,7 @@ const ViewWorkout = () => {
     const [listView, setListView] = useState(true)
     const handleJoinWorkout = () => {
         setIsLoading(true)
-        fetch(`/participants`, {
+        fetch(`/api/participants`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

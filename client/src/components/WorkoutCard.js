@@ -52,7 +52,7 @@ const WorkoutCard = ({ workout, user }) => {
 
     const handleDelete = () => {
         setIsLoading(true)
-        fetch(`/workouts/${id}`, {
+        fetch(`/api/workouts/${id}`, {
             method: 'DELETE',
         })
             .then(res => {
@@ -65,7 +65,7 @@ const WorkoutCard = ({ workout, user }) => {
     const handleSubmitTime = (e) => {
         e.preventDefault();
         setIsLoading(true)
-        fetch(`/workouts/${id}`, {
+        fetch(`/api/workouts/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -100,7 +100,7 @@ const WorkoutCard = ({ workout, user }) => {
 
     const handleSubmitEditWorkout = (e) => {
         e.preventDefault();
-        fetch(`/workouts/${id}`, {
+        fetch(`/api/workouts/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -129,7 +129,7 @@ const WorkoutCard = ({ workout, user }) => {
     }
 
     const handleJoinWorkout = () => {
-        fetch(`/participants`, {
+        fetch(`/api/participants`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -153,7 +153,7 @@ const WorkoutCard = ({ workout, user }) => {
     }
 
     const handleDeleteJoined = () => {
-        fetch(`/participants/${id}`, {
+        fetch(`/api/participants/${id}`, {
             method: 'DELETE',
         })
             .then(res => {

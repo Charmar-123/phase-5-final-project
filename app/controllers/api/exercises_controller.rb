@@ -1,4 +1,4 @@
-class ExercisesController < ApplicationController
+class Api::ExercisesController < ApplicationController
 
     def index 
         render json: Exercise.all, status: :ok

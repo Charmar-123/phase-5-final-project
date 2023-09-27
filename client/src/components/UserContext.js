@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch('/workouts')
+        fetch('/api/workouts')
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
@@ -110,7 +110,7 @@ const UserProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        fetch('/authorized_user')
+        fetch('/api/authorized_user')
             .then(res => {
                 if (res.ok) {
                     res.json().then(user => {

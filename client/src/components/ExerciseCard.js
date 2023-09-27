@@ -52,7 +52,7 @@ const ExerciseCard = ({ selectedExercise }) => {
 
     const handleDeleteCard = () => {
         setIsLoading(true)
-        fetch(`/exercises/${id}`, {
+        fetch(`/api/exercises/${id}`, {
             method: 'DELETE',
         })
             .then(res => {
@@ -99,7 +99,7 @@ const ExerciseCard = ({ selectedExercise }) => {
         }
 
         console.log(formDataToPatch);
-        fetch(`/exercises/${id}`, {
+        fetch(`/api/exercises/${id}`, {
             method: 'PATCH',
             body: formDataToPatch,
             headers: {   // 'Content-Type': 'multipart/form-data' 

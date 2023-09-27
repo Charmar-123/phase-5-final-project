@@ -1,4 +1,4 @@
-class ParticipantsController < ApplicationController
+class Api::ParticipantsController < ApplicationController
 
     def create
         participant = Participant.create!(participant_params.merge(admin: false))

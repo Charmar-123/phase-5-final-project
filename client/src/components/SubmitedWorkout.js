@@ -68,7 +68,7 @@ const SubmitedWorkout = () => {
         formData.append('workout_id', workoutId)
         formData.append('video', selectedFile)
 
-        fetch('/exercises', {
+        fetch('/api/exercises', {
             method: 'POST',
             body: formData,
             headers: {

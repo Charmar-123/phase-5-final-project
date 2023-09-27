@@ -64,7 +64,7 @@ const CreateAccount = () => {
         formData.append('password_confirmation', confirmPassword)
         formData.append('profile_pic', selectedFile)
 
-        fetch('/users', {
+        fetch('/api/users', {
             method: 'POST',
             body: formData,
             headers: {

@@ -21,7 +21,7 @@ const NavigationBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
   const handleLogOut = () => {
-    fetch('/logout', {
+    fetch('/api/logout', {
       method: 'DELETE'
     })
       .then(res => {

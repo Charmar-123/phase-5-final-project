@@ -54,7 +54,7 @@ const CreateWorkout = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true)
-        fetch('/workouts', {
+        fetch('/api/workouts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
