@@ -14,21 +14,27 @@ const WorkoutPage = () => {
     const [workoutExercises, setWorkoutExercises] = useState([])
     const navigate = useNavigate();
     const [selectedExercise, setSelectedExercise] = useState([])
-    const workoutName = loggedInUser.workouts
-        .find(workout => workout.id === parseInt(workoutId))
-        .name;
+
+
+    const workoutName = loggedInUser && loggedInUser.workouts
+        ? loggedInUser.workouts.find(workout => workout.id === parseInt(workoutId)).name
+        : "";
 
     useEffect(() => {
-        const targetExercises = loggedInUser.workouts
-            .find(workout => workout.id === parseInt(workoutId))
-            .exercises.sort((a, b) => a.order - b.order)
-        setWorkoutExercises(targetExercises)
-        setSelectedExercise(targetExercises[0])
-    }, [loggedInUser])
+        if (loggedInUser && loggedInUser.workouts) {
+            const targetExercises = loggedInUser.workouts
+                .find(workout => workout.id === parseInt(workoutId))
+                .exercises.sort((a, b) => a.order - b.order);
+            setWorkoutExercises(targetExercises);
+            setSelectedExercise(targetExercises[0]);
+        }
+    }, [loggedInUser]);
+
 
 
     // const [items, setItems] = useState(workoutExercises)
     const [listView, setListView] = useState(true)
+
 
     const updateExerciseOrder = (e) => {
 
@@ -66,7 +72,7 @@ const WorkoutPage = () => {
     return (
 
         <div style={{ padding: 20, height: '100vh' }}>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: 0 }}>Check out your {workoutName} workout!</h1>
                 <div>
                     <Button variant="outlined" color="warning" onClick={() => setListView(true)}>list</Button>
@@ -118,8 +124,6 @@ const WorkoutPage = () => {
                                     }}
                                     key={item.id} value={item}>
                                     <MinimizedWorkoutCard
-
-
                                         name={
                                             (item || { name: "Loading" }).name
                                         }
@@ -129,14 +133,14 @@ const WorkoutPage = () => {
                             ))}
 
                         </Reorder.Group>
-                        {selectedExercise ?   <div style={{
+                        {selectedExercise ? <div style={{
                             position: 'fixed', marginLeft: 650, marginTop: -150,
                         }}>
-                          <ExerciseCard selectedExercise={selectedExercise} />
+                            <ExerciseCard selectedExercise={selectedExercise} />
                         </div> :
-                        
-                        <h1>Click on the button above to start adding exercises!</h1>}
-                      
+
+                            <h1>Click on the button above to start adding exercises!</h1>}
+
 
 
                     </motion.div>
@@ -152,10 +156,9 @@ const WorkoutPage = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
-                        style={{marginTop: 20}}
-                        >
-                        {/* pass in data */}
-                        <Grid items={workoutExercises} updateExerciseOrder={updateExerciseOrder} workoutExercises={workoutExercises} />
+                        style={{ marginTop: 20 }}
+                    >
+                        <Grid items={workoutExercises} updateExerciseOrder={updateExerciseOrder} />
                     </motion.div>
 
                 </AnimatePresence>

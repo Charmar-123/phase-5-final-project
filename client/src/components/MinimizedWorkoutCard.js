@@ -11,7 +11,7 @@ const MinimizedWorkoutCardWorkoutCard = ({name}) => {
 
         <motion.div
         style={{userSelect: 'none'}}
-        whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
+        // whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}
         >
             <Card sx={{
                 width: 345,

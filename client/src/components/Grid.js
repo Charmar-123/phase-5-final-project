@@ -9,15 +9,6 @@ import ExerciseCard from "./ExerciseCard";
 
 const Grid = ({items, updateExerciseOrder}) => {
 
-  // console.log(items);
-  // const [items, setItems] = React.useState([
-    
-  //   1,
-  //   2,
-  //   3,
-    
-
-  // ]);
   function onChange(sourceId, sourceIndex, targetIndex, targetId) {
     const nextState = swap(items, sourceIndex, targetIndex);
     // setItems(nextState);

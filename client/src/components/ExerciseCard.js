@@ -321,9 +321,6 @@ const ExerciseCard = ({ selectedExercise }) => {
                                 maxLength={150}
                                 onChange={(e) => handleChange(e)}
                             /> :
-                            // <Typography sx={{ marginRight: 1, fontFamily: "CardFont", fontWeight: 800, width: 300 }} variant="body1">
-                            //     {description}
-                            // </Typography>
                             <TextareaAutosize
                                 disabled
                                 style={{
