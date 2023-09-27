@@ -5,7 +5,7 @@ import { UserContext } from './UserContext.js'
 
 const Workouts = () => {
   const navigate = useNavigate();
-  const { workouts } = useContext(UserContext);
+  const { workouts = [] } = useContext(UserContext);
 
   // Create an array to group workouts into pairs
   
