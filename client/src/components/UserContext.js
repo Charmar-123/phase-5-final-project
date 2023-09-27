@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
                 // console.log(data)
                 setWorkouts(data)
             })
-    }, [])
+    }, [loggedInUser])
 
     // workout Code
     const addWorkout = (newWorkout) => {
