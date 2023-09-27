@@ -3,7 +3,7 @@ import React from 'react'
 
 const AboutUs = () => {
   return (
-    <div>
+    <div style={{padding: 10, background: "linear-gradient(180deg, rgba(199,252,255,1) 0%, rgba(255,195,234,1) 67%)", height: '100vh'}}>
       <Typography variant="h4" gutterBottom>
         About Us
       </Typography>
