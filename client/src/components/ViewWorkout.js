@@ -14,17 +14,43 @@ const ViewWorkout = () => {
     const [workoutExercises, setWorkoutExercises] = useState([])
     const navigate = useNavigate();
     const [selectedExercise, setSelectedExercise] = useState([])
-    const workoutName = workouts
-        .find(workout => workout.id === parseInt(workoutId))
-        .name;
+
     const [isLoading, setIsLoading] = useState(false)
+
+    const workoutName = workouts.length > 0 ? workouts.find(workout => workout.id === parseInt(workoutId)).name : "";
+
+
+
+    
     useEffect(() => {
-        const targetExercises = workouts
-            .find(workout => workout.id === parseInt(workoutId))
-            .exercises.sort((a, b) => a.order - b.order)
-        setWorkoutExercises(targetExercises)
-        setSelectedExercise(targetExercises[0])
-    }, [loggedInUser])
+        const selectedWorkout = workouts.find(workout => workout.id === parseInt(workoutId));
+
+        if (loggedInUser && selectedWorkout) {
+            const targetExercises = selectedWorkout.exercises.sort((a, b) => a.order - b.order);
+            setWorkoutExercises(targetExercises);
+            setSelectedExercise(targetExercises[0]);
+        } else {
+
+            setWorkoutExercises([]);
+            setSelectedExercise(null);
+        }
+
+        let isWorkoutInLoggedInUser = false; 
+
+        if (loggedInUser) {
+            isWorkoutInLoggedInUser = loggedInUser.workouts.some(
+                workout => workout.id === parseInt(workoutId)
+            );
+        }
+    
+        setAllowJoin(!isWorkoutInLoggedInUser);
+    
+    }, [loggedInUser, workoutId])
+
+
+// Test Code
+console.log(loggedInUser);
+const [allowJoin, setAllowJoin] = useState(true)
 
 
     const [listView, setListView] = useState(true)
@@ -69,6 +95,8 @@ const ViewWorkout = () => {
 
 
             <h1 style={{ fontFamily: 'CardFont', fontWeight: '950', paddingTop: 4, fontSize: 60, marginTop: -50 }}>Exercises:</h1>
+            {/* Conditional render */}
+            {allowJoin &&
             <Button
                 disabled={isLoading ? true : false}
                 variant='contained'
@@ -77,7 +105,7 @@ const ViewWorkout = () => {
                 }}
             >
                 {isLoading ? <CircularProgress/> : 'Join'}
-                </Button>
+                </Button>}
 
 
 
