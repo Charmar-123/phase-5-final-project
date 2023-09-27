@@ -16,6 +16,10 @@ const WorkoutPage = () => {
     const [selectedExercise, setSelectedExercise] = useState([])
 
 
+    const [order, SetOrder] = useState([])
+    const [cancel, setCancel] = useState(true)
+    const [edit, setEdit] = useState(false)
+
     const workoutName = loggedInUser && loggedInUser.workouts
         ? loggedInUser.workouts.find(workout => workout.id === parseInt(workoutId)).name
         : "";
@@ -28,7 +32,7 @@ const WorkoutPage = () => {
             setWorkoutExercises(targetExercises);
             setSelectedExercise(targetExercises[0]);
         }
-    }, [loggedInUser]);
+    }, [loggedInUser, cancel]);
 
 
 
@@ -41,10 +45,18 @@ const WorkoutPage = () => {
         const updatedExercises = e.map((exercise, index) => {
             return { ...exercise, order: index + 1 };
         });
-        setWorkoutExercises(updatedExercises)
-        // console.log(updatedExercises)
+        SetOrder(updatedExercises)
+        setWorkoutExercises(e)
+        setEdit(true)
 
-        updatedExercises.forEach((exercise) => {
+
+
+    };
+
+    const setUpdatedExercises = () => {
+        console.log('clicked');
+        console.log(order);
+        order.forEach((exercise) => {
             fetch(`/api/exercises/${exercise.id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
@@ -65,9 +77,7 @@ const WorkoutPage = () => {
                     }
                 })
         })
-
-
-    };
+    }
 
     return (
 
@@ -89,6 +99,23 @@ const WorkoutPage = () => {
                 variant='contained'
                 onClick={() => navigate(`/users/${userId}/workouts/${workoutId}/exercises/new`)}
             >Add Exercise</Button>
+           {edit && 
+           <div style={{marginTop: 5}}>
+                <Button
+                    style={{marginRight: 5}}
+                    variant='contained'
+                    color='success'
+                    onClick={() => setUpdatedExercises()}
+                >Set Order</Button>
+                <Button
+                    variant='contained'
+                    color='error'
+                    onClick={() => {
+                        setEdit(false)
+                        setCancel(!cancel)
+                    }}
+                >Cancel</Button>
+            </div>}
 
 
 
@@ -110,16 +137,14 @@ const WorkoutPage = () => {
 
                             }
                             axis="y" values={workoutExercises}
-                            // onReorder={(e) => console.log(e)}
                             onReorder={(e) => updateExerciseOrder(e)}
                         >
+
+
                             {workoutExercises.map((item) => (
-                                // Pass in data
-                                // console.log(item.order)
                                 <Reorder.Item
 
                                     onDoubleClick={() => {
-                                        // console.log(item);
                                         setSelectedExercise(item)
                                     }}
                                     key={item.id} value={item}>
