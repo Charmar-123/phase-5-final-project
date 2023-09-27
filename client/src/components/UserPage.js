@@ -65,7 +65,8 @@ const UserPage = () => {
           Create Workout
         </Button>
       </div>
-
+      {accessibleUserWorkouts.length > 0 ?
+        <h1>Your next workout is on {dayjs(accessibleUserWorkouts[0].datetime).format('YYYY-MM-DD')} at {dayjs(accessibleUserWorkouts[0].datetime).format('HH:mm ')}!</h1> : null}
       <ToggleButtonGroup
         sx={{ background: "white", marginTop: 5, marginBottom: 3 }}
         color="standard"
@@ -79,28 +80,10 @@ const UserPage = () => {
         <ToggleButton value="upcoming">Joined Upcoming Workouts</ToggleButton>
         <ToggleButton value="previous">Joined Previous Workouts</ToggleButton>
       </ToggleButtonGroup>
-
-
-      {alignment === "your-upcoming-workouts" && accessibleUserWorkouts.length > 0 ? <>
-        <h1>Your next workout is on {dayjs(accessibleUserWorkouts[0].datetime).format('YYYY-MM-DD')} at {dayjs(accessibleUserWorkouts[0].datetime).format('HH:mm ')}!</h1>
-        {accessibleUserWorkouts.map((workout) => {
-          return (
-            <WorkoutCard
-              user={true}
-              key={workout.name}
-              workout={workout} />
-          )
-        })}
-
-      </> : null
-      }
-
-
-      {alignment === "your-previous-workouts" && unaccessibleUserWorkouts.length > 0 ?
-        <>
-
-          {/* <h3>User Workouts Unaccessible:</h3> */}
-          {unaccessibleUserWorkouts.map((workout) => {
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        {alignment === "your-upcoming-workouts" && accessibleUserWorkouts.length > 0 ? <>
+          
+          {accessibleUserWorkouts.map((workout) => {
             return (
               <WorkoutCard
                 user={true}
@@ -108,41 +91,60 @@ const UserPage = () => {
                 workout={workout} />
             )
           })}
-        </>
-        : null
-      }
 
-      {alignment === "previous" && unaccessibleJoinedWorkouts.length > 0 ?
-        <>
+        </> : null
+        }
 
-          {/* <h3>User Workouts Unaccessible:</h3> */}
-          {unaccessibleJoinedWorkouts.map((workout) => {
-            return (
-              <WorkoutCard
-                user={true}
-                key={workout.name}
-                workout={workout} />
-            )
-          })}
-        </>
-        : null
-      }
 
-      {alignment === "upcoming" && accessibleJoinedWorkouts.length > 0 ?
-        <>
+        {alignment === "your-previous-workouts" && unaccessibleUserWorkouts.length > 0 ?
+          <>
 
-          {/* <h3>User Workouts Unaccessible:</h3> */}
-          {accessibleJoinedWorkouts.map((workout) => {
-            return (
-              <WorkoutCard
-                user={true}
-                key={workout.name}
-                workout={workout} />
-            )
-          })}
-        </>
-        : null
-      }
+            {/* <h3>User Workouts Unaccessible:</h3> */}
+            {unaccessibleUserWorkouts.map((workout) => {
+              return (
+                <WorkoutCard
+                  user={true}
+                  key={workout.name}
+                  workout={workout} />
+              )
+            })}
+          </>
+          : null
+        }
+
+        {alignment === "previous" && unaccessibleJoinedWorkouts.length > 0 ?
+          <>
+
+            {/* <h3>User Workouts Unaccessible:</h3> */}
+            {unaccessibleJoinedWorkouts.map((workout) => {
+              return (
+                <WorkoutCard
+                  user={true}
+                  key={workout.name}
+                  workout={workout} />
+              )
+            })}
+          </>
+          : null
+        }
+
+        {alignment === "upcoming" && accessibleJoinedWorkouts.length > 0 ?
+          <>
+
+            {/* <h3>User Workouts Unaccessible:</h3> */}
+            {accessibleJoinedWorkouts.map((workout) => {
+              return (
+                <WorkoutCard
+                  user={true}
+                  key={workout.name}
+                  workout={workout} />
+              )
+            })}
+          </>
+          : null
+        }
+      </div>
+
     </div>
   )
 }

@@ -252,6 +252,7 @@ const WorkoutCard = ({ workout, user }) => {
 
                     {editEnabled === false && admin === true ?
                         <Button
+                        
                             variant='contained'
                             onClick={() => setEditEnabled(true)}>Edit</Button> :
                         null
@@ -259,6 +260,7 @@ const WorkoutCard = ({ workout, user }) => {
                     {editEnabled ?
                         <div>
                             <Button
+                                style={{marginRight: 5 }}
                                 disabled={isLoading ? true : false}
                                 variant='contained'
                                 onClick={() => cancelEdit()}>Cancel</Button>
@@ -280,7 +282,8 @@ const WorkoutCard = ({ workout, user }) => {
             disabled={isLoading ? true : false}
                 variant='contained'
                 onClick={handleDelete}
-            >
+                style={{marginTop: 5}}
+            >   
                 {isLoading ? <CircularProgress/> : 'Delete'}
                 </Button> : null}
 
@@ -303,6 +306,7 @@ const WorkoutCard = ({ workout, user }) => {
                 </Button> : null}
 
             {admin === true && accessible === false ? <Button
+                style={{marginTop:5, marginLeft: 5}}
                 variant='contained'
                 onClick={() => setShowDate(true)}
             >Rescheduel</Button> : null}
