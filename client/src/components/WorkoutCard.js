@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, CircularProgress } from '@mui/material';
 const WorkoutCard = ({ workout, user }) => {
 
-
+    const [allowJoin, setAllowJoin] = useState(true)
     const navigate = useNavigate();
     const [editEnabled, setEditEnabled] = useState(false)
     const styles = {
@@ -35,6 +35,15 @@ const WorkoutCard = ({ workout, user }) => {
 
     useEffect(() => {
         checkIfDateAfter()
+
+        let isWorkoutInLoggedInUser = false; 
+        if (loggedInUser) {
+            isWorkoutInLoggedInUser = loggedInUser.workouts.some(
+                workout => workout.id === parseInt(id)
+            );
+        }
+    
+        setAllowJoin(!isWorkoutInLoggedInUser);
     }, [])
 
     // console.log(datetime);
@@ -297,7 +306,7 @@ const WorkoutCard = ({ workout, user }) => {
                 {isLoading ? <CircularProgress/> : 'Delete'}
               </Button> : null}
 
-            {admin === false && user === false ? <Button
+            {admin === false && user === false && allowJoin === true ? <Button
             disabled={isLoading ? true : false}
                 onClick={() => handleJoinWorkout()}
                 variant='contained'
