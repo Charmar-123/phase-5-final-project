@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import gymHomeVideo from '../assets/videos/gym-home-video.mp4'
 import IntroAnimation from './IntroAnimation'
 

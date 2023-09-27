@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import WorkoutCard from './WorkoutCard'
-import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext.js'
 
 const Workouts = () => {
-  const navigate = useNavigate();
+
   const { workouts = [] } = useContext(UserContext);
 
   // Create an array to group workouts into pairs

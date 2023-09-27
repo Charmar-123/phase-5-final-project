@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { TextField } from '@mui/material';
+import React from 'react';
+import { motion } from 'framer-motion';
+
 
 const AutoTypeInput = ({
   paddingLeft,

@@ -15,7 +15,6 @@ const IntroAnimation = () => {
             overflow: "hidden",
             background: "rgba(255, 255, 255, 0.2)",
             borderRadius: "30px",
-            display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
 

@@ -26,7 +26,7 @@ const UserProvider = ({ children }) => {
 
     const deleteWorkout = (id) => {
         const filteredWorkouts = loggedInUser.workouts.filter(workout => workout.id !== parseInt(id))
-        console.log(filteredWorkouts);
+        // console.log(filteredWorkouts);
 
         setLoggedInUser({ ...loggedInUser, workouts: filteredWorkouts })
     }
@@ -52,7 +52,7 @@ const UserProvider = ({ children }) => {
         // ).exercises);
         const updatedLoggedInUser = { ...loggedInUser }
         const newExercises = [...loggedInUser.workouts.find((workout) => workout.id === parseInt(workout_id)).exercises, newExercise]
-        console.log(newExercises);
+        // console.log(newExercises);
         updatedLoggedInUser.workouts.find((workout) => workout.id === parseInt(workout_id)).exercises = newExercises
         setLoggedInUser(updatedLoggedInUser)
     }
@@ -76,7 +76,7 @@ const UserProvider = ({ children }) => {
             // console.log(updatedLoggedInUser);
             setLoggedInUser(updatedLoggedInUser);
         } else {
-            console.error(`Workout with ID ${workout_id} not found.`);
+            // console.error(`Workout with ID ${workout_id} not found.`);
         }
     };
 

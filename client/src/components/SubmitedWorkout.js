@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import AnimationWorkoutCard from './AnimationWorkoutCard'
-import { AnimatePresence, motion } from 'framer-motion'
-import { CircularProgress, TextField, TextareaAutosize, Typography } from '@mui/material'
+import {  motion } from 'framer-motion'
+import { CircularProgress,  TextareaAutosize} from '@mui/material'
 import AutoTypeInput from './AutoTypeInput'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from './UserContext.js'
@@ -88,7 +88,7 @@ const SubmitedWorkout = () => {
                 } else {
                     res.json().then(data => {
                         setErrors(data.errors)
-                        console.log(data);
+                        // console.log(data);
                         setIsLoading(false)
                     })
                 }

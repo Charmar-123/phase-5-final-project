@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
-import ExerciseCard from './ExerciseCard'
 import MinimizedWorkoutCard from './MinimizedWorkoutCard'
-import { AnimatePresence, Reorder, motion } from 'framer-motion'
-import Grid from './Grid'
+import { AnimatePresence, motion } from 'framer-motion'
 import { UserContext } from './UserContext.js'
 import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
@@ -11,7 +9,7 @@ import ViewExerciseCard from './ViewExerciseCard'
 import ViewGrid from './ViewGrid'
 const ViewWorkout = () => {
     const { loggedInUser, workouts, addWorkout } = useContext(UserContext)
-    const { userId, workoutId } = useParams();
+    const { workoutId } = useParams();
     const [errors, setErrors] = useState([]);
     const [workoutExercises, setWorkoutExercises] = useState([])
     const navigate = useNavigate();
@@ -51,7 +49,6 @@ const ViewWorkout = () => {
                 } else {
                     res.json().then(json => {
                         setErrors(json.errors)
-                        console.log("Errors");
                         setIsLoading(false)
                     })
                 }

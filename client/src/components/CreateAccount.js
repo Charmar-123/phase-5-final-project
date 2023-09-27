@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
-import AnimationWorkoutCard from './AnimationWorkoutCard'
-import { AnimatePresence, motion } from 'framer-motion'
-import { CircularProgress, TextField, TextareaAutosize, Typography } from '@mui/material'
-import AutoTypeInput from './AutoTypeInput'
+import { motion } from 'framer-motion'
+import { CircularProgress, TextareaAutosize} from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { UserContext } from './UserContext.js'
@@ -75,7 +73,7 @@ const CreateAccount = () => {
             .then(res => {
                 if (res.ok) {
                     res.json().then((user) => {
-                        console.log(user);
+                        // console.log(user);
                         setLoggedInUser(user)
                         navigate(`/users/${user.id}/workouts/new`)
                         setIsLoading(false)
@@ -83,7 +81,7 @@ const CreateAccount = () => {
                 } else {
                     res.json().then(data => {
                         setErrors(data.errors)
-                        console.log(data.errors);
+                        // console.log(data.errors);
                         setIsLoading(false)
                     })
                 }

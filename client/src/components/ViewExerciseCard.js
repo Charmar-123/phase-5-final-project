@@ -1,48 +1,23 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Divider, Box, TextareaAutosize } from '@mui/material';
-import { useNavigate } from 'react-router-dom'
-import benchPress from '../assets/videos/bench-press.mp4'
-import AutoTypeInput from './AutoTypeInput';
-import { UserContext } from './UserContext.js'
 
-import { useParams } from 'react-router-dom';
+
 
 const ViewExerciseCard = ({ selectedExercise }) => {
     const [displayVideo, setDisplayVideo] = useState()
 
-    const params = useParams();
-    const { deleteExercise, updateExercise } = useContext(UserContext)
-    const navigate = useNavigate();
-    // const [selectedFile, setSelectedFile] = useState(null)
 
-    // console.log(selectedExercise.name);
+
+
     const { id, name, reps, sets, rest, description, video_url } = selectedExercise
     const videoKey = displayVideo
-    const [formData, setFormData] = useState({
-        name: '',
-        reps: "",
-        sets: "",
-        rest: "",
-        description: "",
-        video_url: "",
-        video: null,
-    })
+
     useEffect(() => {
-        setFormData({
-            name: name,
-            reps: reps,
-            sets: sets,
-            rest: rest,
-            description: description,
-            video_url: video_url,
-            video: null
-        })
+
         setDisplayVideo(video_url)
     }, [selectedExercise])
 

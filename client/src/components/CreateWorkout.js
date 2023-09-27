@@ -20,12 +20,7 @@ const CreateWorkout = () => {
     const [workoutIntensity, setWorkoutIntensity] = useState('')
     const navigate = useNavigate();
     const { loggedInUser, addWorkout } = useContext(UserContext)
-    const styles = {
-        ' input:focus': {
-            outline: 'none',
-            borderColor: '#719ECE',
-        }
-    }
+
 
 
 
@@ -71,7 +66,7 @@ const CreateWorkout = () => {
             .then(res => {
                 if (res.ok) {
                     res.json().then((workout) => {
-                        console.log(workout);
+                        // console.log(workout);
                         addWorkout(workout)
                         navigate(`/users/${loggedInUser.id}/workouts/${workout.id}/exercises/new`)
                         setIsLoading(false)
@@ -79,7 +74,7 @@ const CreateWorkout = () => {
                 } else {
                     res.json().then(data => {
                         setErrors(data.errors)
-                        console.log(data.errors);
+                        // console.log(data.errors);
                         setIsLoading(false)
                     })
                 }

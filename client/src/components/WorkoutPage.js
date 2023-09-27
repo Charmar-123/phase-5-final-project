@@ -54,8 +54,6 @@ const WorkoutPage = () => {
     };
 
     const setUpdatedExercises = () => {
-        console.log('clicked');
-        console.log(order);
         order.forEach((exercise) => {
             fetch(`/api/exercises/${exercise.id}`, {
                 method: 'PATCH',
@@ -72,7 +70,7 @@ const WorkoutPage = () => {
                     } else {
                         res.json().then(data => {
                             setErrors(data.errors)
-                            console.log(data.errors);
+                            // console.log(data.errors);
                         })
                     }
                 })

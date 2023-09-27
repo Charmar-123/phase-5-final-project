@@ -6,9 +6,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Divider, Box, TextareaAutosize, CircularProgress } from '@mui/material';
-import { useNavigate } from 'react-router-dom'
-import benchPress from '../assets/videos/bench-press.mp4'
-import AutoTypeInput from './AutoTypeInput';
+
+
 import { UserContext } from './UserContext.js'
 
 import { useParams } from 'react-router-dom';
@@ -20,12 +19,9 @@ const ExerciseCard = ({ selectedExercise }) => {
     const [errors, setErrors] = useState([])
     const params = useParams();
     const { deleteExercise, updateExercise } = useContext(UserContext)
-    const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false)
-    // const [selectedFile, setSelectedFile] = useState(null)
 
-    // console.log(selectedExercise.name);
     const { id, name, reps, sets, rest, description, video_url } = selectedExercise
     const videoKey = displayVideo
     const [formData, setFormData] = useState({
@@ -79,7 +75,7 @@ const ExerciseCard = ({ selectedExercise }) => {
             video: null
         })
         setDisplayVideo(video_url)
-        console.log(video_url);
+        // console.log(video_url);
     }
     const handleSaveCard = (e) => {
         e.preventDefault();
@@ -98,7 +94,7 @@ const ExerciseCard = ({ selectedExercise }) => {
             formDataToPatch.append('video', formData.video);
         }
 
-        console.log(formDataToPatch);
+        // console.log(formDataToPatch);
         fetch(`/api/exercises/${id}`, {
             method: 'PATCH',
             body: formDataToPatch,
@@ -113,7 +109,7 @@ const ExerciseCard = ({ selectedExercise }) => {
                 })
             } else {
                 res.json().then(json => {
-                    console.log(json.errors);
+                    // console.log(json.errors);
                     setErrors(json.errors)
                     setIsLoading(false)
                 })
