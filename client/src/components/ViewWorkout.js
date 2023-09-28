@@ -12,6 +12,7 @@ const ViewWorkout = () => {
     const { workoutId } = useParams();
     const [errors, setErrors] = useState([]);
     const [workoutExercises, setWorkoutExercises] = useState([])
+    const [allowJoin, setAllowJoin] = useState(true)
     const navigate = useNavigate();
     const [selectedExercise, setSelectedExercise] = useState([])
 
@@ -48,9 +49,8 @@ const ViewWorkout = () => {
     }, [loggedInUser, workoutId])
 
 
-// Test Code
-console.log(loggedInUser);
-const [allowJoin, setAllowJoin] = useState(true)
+
+
 
 
     const [listView, setListView] = useState(true)
