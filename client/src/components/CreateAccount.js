@@ -203,7 +203,7 @@ const CreateAccount = () => {
                         />
 
                         {errors.name && errors.name.map((error, index) => {
-                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                            return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
                         })}
                     </motion.div>
 
@@ -232,7 +232,7 @@ const CreateAccount = () => {
 
                         />
                         {errors.email && errors.email.map((error, index) => {
-                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                            return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
                         })}
                     </motion.div>
                     <motion.div
@@ -259,9 +259,9 @@ const CreateAccount = () => {
                             type='password'
 
                         />
-                        {errors.password && errors.password.map((error, index) => {
-                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
-                        })}
+                        {errors.password ? errors.password.map((error, index) => {
+                            return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
+                        }): <h4 style={{ margin: 0 }}>Password must be 8 characters long, have a capital letter, a number, and a symbol !@#$%^&*</h4>}
 
                     </motion.div>
                     <motion.div
@@ -290,7 +290,7 @@ const CreateAccount = () => {
 
                         />
                         {errors.password_confirmation && errors.password_confirmation.map((error, index) => {
-                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                            return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
                         })}
                     </motion.div>
 

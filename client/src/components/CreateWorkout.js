@@ -127,7 +127,7 @@ const CreateWorkout = () => {
 
                     </div>
                     {errors.name && errors.name.map((error, index) => {
-                        return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                        return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
                     })}
                 </motion.div>
                 <motion.div
@@ -147,7 +147,7 @@ const CreateWorkout = () => {
 
                     </div>
                     {errors.zoom_link && errors.zoom_link.map((error, index) => {
-                        return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                        return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
                     })}
                 </motion.div>
                 <motion.div
@@ -169,7 +169,7 @@ const CreateWorkout = () => {
 
                     </LocalizationProvider>
                     {errors.datetime && errors.datetime.map((error, index) => {
-                        return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                        return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
                     })}
                 </motion.div>
                 <div style={{ display: 'flex' }}>
@@ -182,12 +182,12 @@ const CreateWorkout = () => {
                         <textarea
                             style={{ fontFamily: 'CardFont', fontWeight: '950', width: 300, borderRadius: 10, height: 200, fontSize: 17, resize: 'none', padding: '8px', outline: 'none', borderWidth: 2 }}
                             maxLength={300}
-                            placeholder='Write here...(max 300 characters)'
+                            placeholder='Write here...(max 300 characters and optional)'
                             onChange={(e) => setWorkoutExerciseType(e.target.value)}
                         >
                         </textarea>
                         {errors.workout_type && errors.workout_type.map((error, index) => {
-                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                            return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
                         })}
 
                         <div>
@@ -216,7 +216,7 @@ const CreateWorkout = () => {
                     <div>
                         <RatingsDropdown setWorkoutIntensity={setWorkoutIntensity} titleItem={titleItem} />
                         {errors.intensity && errors.intensity.map((error, index) => {
-                            return (<h6 key={index} style={{ margin: 0 }}>{error}</h6>)
+                            return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
                         })}
                     </div>
 
