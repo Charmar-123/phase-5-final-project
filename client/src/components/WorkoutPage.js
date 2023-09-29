@@ -65,6 +65,8 @@ const WorkoutPage = () => {
                         res.json().then((exercise) => {
                             // console.log(exercise);
                             updateExercise(exercise, workoutId)
+                            setEdit(false)
+                            
 
                         })
                     } else {

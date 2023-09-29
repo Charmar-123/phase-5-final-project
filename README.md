@@ -14,16 +14,59 @@ npm start --prefix client
 
 ## Usage
 
-Click on login to create an account
+<div style="display: flex; justify-content: center;">
+  <div style="flex: 1; margin: 10px;">
+  Click on login to create an account
+    <img src="./readme_images/create_account.png" alt="Create Account" style="width:100%;" />
+  </div>
+  <div style="flex: 1; margin: 10px;">
+  Create a workout
+    <img src="./readme_images/create_workout.png" alt="Create Workout" style="width:100%;" />
+  </div>
+</div>
+
+<div style="display: flex; justify-content: center;">
+  <div style="flex: 1; margin: 10px;">
+  Add an exercise
+    <img src="./readme_images/create_exercises.png" alt="Create Exercise" style="width:100%;" />
+  </div>
+  <div style="flex: 1; margin: 10px;">
+  Find workouts on the community page
+    <img src="./readme_images/community_workouts.png" alt="Community Workouts" style="width:100%;" />
+  </div>
+</div>
+
+<div style="display: flex; justify-content: center;">
+  <div style="flex: 1; margin: 10px;">
+  View your workouts on your user page
+    <img src="./readme_images/user_page.png" alt="User Page" style="width:100%;" />
+  </div>
+  <div style="flex: 1; margin: 10px;">
+  Reorder the exercises on your workouts
+    <img src="./readme_images/reorder_exercises.png" alt="Reorder Exercises" style="width:100%;" />
+  </div>
+</div>
+
+
 ```
 
-## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+## Technologies and Packages Used
 
-Please make sure to update tests as appropriate.
+This project utilizes a variety of technologies and packages to achieve its functionality:
 
-## License
+- **React** - A JavaScript library for building user interfaces.
+- **Ruby on Rails** - A web application framework for building robust web applications.
+- **Active Storage** - A Rails library for managing and serving files.
+- **Whenever** - A Ruby gem for managing cron jobs. It allows for easy scheduling of recurring tasks within your Rails application.
+- **AWS S3 Storage** - Amazon Web Services (AWS) Simple Storage Service for file storage.
+- **react-grid-dnd** - A React component for draggable and droppable grid layouts.
+- **Framer Motion** - A React animation library for creating smooth animations.
+- **Material-UI (MUI)** - A popular React UI framework that provides pre-designed components.
+
+Feel free to explore the documentation and resources associated with each technology or package to learn more about how they were used in this project.
+
+
+## license 
 
 [MIT](https://choosealicense.com/licenses/mit/)
