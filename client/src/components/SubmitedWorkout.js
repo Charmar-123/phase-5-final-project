@@ -200,7 +200,7 @@ const SubmitedWorkout = () => {
                         }
 
                         {errors.name && errors.name.map((error, index) => {
-                            return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
+                            return (<h4 key={index} style={{ margin: 0, color: "red" }}>{error}</h4>)
                         })}
 
                     </motion.div>

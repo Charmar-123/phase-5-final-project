@@ -156,7 +156,7 @@ const LoginScreen = () => {
                                     onChange={handleChange}
                                 ></input>
                             </div>
-                            {errors ? <h4 style={{ fontSize: 15, margin: 0 }}>{errors}</h4> : null}
+                            {errors ? <h4 style={{ fontSize: 15, margin: 0, color: "red" }}>{errors}</h4> : null}
                             <button
                             disabled={isLoading ? true : false}
                                 style={{ fontSize: 20, fontFamily: 'CardFont', fontWeight: '950', width: 100, marginTop: 10, height: 30, borderRadius: 8 }}

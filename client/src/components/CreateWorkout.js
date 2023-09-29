@@ -127,7 +127,7 @@ const CreateWorkout = () => {
 
                     </div>
                     {errors.name && errors.name.map((error, index) => {
-                        return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
+                        return (<h4 key={index} style={{ margin: 0, color: "red" }}>{error}</h4>)
                     })}
                 </motion.div>
                 <motion.div
@@ -147,7 +147,7 @@ const CreateWorkout = () => {
 
                     </div>
                     {errors.zoom_link && errors.zoom_link.map((error, index) => {
-                        return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
+                        return (<h4 key={index} style={{ margin: 0, color: "red" }}>{error}</h4>)
                     })}
                 </motion.div>
                 <motion.div
@@ -169,7 +169,7 @@ const CreateWorkout = () => {
 
                     </LocalizationProvider>
                     {errors.datetime && errors.datetime.map((error, index) => {
-                        return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
+                        return (<h4 key={index} style={{ margin: 0, color: "red" }}>{error}</h4>)
                     })}
                 </motion.div>
                 <div style={{ display: 'flex' }}>
@@ -187,7 +187,7 @@ const CreateWorkout = () => {
                         >
                         </textarea>
                         {errors.workout_type && errors.workout_type.map((error, index) => {
-                            return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
+                            return (<h4 key={index} style={{ margin: 0, color: "red" }}>{error}</h4>)
                         })}
 
                         <div>
@@ -216,7 +216,7 @@ const CreateWorkout = () => {
                     <div>
                         <RatingsDropdown setWorkoutIntensity={setWorkoutIntensity} titleItem={titleItem} />
                         {errors.intensity && errors.intensity.map((error, index) => {
-                            return (<h4 key={index} style={{ margin: 0 }}>{error}</h4>)
+                            return (<h4 key={index} style={{ margin: 0, color: "red" }}>{error}</h4>)
                         })}
                     </div>
 
