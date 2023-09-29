@@ -342,7 +342,7 @@ const ExerciseCard = ({ selectedExercise }) => {
                                     type='submit'
                                 >
                                     {isLoading ? <CircularProgress /> : 'Save'}
-                                    Save</Button>
+                                    </Button>
                                 <Button
                                     variant='contained'
                                     onClick={() => handleCancelCard()}>Cancel</Button>
