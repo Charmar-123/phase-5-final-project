@@ -76,6 +76,7 @@ const ExerciseCard = ({ selectedExercise }) => {
         })
         setDisplayVideo(video_url)
         // console.log(video_url);
+        setErrors([])
     }
     const handleSaveCard = (e) => {
         e.preventDefault();
@@ -106,10 +107,11 @@ const ExerciseCard = ({ selectedExercise }) => {
                     updateExercise(exercise, params.workoutId)
                     setIsEditing(false);
                     setIsLoading(false)
+                    setErrors([])
                 })
             } else {
                 res.json().then(json => {
-                    // console.log(json.errors);
+                    console.log(json.errors);
                     setErrors(json.errors)
                     setIsLoading(false)
                 })
@@ -228,7 +230,7 @@ const ExerciseCard = ({ selectedExercise }) => {
                         <Typography sx={{ fontFamily: "CardFont", fontWeight: 800 }} gutterBottom variant="h4" component="div">
                             {name}
                         </Typography>}
-
+                        {errors ? <h4 style={{ fontSize: 15, margin: 0, color: "red" }}>{errors.name}</h4> : null}
 
                     <Divider />
                     <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
