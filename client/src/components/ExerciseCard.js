@@ -111,7 +111,7 @@ const ExerciseCard = ({ selectedExercise }) => {
                 })
             } else {
                 res.json().then(json => {
-                    console.log(json.errors);
+                    // console.log(json.errors);
                     setErrors(json.errors)
                     setIsLoading(false)
                 })
