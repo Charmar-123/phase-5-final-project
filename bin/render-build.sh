@@ -7,5 +7,5 @@ rm -rf public
 npm install --prefix client --force && npm run build --prefix client --force
 cp -a client/build/. public/
 
-bundle install
-bundle exec rake db:migrate
+# bundle install
+# bundle exec rake db:migrate
